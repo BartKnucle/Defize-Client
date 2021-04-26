@@ -12,7 +12,6 @@ namespace FunkySheep.Network {
   [AddComponentMenu("FunkySheep/Network/Manager")]
   public class Manager : GenericSingletonClass<Manager>
   {
-      //public static Manager instance;
       public WsClient wsClient;
       public List<Service> services;
       public WebSocket webSocket;
@@ -127,7 +126,9 @@ namespace FunkySheep.Network {
                       variable.Value = msgObject["data"][variable.DatabaseFieldName];
                     });
 
-                  jobs.Enqueue(request.onReception.Raise);
+                  if (request.onReception) {
+                    jobs.Enqueue(request.onReception.Raise);
+                  }
                 });
             }
           });

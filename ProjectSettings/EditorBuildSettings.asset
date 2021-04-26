@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Examples/ColorPicker/ColorPicker.unity
+    guid: 3addc1a28071733419e01994622b5c2b
   m_configObjects: {}
