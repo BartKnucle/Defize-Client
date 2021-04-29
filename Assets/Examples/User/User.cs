@@ -16,6 +16,16 @@ public class User : GenericSingletonClass<User>
     }
 
     void Start() {
+      if (Application.platform != RuntimePlatform.WebGLPlayer)
+        _setUserId();
+    }
+
+    public void defineId(string Id) {
+      _id.Value = Id;
+      setId.execute();
+    }
+
+    void _setUserId() {
       if (!PlayerPrefs.HasKey("user")) {
         _id.Value = Guid.NewGuid().ToString();
         PlayerPrefs.SetString("user", _id.Value);

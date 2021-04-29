@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Examples/ColorPicker/ColorPicker.unity
     guid: 3addc1a28071733419e01994622b5c2b
+  - enabled: 1
+    path: Assets/Examples/Movements/Movements.unity
+    guid: 475c99c6bb00ae64fac6b47cbd9598d3
   m_configObjects: {}
