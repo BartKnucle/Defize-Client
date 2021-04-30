@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d872bdcfd2370d141b5d6bf7b858ab3c, type: 3}
+  m_Name: Update Position
+  m_EditorClassIdentifier: 
+  ServerRequestName: patch
+  service: {fileID: 11400000, guid: b758e9ab59595cc4f8490503b702be17, type: 2}
+  floatVariables:
+  - {fileID: 11400000, guid: 441968a71d5cfb243b91f2faaf22c03a, type: 2}
+  - {fileID: 11400000, guid: e1232cc3b9ad0724e8e8a182fc0ac507, type: 2}
+  - {fileID: 11400000, guid: 644a9c7860d18cf438403bdb89b9f963, type: 2}
+  intVariables: []
+  stringVariables: []
+  stringListVariables: []
+  boolVariables: []
+  onReception: {fileID: 0}

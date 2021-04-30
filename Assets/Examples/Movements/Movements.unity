@@ -134,6 +134,10 @@ GameObject:
   - component: {fileID: 44845705}
   - component: {fileID: 44845704}
   - component: {fileID: 44845706}
+  - component: {fileID: 44845708}
+  - component: {fileID: 44845707}
+  - component: {fileID: 44845710}
+  - component: {fileID: 44845709}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -186,6 +190,118 @@ MonoBehaviour:
   - {fileID: 328133550988936170}
   - {fileID: 6023483361695189836}
   - {fileID: 1731273623662468001}
+  startMoving: {fileID: 11400000, guid: 73ef634dd0245014fb4ae40fae3d6faa, type: 2}
+  stopMoving: {fileID: 11400000, guid: f3cdf7e74c61b6446a06a06d0ccfc95e, type: 2}
+--- !u!114 &44845707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44845703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f248cd5cbad87c1468c516d9b5a1a276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xposition: {fileID: 11400000, guid: 441968a71d5cfb243b91f2faaf22c03a, type: 2}
+  yposition: {fileID: 11400000, guid: e1232cc3b9ad0724e8e8a182fc0ac507, type: 2}
+  zposition: {fileID: 11400000, guid: 644a9c7860d18cf438403bdb89b9f963, type: 2}
+--- !u!114 &44845708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44845703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b851ce25906f44a489a692032fc8f5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xposition: {fileID: 11400000, guid: 441968a71d5cfb243b91f2faaf22c03a, type: 2}
+  yposition: {fileID: 11400000, guid: e1232cc3b9ad0724e8e8a182fc0ac507, type: 2}
+  zposition: {fileID: 11400000, guid: 644a9c7860d18cf438403bdb89b9f963, type: 2}
+--- !u!114 &44845709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44845703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f3cdf7e74c61b6446a06a06d0ccfc95e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 44845708}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 44845707}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &44845710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44845703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 73ef634dd0245014fb4ae40fae3d6faa, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 44845708}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 44845707}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &198245625
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,8 +416,8 @@ MonoBehaviour:
   autoEnableOutlines: 1
   outlineCamera: {fileID: 1334555313}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 1722114135}
-  extraRenderTexture: {fileID: 727449449}
+  renderTexture: {fileID: 2019610565}
+  extraRenderTexture: {fileID: 968422343}
 --- !u!1001 &230100165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -414,9 +530,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Network
       objectReference: {fileID: 0}
+    - target: {fileID: 643642166392576217, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
+      propertyPath: services.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 643642166392576217, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
+      propertyPath: services.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: b758e9ab59595cc4f8490503b702be17, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
---- !u!84 &727449449
+--- !u!84 &968422343
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -595,7 +719,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 1722114135}
+  m_TargetTexture: {fileID: 2019610565}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -619,7 +743,7 @@ Transform:
   m_Father: {fileID: 198245628}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!84 &1722114135
+--- !u!84 &2019610565
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

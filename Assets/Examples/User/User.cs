@@ -25,9 +25,13 @@ public class User : GenericSingletonClass<User>
       setId.execute();
     }
 
-    void _setUserId() {
+    void _setUserId(String id="") {
       if (!PlayerPrefs.HasKey("user")) {
-        _id.Value = Guid.NewGuid().ToString();
+        if (id != "") {
+          _id.Value = id;
+        } else {
+          _id.Value = Guid.NewGuid().ToString();
+        }
         PlayerPrefs.SetString("user", _id.Value);
         PlayerPrefs.Save();
       } else {
