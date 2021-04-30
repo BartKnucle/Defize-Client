@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d872bdcfd2370d141b5d6bf7b858ab3c, type: 3}
   m_Name: Update Position
   m_EditorClassIdentifier: 
-  ServerRequestName: patch
+  ServerRequestName: setPosition
   service: {fileID: 11400000, guid: b758e9ab59595cc4f8490503b702be17, type: 2}
   floatVariables:
   - {fileID: 11400000, guid: 441968a71d5cfb243b91f2faaf22c03a, type: 2}
   - {fileID: 11400000, guid: e1232cc3b9ad0724e8e8a182fc0ac507, type: 2}
   - {fileID: 11400000, guid: 644a9c7860d18cf438403bdb89b9f963, type: 2}
   intVariables: []
-  stringVariables: []
+  stringVariables:
+  - {fileID: 11400000, guid: e6e8a6d0b98cbdf49bd0d38f735c3c0d, type: 2}
   stringListVariables: []
   boolVariables: []
   onReception: {fileID: 0}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using SimpleJSON;
+using FunkySheep;
 using FunkySheep.Variables;
 
 namespace FunkySheep.Network.Variables
@@ -7,18 +8,11 @@ namespace FunkySheep.Network.Variables
     [CreateAssetMenu(menuName = "FunkySheep/Network/NetFloatVariable")]
     public class NetFloatVariable : FloatVariable {
 
-      public bool autoSend = false;
       public Service service;
 
       override public bool SetValue(float value)
       {
-          bool updated = base.SetValue(value);
-          if (autoSend && updated) {
-            Send();
-            return true;
-          } else {
-            return false;
-          }
+          return base.SetValue(value);
       }
 
       public void Send() {
