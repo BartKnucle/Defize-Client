@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using SimpleJSON;
+using FunkySheep;
 
 namespace FunkySheep.Network {
     public class Message
     {
-      public void Send(string data) {
-        Manager.Instance.messages.Enqueue(data);
+      public JSONNode body = JSON.Parse("{}");
+      public Message () {
+        body["sentAt"] = Time.Now();
+      }
+
+      public void Send() {
+        Manager.Instance.messages.Enqueue(body.ToString());
       }
     }
 }

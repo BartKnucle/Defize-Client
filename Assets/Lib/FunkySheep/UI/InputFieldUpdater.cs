@@ -6,7 +6,7 @@ namespace FunkySheep.UI
 {
     [RequireComponent(typeof(UnityEngine.UI.InputField), typeof(FunkySheep.Events.GameEventListener))][AddComponentMenu("FunkySheep/UI/SetInputField")]
     public class InputFieldUpdater : MonoBehaviour {
-        public GenericVariable variable;
+        public StringVariable variable;
 
         void Start() {
           SetComponentText();
@@ -14,11 +14,11 @@ namespace FunkySheep.UI
 
         public void SetComponentText() {
             InputField inputField = gameObject.GetComponent<InputField>();
-            inputField.SetTextWithoutNotify(variable.GetString());
+            inputField.SetTextWithoutNotify(variable.ToString());
         }
 
         public void SetVariable(string value) {
-            variable.setFromString(value);
+            variable.SetValue(value);
         }
     }    
 }

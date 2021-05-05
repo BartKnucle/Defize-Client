@@ -17,15 +17,13 @@ namespace FunkySheep.Network {
     void HandleLog(string logString, string stackTrace, LogType type)
     {
       Message msg = new Message();
-      JSONNode dataJSON = JSON.Parse("{}");
-      dataJSON["service"] = "/api/logger";
-      dataJSON["request"] = "log";
-      dataJSON["message"] = logString;
-      dataJSON["type"] = type.ToString();
-      dataJSON["stackTrace"] = stackTrace;
+      msg.body["service"] = "/api/logger";
+      msg.body["request"] = "create";
+      msg.body["data"]["message"] = logString;
+      msg.body["data"]["type"] = type.ToString();
+      msg.body["data"]["stackTrace"] = stackTrace;
 
-      string msgString = dataJSON.ToString();
-      msg.Send(msgString);
+      msg.Send();
     }
   }
 }

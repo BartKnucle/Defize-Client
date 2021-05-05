@@ -9,7 +9,7 @@ namespace FunkySheep.UI
         public GenericVariable variable;
 
         public void SetText() {
-            gameObject.GetComponent<Text>().text = variable.GetString();
+            gameObject.GetComponent<Text>().text = variable.ToString();
         }
     }    
 }

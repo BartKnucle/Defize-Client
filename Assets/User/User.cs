@@ -5,15 +5,10 @@ using FunkySheep.Variables;
 
 public class User : GenericSingletonClass<User>
 {
-    public FunkySheep.Network.Variables.NetStringVariable _id;
-
-    public Request setId;
+    public StringVariable _id;
+    public Service service;
            
     bool _team;
-
-    new void Awake() {
-        base.Awake();
-    }
 
     void Start() {
       if (Application.platform != RuntimePlatform.WebGLPlayer)
@@ -22,7 +17,7 @@ public class User : GenericSingletonClass<User>
 
     public void defineId(string Id) {
       _id.Value = Id;
-      setId.execute();
+      //  setId.execute();
     }
 
     void _setUserId(String id="") {
@@ -32,11 +27,12 @@ public class User : GenericSingletonClass<User>
         } else {
           _id.Value = Guid.NewGuid().ToString();
         }
-        PlayerPrefs.SetString("user", _id.Value);
+        PlayerPrefs.SetString("user", (string)_id.Value);
         PlayerPrefs.Save();
+        service.CreateRecords();
       } else {
           _id.Value = PlayerPrefs.GetString("user");
+          service.PatchRecords();
       }
-      setId.execute();
     }
 }

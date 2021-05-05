@@ -1,38 +1,44 @@
 using System;
 using UnityEngine;
+using SimpleJSON;
 
 namespace FunkySheep.Variables
 {
     [CreateAssetMenu(menuName = "FunkySheep/FloatVariable")]
     public class FloatVariable : GenericVariable
     {
-        private float value;
+        private float _value;
         public float Value
         {
-          get { return value; }   // get method
+          get { return _value; }   // get method
           set { SetValue(value); }  // set method
         }
 
         virtual public bool SetValue(float value)
         {
-          if (this.value != value) {
-            this.value = value;
+          if (this._value != value) {
+            this._value = value;
             return true;
           } else {
             return false;
           }
         }
 
-        override public string GetString() {
+        override public string ToString() {
           return Value.ToString();
         }
-        override public void setFromString(string value) {
-          SetValue(Convert.ToSingle(value));
+
+        override public JSONNode toJSONNode() {
+          return (JSONNode)this._value;
         }
+        override public void fromJSONNode(JSONNode node) {
+          this.SetValue(node);
+        }
+
         public override void OnEnable ()
         {
             if (reset) {
-              value = 0;
+              _value = 0;
             }
         }
     }

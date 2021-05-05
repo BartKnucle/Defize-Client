@@ -43,10 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153720f80efb25446878a6119562a95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wsClient: {fileID: 11400000, guid: 623d38e90eb842649bd93571f43bac7c, type: 2}
+  wsClient: {fileID: 11400000, guid: 894b1f94aa04b3a4a859c74fd7e2ece9, type: 2}
   services:
   - {fileID: 11400000, guid: 653a3fdc7b5c4d1459f6652312555312, type: 2}
   - {fileID: 11400000, guid: 5689d3ba752c9e347a0b72634bc44ce3, type: 2}
+  - {fileID: 11400000, guid: b758e9ab59595cc4f8490503b702be17, type: 2}
   onStatusChanged: {fileID: 11400000, guid: 155627661dfcc0d478890facef0f220f, type: 2}
   status: {fileID: 11400000, guid: 72fef8417f2eb3e49a87adab2b23348f, type: 2}
   startedAt: 0

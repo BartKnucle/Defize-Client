@@ -8,7 +8,7 @@ namespace FunkySheep.Network {
   [CreateAssetMenu(menuName = "FunkySheep/Network/Client")]
   public class WsClient : ScriptableObject
   {
-      public StringReference address;
-      public IntReference port;
+      public string address;
+      public int port;
   }
 }

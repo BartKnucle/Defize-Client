@@ -15,4 +15,5 @@ MonoBehaviour:
   api: /api/colorpicker
   _id: {fileID: 11400000, guid: e6e8a6d0b98cbdf49bd0d38f735c3c0d, type: 2}
   requests:
+  - {fileID: 0}
   - {fileID: 11400000, guid: c8f01dde1b3857a4fa97b11a703eada1, type: 2}
