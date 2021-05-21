@@ -33,7 +33,6 @@ namespace FunkySheep.Network {
         webSocket.OnError += onConnectionError;
         webSocket.OnMessage += onMessage;
 
-        status.Value = "";
         webSocket.Connect();
       }
 
