@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afde042156902ab4b9521d2a74eb2466, type: 3}
-  m_Name: On Text Received
+  m_Script: {fileID: 11500000, guid: 79461f2128cbc5648b7a191aa4e05ba4, type: 3}
+  m_Name: Nickname
   m_EditorClassIdentifier: 
+  api: /api/management/users
+  fields:
+  - {fileID: 11400000, guid: 56043660339c8d945abe1a38ba5916e4, type: 2}
+  onReception: {fileID: 11400000, guid: fe2c87897470998458dac74dbd6df49b, type: 2}

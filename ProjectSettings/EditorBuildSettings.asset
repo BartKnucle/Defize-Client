@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Examples/ColorPicker/ColorPicker.unity
     guid: 3addc1a28071733419e01994622b5c2b
   - enabled: 0
-    path: Assets/Examples/Text/Text.unity
+    path: Assets/Examples/Nickname/Nickname.unity
     guid: 88dbbf82abe331e45af3c4dfc273c853
   - enabled: 0
     path: Assets/Examples/Movements/Movements.unity
