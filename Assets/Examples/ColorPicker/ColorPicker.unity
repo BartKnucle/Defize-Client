@@ -318,7 +318,6 @@ GameObject:
   m_Component:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
-  - component: {fileID: 963194226}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -326,14 +325,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &963194226
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0
@@ -506,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {fileID: 11400000, guid: 8eb8d71c3e719ab4fb56962a941a1017, type: 2}
---- !u!1001 &643642165670998702
+--- !u!1001 &1808868922
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -535,15 +526,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 643642166392576214, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 643642166392576214, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 643642166392576214, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 643642166392576214, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -562,16 +553,8 @@ PrefabInstance:
       value: Network
       objectReference: {fileID: 0}
     - target: {fileID: 643642166392576217, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
-      propertyPath: wsClient
-      value: 
-      objectReference: {fileID: 11400000, guid: 579c4520d8b8dd34097d6d9cb68683ac, type: 2}
-    - target: {fileID: 643642166392576217, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
       propertyPath: services.Array.size
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 643642166392576217, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
-      propertyPath: services.Array.data[2]
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}

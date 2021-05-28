@@ -6,7 +6,11 @@ using FunkySheep.Variables;
 public class UpdateText : MonoBehaviour
 {
   public StringVariable text;
-  //  public Request request;
+  public Service service;
+
+  public void Start() {
+    transform.GetComponent<InputField>().text = (string)text.Value;
+  }
 
   public void SetText() {
     transform.GetComponent<InputField>().text = (string)text.Value;
@@ -14,6 +18,6 @@ public class UpdateText : MonoBehaviour
 
   public void SendText() {
     this.text.Value = transform.GetComponent<InputField>().text;
-    //  request.execute();
+    service.PatchRecords(User.Instance._id.Value);
   }
 }

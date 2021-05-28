@@ -17,22 +17,20 @@ public class User : GenericSingletonClass<User>
 
     public void defineId(string Id) {
       _id.Value = Id;
-      //  setId.execute();
     }
 
-    void _setUserId(String id="") {
-      if (!PlayerPrefs.HasKey("user")) {
-        if (id != "") {
-          _id.Value = id;
-        } else {
+    void _setUserId() {
+      if (_id.Value == null) {
+        if (!PlayerPrefs.HasKey("user")) {
           _id.Value = Guid.NewGuid().ToString();
-        }
-        PlayerPrefs.SetString("user", (string)_id.Value);
-        PlayerPrefs.Save();
-        service.CreateRecords();
-      } else {
+          PlayerPrefs.SetString("user", (string)_id.Value);
+          PlayerPrefs.Save();
+          service.CreateRecords();
+        } else {
           _id.Value = PlayerPrefs.GetString("user");
-          service.PatchRecords();
+        }
       }
+
+      service.PatchRecords();
     }
 }
