@@ -6,7 +6,7 @@ namespace FunkySheep.Variables
     [CreateAssetMenu(menuName = "FunkySheep/StringVariable")]
     public class StringVariable : GenericVariable
     {
-        private string _value;
+        [SerializeField] private string _value;
         public string Value
         {
           get { return _value; }   // get method

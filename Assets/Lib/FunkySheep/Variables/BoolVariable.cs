@@ -7,7 +7,7 @@ namespace FunkySheep.Variables
     [CreateAssetMenu(menuName = "FunkySheep/BoolVariable")]
     public class BoolVariable : GenericVariable
     {
-        private bool _value;
+        [SerializeField] private bool _value;
         bool Value
         {
           get { return _value; }   // get method
