@@ -7,20 +7,15 @@ public class User : GenericSingletonClass<User>
 {
     public StringVariable _id;
     public Service service;
-           
-    bool _team;
 
     void Start() {
       if (Application.platform != RuntimePlatform.WebGLPlayer)
-        _setUserId();
+        setUserId(_id.Value);
     }
 
-    public void defineId(string Id) {
-      _id.Value = Id;
-    }
-
-    void _setUserId() {
-      if (_id.Value == null) {
+    public void setUserId(string Id = "") {
+      Debug.Log(Id);
+      if (Id == null || Id == "") {
         if (!PlayerPrefs.HasKey("user")) {
           _id.Value = Guid.NewGuid().ToString();
           PlayerPrefs.SetString("user", (string)_id.Value);
@@ -29,6 +24,8 @@ public class User : GenericSingletonClass<User>
         } else {
           _id.Value = PlayerPrefs.GetString("user");
         }
+      } else {
+        _id.Value = Id;
       }
 
       service.PatchRecords();
