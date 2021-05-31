@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39ec038f337e021489cffacb9978b763, type: 3}
   m_Name: nickname
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
+  DeveloperDescription: User Nickname
   reset: 0
   _value: 
