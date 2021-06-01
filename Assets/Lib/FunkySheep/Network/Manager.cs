@@ -73,13 +73,14 @@ namespace FunkySheep.Network {
         private void onMessage(byte[] msg) {
         string strMsg = Encoding.UTF8.GetString(msg);
         JSONNode msgObject = JSON.Parse(strMsg);
-        string msgService = msgObject["data"]["service"];
-        string msgRequest = msgObject["data"]["request"];
+        string msgService = msgObject["service"];
+        string msgRequest = msgObject["request"];
         
         services.FindAll(service => service.api == msgService)
           .ForEach(service => {
             service.fields.ForEach(field => {
-              field.fromJSONNode(msgObject["data"][field.name]);
+              if (msgObject["data"][field.name] != null)
+                field.fromJSONNode(msgObject["data"][field.name]);
             });
 
             //  Raise the event

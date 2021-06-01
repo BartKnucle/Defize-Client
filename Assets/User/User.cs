@@ -13,21 +13,11 @@ public class User : GenericSingletonClass<User>
         setUserId(_id.Value);
     }
 
-    public void setUserId(string Id = "") {
-      Debug.Log(Id);
-      if (Id == null || Id == "") {
-        if (!PlayerPrefs.HasKey("user")) {
-          _id.Value = Guid.NewGuid().ToString();
-          PlayerPrefs.SetString("user", (string)_id.Value);
-          PlayerPrefs.Save();
-          service.CreateRecords();
-        } else {
-          _id.Value = PlayerPrefs.GetString("user");
-        }
-      } else {
+    public void setUserId(string Id) {
+      if (Application.platform == RuntimePlatform.WebGLPlayer) {
         _id.Value = Id;
       }
-
-      service.PatchRecords();
+      
+      service.GetRecord();
     }
 }

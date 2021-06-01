@@ -8,10 +8,6 @@ public class UpdateText : MonoBehaviour
   public StringVariable text;
   public Service service;
 
-  public void Start() {
-    transform.GetComponent<InputField>().text = (string)text.Value;
-  }
-
   public void SetText() {
     transform.GetComponent<InputField>().text = (string)text.Value;
   }

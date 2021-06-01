@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: nickname
   m_EditorClassIdentifier: 
   DeveloperDescription: User Nickname
-  reset: 0
-  _value: 
+  reset: 1
+  _value: "S\xE9b home"
