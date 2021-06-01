@@ -1,18 +1,26 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 using FunkySheep.Network;
 using FunkySheep.Variables;
 
+[RequireComponent(typeof(UIDocument))]
 public class UpdateText : MonoBehaviour
 {
   public StringVariable text;
   public Service service;
+  private TextField _textField;
 
-  public void SetText() {
-    //  transform.GetComponent<InputField>().text = (string)text.Value;
+  public void Awake() {
+    this._textField = GetComponent<UIDocument>().rootVisualElement.Q<TextField>("input-nickname");
+    this._textField.RegisterCallback<KeyDownEvent>(this.SendText);
   }
 
-  public void SendText() {
-    //  this.text.Value = transform.GetComponent<InputField>().text;
+  public void SetText() {
+    this._textField.value = this.text.Value;
+  }
+
+  public void SendText(KeyDownEvent evt) {
+    this.text.Value = this._textField.value;
     service.PatchRecords(User.Instance._id.Value);
   }
 }
