@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153720f80efb25446878a6119562a95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wsClient: {fileID: 11400000, guid: 894b1f94aa04b3a4a859c74fd7e2ece9, type: 2}
+  wsClient: {fileID: 11400000, guid: 579c4520d8b8dd34097d6d9cb68683ac, type: 2}
   services:
   - {fileID: 11400000, guid: 653a3fdc7b5c4d1459f6652312555312, type: 2}
   - {fileID: 11400000, guid: 5689d3ba752c9e347a0b72634bc44ce3, type: 2}
