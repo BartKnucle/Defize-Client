@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.endel.nativewebsocket": "https://github.com/endel/NativeWebSocket.git#upm",
+    "com.endel.nativewebsocket": "https://github.com/FunkySheepStudio/NativeWebSocket.git#upm",
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.ui": "1.0.0-preview.14",
     "com.unity.ui.builder": "1.0.0-preview.14",
