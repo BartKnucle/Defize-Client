@@ -6,6 +6,7 @@ using FunkySheep.Variables;
 public class User : GenericSingletonClass<User>
 {
     public StringVariable _id;
+    public StringVariable token;
     public Service service;
 
     void Start() {
@@ -16,6 +17,14 @@ public class User : GenericSingletonClass<User>
     public void setUserId(string Id) {
       if (Application.platform == RuntimePlatform.WebGLPlayer) {
         _id.Value = Id;
+      }
+      
+      service.GetRecord();
+    }
+
+    public void setUserToken(string Token) {
+      if (Application.platform == RuntimePlatform.WebGLPlayer) {
+        token.Value = Token;
       }
       
       service.GetRecord();
