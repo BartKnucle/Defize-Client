@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="veLongitude" style="flex-direction: row;">
+        <ui:Label text="Longitude: " display-tooltip-when-elided="true" name="lblLongitude" />
+        <ui:Label text="0" display-tooltip-when-elided="true" name="longitude" />
+    </ui:VisualElement>
+    <ui:VisualElement name="veAltitude" style="flex-direction: row;">
+        <ui:Label text="Altitude : " display-tooltip-when-elided="true" name="lblAltitude" />
+        <ui:Label text="0" display-tooltip-when-elided="true" name="altitude" />
+    </ui:VisualElement>
+    <ui:VisualElement name="veLatitude" style="flex-direction: row;">
+        <ui:Label text="Latitude: " display-tooltip-when-elided="true" name="lblLatitude" />
+        <ui:Label text="0" display-tooltip-when-elided="true" name="latitude" />
+    </ui:VisualElement>
+</ui:UXML>

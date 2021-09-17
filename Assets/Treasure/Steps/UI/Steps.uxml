@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Steps" display-tooltip-when-elided="true" name="Title" />
+    <ui:TextField picking-mode="Ignore" label="Name" value="filler text" name="Name" />
+    <ui:TextField picking-mode="Ignore" label="Latitude" value="0" name="Latitude" text="0" />
+    <ui:TextField picking-mode="Ignore" label="Longitude" value="0" name="Longitude" text="0" />
+    <ui:TextField picking-mode="Ignore" label="Altitude" value="0" name="Altitude" text="0" />
+    <ui:Button text="Create" display-tooltip-when-elided="true" name="Create" />
+    <ui:Button text="Show" display-tooltip-when-elided="true" name="Show" />
+</ui:UXML>

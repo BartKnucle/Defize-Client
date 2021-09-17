@@ -70,7 +70,7 @@ namespace FunkySheep.Network {
         changeStatus("Disconnected");
       }
 
-        private void onMessage(byte[] msg) {
+      private void onMessage(byte[] msg) {
         string strMsg = Encoding.UTF8.GetString(msg);
         JSONNode msgObject = JSON.Parse(strMsg);
         string msgService = msgObject["service"];
@@ -82,6 +82,8 @@ namespace FunkySheep.Network {
               if (msgObject["data"][field.name] != null)
                 field.fromJSONNode(msgObject["data"][field.name]);
             });
+
+            service.lastRawMsg = msgObject;
 
             //  Raise the event
             if (service.onReception) {

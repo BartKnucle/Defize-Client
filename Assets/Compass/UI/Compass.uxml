@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="veElement" style="flex-direction: row;">
+        <ui:Label text="Heading: " display-tooltip-when-elided="true" name="lblHeading" />
+        <ui:Label text="0" display-tooltip-when-elided="true" name="heading" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: {fileID: 11400000, guid: 5e1bb668d97033f4883a559512d0f871, type: 2}
-  token: {fileID: 11400000, guid: c92abd76a4fabc941a6e8bba836e6703, type: 2}
+  login: {fileID: 11400000, guid: e6e897c123dc75248a8ea9f17c3891e1, type: 2}
+  password: {fileID: 11400000, guid: a261fe4999a02dc439246b1ca569cec4, type: 2}
+  accessToken: {fileID: 11400000, guid: c92abd76a4fabc941a6e8bba836e6703, type: 2}
   service: {fileID: 11400000, guid: 653a3fdc7b5c4d1459f6652312555312, type: 2}
+  authService: {fileID: 11400000, guid: f1502cea02f94c34284e762686c3e9d8, type: 2}

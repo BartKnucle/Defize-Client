@@ -2,21 +2,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using FunkySheep.Variables;
 using FunkySheep.Events;
+using SimpleJSON;
 
 namespace FunkySheep.Network {
     [CreateAssetMenu(menuName = "FunkySheep/Network/Service")]
     public class Service : ScriptableObject
     {
       public string api;
+      public bool ack = false;
       public List<GenericVariable> fields;
-
       public GameEvent onReception;
+      public JSONNode lastRawMsg;
 
       public void FindRecords(string Params = null) {
         Message msg = new Message();
         msg.body["service"] = this.api;
         msg.body["request"] = "find";
-        msg.body["params"] = Params;
+        //  msg.body["params"] = Params;
         msg.Send();
       }
       public void GetRecord(string Key = null, string Params = null) {
@@ -25,7 +27,7 @@ namespace FunkySheep.Network {
         if (_setKey(msg, Key)) {
           msg.body["service"] = this.api;
           msg.body["request"] = "get";
-          msg.body["params"] = Params;
+          //  msg.body["params"] = Params;
           msg.Send();
         }
       }
@@ -33,7 +35,7 @@ namespace FunkySheep.Network {
         Message msg = new Message();
         msg.body["service"] = this.api;
         msg.body["request"] = "create";
-        msg.body["params"] = Params;
+        //  msg.body["params"] = Params;
         _fill(msg);
         msg.Send();
       }
@@ -43,7 +45,7 @@ namespace FunkySheep.Network {
         if (_setKey(msg, Key)) {
           msg.body["service"] = this.api;
           msg.body["request"] = "update";
-          msg.body["params"] = Params;
+          //  msg.body["params"] = Params;
           _fill(msg);
           msg.Send();
         }
@@ -54,7 +56,7 @@ namespace FunkySheep.Network {
         if (_setKey(msg, Key)) {
           msg.body["service"] = this.api;
           msg.body["request"] = "patch";
-          msg.body["params"] = Params;
+          //  msg.body["params"] = Params;
           _fill(msg);
           msg.Send();
         }
@@ -64,12 +66,14 @@ namespace FunkySheep.Network {
         if (_setKey(msg, Key)) {
           msg.body["service"] = this.api;
           msg.body["request"] = "remove";
-          msg.body["params"] = Params;
+          //  msg.body["params"] = Params;
           msg.Send();
         }
       }
 
       private void _fill(Message msg) {
+        msg.body["params"]["ack"] = ack;
+
         fields.ForEach(field => {
           msg.body["data"][field.name] = field.toJSONNode();
         });
