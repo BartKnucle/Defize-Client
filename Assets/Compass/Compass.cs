@@ -13,12 +13,6 @@ public class Compass : MonoBehaviour
 
     public UIDocument UI;
     
-    private Label _heading;
-
-  public void Awake() {
-    this._heading = UI.rootVisualElement.Q<Label>("heading");
-  }
-
     IEnumerator Start()
     {
         Input.compass.enabled = true;
@@ -61,7 +55,9 @@ public class Compass : MonoBehaviour
 
     private void Update()
     {
-        _heading.text = Input.compass.magneticHeading.ToString();
-        heading.Value = Input.compass.magneticHeading;
+        if (Input.location.isEnabledByUser) {
+            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("heading").text = Input.compass.magneticHeading.ToString();
+            heading.Value = Input.compass.magneticHeading;
+        }
     }
 }

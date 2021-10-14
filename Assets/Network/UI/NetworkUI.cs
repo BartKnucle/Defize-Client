@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using FunkySheep.Events;
 using FunkySheep.Variables;
+using UnityEngine.UIElements;
 
 public class NetworkUI : MonoBehaviour
 {

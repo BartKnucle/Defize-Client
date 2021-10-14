@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79461f2128cbc5648b7a191aa4e05ba4, type: 3}
   m_Name: Authentication
   m_EditorClassIdentifier: 
-  api: /api/management/authentication
+  api: /api/system/authentication
+  ack: 0
   fields: []
   onReception: {fileID: 11400000, guid: 56f75a9e3ddc47242b8a3ff591b13005, type: 2}

@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="Compass" src="/Assets/Compass/UI/Compass.uxml" />
+    <ui:Template name="Gps" src="/Assets/Gps/UI/Gps.uxml" />
+    <ui:Instance template="Gps" name="Gps" />
+    <ui:Instance template="Compass" name="Compass" />
+    <ui:Button text="Create" name="btnCreate" style="justify-content: flex-end;" />
+    <ui:Button text="Play" name="btnPlay" style="justify-content: flex-end;" />
+    <ui:Button text="Debug" name="btnDebug" style="justify-content: flex-end;" />
+</ui:UXML>

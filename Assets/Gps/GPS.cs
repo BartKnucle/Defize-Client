@@ -7,7 +7,7 @@ using UnityEngine.Android;
 #endif
 
 
-public class GPS : MonoBehaviour
+public class GPS : GenericSingletonClass<GPS>
 {
     public DoubleVariable latitude;
     public DoubleVariable longitude;
@@ -15,17 +15,15 @@ public class GPS : MonoBehaviour
     public FloatVariable horizontalAccuracy;
     public DoubleVariable altitude;
     public FloatVariable verticalAccuracy;
-    public UIDocument DebugUI;
-    private Label _latitude;
-    private Label _longitude;
-    private Label _altitude;
-
+    public UIDocument UI;
     GameObject dialog = null;
 
-  public void Awake() {
-    this._latitude = DebugUI.rootVisualElement.Q<Label>("latitude");
+  override public void Awake() {
+    base.Awake();
+
+    /*  this._latitude = DebugUI.rootVisualElement.Q<Label>("latitude");
     this._longitude = DebugUI.rootVisualElement.Q<Label>("longitude");
-    this._altitude = DebugUI.rootVisualElement.Q<Label>("altitude");
+    this._altitude = DebugUI.rootVisualElement.Q<Label>("altitude"); */
   }
 
     IEnumerator Start()
@@ -70,9 +68,10 @@ public class GPS : MonoBehaviour
 
     private void Update() {
         if (Input.location.isEnabledByUser) {
-            _latitude.text = Input.location.lastData.latitude.ToString();
-            _longitude.text = Input.location.lastData.longitude.ToString();
-            _altitude.text = Input.location.lastData.altitude.ToString();
+            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("latitude").text = Input.location.lastData.latitude.ToString();
+            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("longitude").text = Input.location.lastData.longitude.ToString();
+            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("altitude").text =  Input.location.lastData.altitude.ToString();
+
             latitude.Value = Input.location.lastData.latitude;
             longitude.Value = Input.location.lastData.longitude;
             altitude.Value = Input.location.lastData.altitude;
