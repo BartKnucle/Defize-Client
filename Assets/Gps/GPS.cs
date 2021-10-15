@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
@@ -79,20 +80,38 @@ public class GPS : GenericSingletonClass<GPS>
     }
 
     public Vector3 relativeCartesianPosition(double latitude, double longitude, double altitude) {
-        return toCartesian(latitude, longitude, altitude) - toCartesian(this.latitude.Value, this.longitude.Value, this.altitude.Value);
+        var rad = Math.PI / 180;
+        var delta = toCartesian(latitude, longitude, altitude) - toCartesian(this.latitude.Value, this.longitude.Value, this.altitude.Value);
+
+        var slat = Math.Sin(latitude * rad);
+        var clat = Math.Cos(latitude * rad);
+        var slon = Math.Sin(longitude * rad);
+        var clon = Math.Cos(longitude * rad);
+
+        var e = -slon * delta.x + clon * delta.y;
+        var n = -clon * slat * delta.x -slat * slon * delta.y+ clat*delta.z;
+        
+        return new Vector3((float)e, (float)(altitude - this.altitude.Value), (float)n);
     }
 
     public Vector3 toCartesian(double latitude, double longitude, double altitude) {
         Vector3 position = new Vector3();
-        double R = 6378137 + altitude;
+        double R = 6378137;
+        Double E = 0.00669437999014;
 
         latitude = latitude * System.Math.PI / 180;
         longitude = longitude * System.Math.PI / 180;
 
         position.x = (float)(R * System.Math.Cos(latitude) * System.Math.Cos(longitude));
-        position.y = (float)(R * System.Math.Sin(latitude));
+        position.y = (float)altitude;
         position.z = (float)(R * System.Math.Cos(latitude) * System.Math.Sin(longitude));
         
+        var N = R / Math.Sqrt(1 - E * Math.Pow(Math.Sin(latitude), 2));
+
+        position.x = (float)(N * Math.Cos(latitude) * Math.Cos(longitude));
+        position.y = (float)(N * Math.Cos(latitude) * Math.Sin(longitude));
+        position.z = (float)((1 - E) * N * Math.Sin(latitude));
+
         return position;
     }
 }

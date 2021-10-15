@@ -18,7 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad6e29c94c9953148ae23e1d78beeea9, type: 2}
   - {fileID: 11400000, guid: c2196c7886d7b9543afc0372de876b02, type: 2}
   - {fileID: 11400000, guid: bc67903241079d74188c17525d14e198, type: 2}
-  - {fileID: 11400000, guid: 2d021adde21a3344f85a03a3664e2858, type: 2}
-  - {fileID: 11400000, guid: b9eff84c0c414bc4a891a5b81a6391d8, type: 2}
-  - {fileID: 11400000, guid: e13d7ee9baefe974c9ddb7b9d118cfcf, type: 2}
   onReception: {fileID: 11400000, guid: 5df57a9db104f5d49a736c9d0cd27535, type: 2}
