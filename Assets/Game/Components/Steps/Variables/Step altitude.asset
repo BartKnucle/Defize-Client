@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6b8b6b2aca0abbd428b099513eeb68d5, type: 3}
-  m_Name: longitude
+  m_Name: Step altitude
   m_EditorClassIdentifier: 
   DeveloperDescription: 
   reset: 0

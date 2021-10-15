@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ec038f337e021489cffacb9978b763, type: 3}
-  m_Name: name
+  m_Name: Step _id
   m_EditorClassIdentifier: 
-  DeveloperDescription: Hunt name
+  DeveloperDescription: Step ID
   reset: 1
-  _value: Hunt test
+  _value: 

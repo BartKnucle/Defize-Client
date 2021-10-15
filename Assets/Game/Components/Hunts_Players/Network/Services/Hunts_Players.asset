@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79461f2128cbc5648b7a191aa4e05ba4, type: 3}
+  m_Name: Hunts_Players
+  m_EditorClassIdentifier: 
+  api: /api/game/hunts_players
+  ack: 0
+  fields:
+  - apiName: _id
+    variable: {fileID: 11400000, guid: 5e1bb668d97033f4883a559512d0f871, type: 2}
+  - apiName: hunt_id
+    variable: {fileID: 11400000, guid: 58e74e99ccbb4f340850cd745ef9b8fa, type: 2}
+  - apiName: latitude
+    variable: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
+  - apiName: longitude
+    variable: {fileID: 11400000, guid: 3cfc946ae90e42d45b7498f84ac5d829, type: 2}
+  - apiName: altitude
+    variable: {fileID: 11400000, guid: 0f2a8df3d2a98464884f0085d93adad7, type: 2}
+  onReception: {fileID: 0}

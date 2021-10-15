@@ -15,7 +15,10 @@ MonoBehaviour:
   api: /api/game/steps
   ack: 1
   fields:
-  - {fileID: 11400000, guid: ad6e29c94c9953148ae23e1d78beeea9, type: 2}
-  - {fileID: 11400000, guid: c2196c7886d7b9543afc0372de876b02, type: 2}
-  - {fileID: 11400000, guid: bc67903241079d74188c17525d14e198, type: 2}
+  - apiName: _id
+    variable: {fileID: 11400000, guid: ad6e29c94c9953148ae23e1d78beeea9, type: 2}
+  - apiName: name
+    variable: {fileID: 11400000, guid: bc67903241079d74188c17525d14e198, type: 2}
+  - apiName: 
+    variable: {fileID: 0}
   onReception: {fileID: 11400000, guid: 5df57a9db104f5d49a736c9d0cd27535, type: 2}

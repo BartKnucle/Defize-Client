@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Authentication
   m_EditorClassIdentifier: 
   api: /api/system/authentication
-  ack: 0
+  ack: 1
   fields: []
   onReception: {fileID: 11400000, guid: 56f75a9e3ddc47242b8a3ff591b13005, type: 2}
