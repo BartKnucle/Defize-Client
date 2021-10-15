@@ -2,6 +2,7 @@
   "dependencies": {
     "com.unity.ide.vscode": "1.2.4",
     "com.unity.ui": "1.0.0-preview.18",
+    "com.unity.ui.builder": "1.0.0-preview.18",
     "com.unity.xr.arcore": "4.1.7",
     "com.unity.xr.arfoundation": "4.1.7",
     "net.funkysheep.unity.library": "0.1.6",

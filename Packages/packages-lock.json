@@ -33,6 +33,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.ui.builder": {
+      "version": "1.0.0-preview.18",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.xr.arcore": {
       "version": "4.1.7",
       "depth": 0,
