@@ -17,6 +17,9 @@ public class GPS : GenericSingletonClass<GPS>
     public DoubleVariable altitude;
     public FloatVariable verticalAccuracy;
     public UIDocument UI;
+    public VectorImage deactivatedIcon;
+    public VectorImage activatedIcon;
+
     GameObject dialog = null;
 
   override public void Awake() {
@@ -69,6 +72,7 @@ public class GPS : GenericSingletonClass<GPS>
 
     private void Update() {
         if (Input.location.isEnabledByUser) {
+            this.UI.rootVisualElement.Q<VisualElement>("gps-icon").style.backgroundImage = new StyleBackground(activatedIcon);
             GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("latitude").text = Input.location.lastData.latitude.ToString();
             GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("longitude").text = Input.location.lastData.longitude.ToString();
             GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("altitude").text =  Input.location.lastData.altitude.ToString();
@@ -76,6 +80,8 @@ public class GPS : GenericSingletonClass<GPS>
             latitude.Value = Input.location.lastData.latitude;
             longitude.Value = Input.location.lastData.longitude;
             altitude.Value = Input.location.lastData.altitude;
+        } else {
+            this.UI.rootVisualElement.Q<VisualElement>("gps-icon").style.backgroundImage = new StyleBackground(deactivatedIcon);
         }
     }
 

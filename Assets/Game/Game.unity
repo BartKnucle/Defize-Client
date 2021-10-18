@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heading: {fileID: 11400000, guid: 6df23ab6ac4f4754a8953597c5f9d4d3, type: 2}
-  UI: {fileID: 0}
+  UI: {fileID: 1782102708}
 --- !u!4 &1207223582
 Transform:
   m_ObjectHideFlags: 0
@@ -880,6 +880,55 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1744195786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 643642166392576216, guid: 3d2d903a23d1cfb40b386396dc38ec82, type: 3}
+  m_PrefabInstance: {fileID: 1114771091}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1744195787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744195786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cccb317e52b86f40b9fc7bd5836cff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI: {fileID: 1782102708}
+  Status: {fileID: 11400000, guid: 72fef8417f2eb3e49a87adab2b23348f, type: 2}
+  offlineImg: {fileID: 7388822144124034973, guid: b25448a3fc2b6794d9d37f4bb2460f2c, type: 3}
+  onlineImg: {fileID: 7388822144124034973, guid: d1e2603f4abadbb48a8505e31888d4d7, type: 3}
+--- !u!114 &1744195789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744195786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 155627661dfcc0d478890facef0f220f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1744195787}
+        m_TargetAssemblyTypeName: NetworkUI, Assembly-CSharp
+        m_MethodName: changeUIStatus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1782102706
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1086,9 @@ MonoBehaviour:
   horizontalAccuracy: {fileID: 11400000, guid: 0a2c9dd9fcbae5549b06399f4ac3ad93, type: 2}
   altitude: {fileID: 11400000, guid: 0f2a8df3d2a98464884f0085d93adad7, type: 2}
   verticalAccuracy: {fileID: 11400000, guid: def0bf7b3d5cf6642a4b071d44623d2f, type: 2}
-  UI: {fileID: 0}
+  UI: {fileID: 1782102708}
+  deactivatedIcon: {fileID: 7388822144124034973, guid: aa15cba51f2e6714c8b274ced3c4c521, type: 3}
+  activatedIcon: {fileID: 7388822144124034973, guid: 10725a3e9f6341d4fb57642cfff2da68, type: 3}
 --- !u!4 &2106934787
 Transform:
   m_ObjectHideFlags: 0
