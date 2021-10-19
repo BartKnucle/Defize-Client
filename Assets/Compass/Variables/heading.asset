@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: heading
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  apiName: heading
   reset: 1
   _value: 0

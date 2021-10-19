@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FunkySheep.Network;
-
+using UnityEngine.XR.ARFoundation;
 public class StepsManager : MonoBehaviour
 {
     public Service service;
-    // Start is called before the first frame update
+    public ARAnchorManager anchorManager;
+        // Start is called before the first frame update
     void Start()
     {
         service.FindRecords();
@@ -38,7 +39,11 @@ public class StepsManager : MonoBehaviour
         double latitude = step["latitude"];
         double longitude = step["longitude"];
         double altitude = step["altitude"];
+        stepObj.transform.localScale *=  0.1f;
+
+        stepObj.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0, 1, 0, 1);
 
         stepObj.transform.localPosition = GPS.Instance.GetComponent<GPS>().relativeCartesianPosition(latitude, longitude, altitude);
+        //stepObj.AddComponent<ARAnchor>();
     }
 }

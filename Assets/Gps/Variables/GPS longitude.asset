@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: GPS longitude
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  apiName: longitude
   reset: 0
-  _value: 4.3800133467811975
+  _value: 4.3800133467812
