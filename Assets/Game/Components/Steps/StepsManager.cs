@@ -33,13 +33,13 @@ public class StepsManager : MonoBehaviour
     }
 
     private void _addStep(SimpleJSON.JSONNode step) {
-        GameObject stepObj = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        GameObject stepObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        stepObj.transform.localScale *=  0.1f;
         stepObj.name = step["name"].ToString();
         stepObj.transform.parent = this.transform;
         double latitude = step["latitude"];
         double longitude = step["longitude"];
         double altitude = step["altitude"];
-        stepObj.transform.localScale *=  0.1f;
 
         stepObj.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0, 1, 0, 1);
 

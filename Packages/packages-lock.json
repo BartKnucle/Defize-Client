@@ -128,10 +128,11 @@
       "url": "https://packages.unity.com"
     },
     "net.funkysheep.unity.library": {
-      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Library",
+      "version": "0.1.8",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
