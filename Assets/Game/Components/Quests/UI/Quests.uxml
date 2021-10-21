@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Label text="Quests&#10;" display-tooltip-when-elided="true" name="Title" style="-unity-text-align: upper-center;" />
+    <ui:VisualElement name="quests_list" style="border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; flex-grow: 1;" />
+    <ui:TextField picking-mode="Ignore" label="Name" value="Name" text="&#x9;" name="hunt-name" />
+    <ui:Button text="Create" display-tooltip-when-elided="true" name="create-hunt" />
+</ui:UXML>

@@ -128,7 +128,7 @@
       "url": "https://packages.unity.com"
     },
     "net.funkysheep.unity.library": {
-      "version": "0.1.8",
+      "version": "0.2.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

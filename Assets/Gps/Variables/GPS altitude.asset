@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: GPS altitude
   m_EditorClassIdentifier: 
   DeveloperDescription: 
-  apiName: altitude
   reset: 0
-  _value: 322.5
+  _value: 323.6

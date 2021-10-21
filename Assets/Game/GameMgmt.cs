@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class GameMgmt : MonoBehaviour
+using UnityEngine.UIElements;
+using FunkySheep.Variables;
+public class GameMgmt : GenericSingletonClass<GameMgmt>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public enum State {
+        root
     }
+    public State state = State.root;
+    public UIDocument UI;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void Start() {
+        if (Debug.isDebugBuild)
+        {
+            UI.rootVisualElement.Q<VisualElement>("debug-btn").visible = true;
+        } else {
+            UI.rootVisualElement.Q<VisualElement>("debug-btn").visible = false;
+        }
     }
 }

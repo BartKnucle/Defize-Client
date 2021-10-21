@@ -73,9 +73,9 @@ public class GPS : GenericSingletonClass<GPS>
     private void Update() {
         if (Input.location.isEnabledByUser) {
             this.UI.rootVisualElement.Q<VisualElement>("gps-icon").style.backgroundImage = new StyleBackground(activatedIcon);
-            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("latitude").text = Input.location.lastData.latitude.ToString();
-            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("longitude").text = Input.location.lastData.longitude.ToString();
-            GameUiMgmt.Instance.document.rootVisualElement.Q<Label>("altitude").text =  Input.location.lastData.altitude.ToString();
+            GameMgmt.Instance.UI.rootVisualElement.Q<Label>("latitude").text = Input.location.lastData.latitude.ToString();
+            GameMgmt.Instance.UI.rootVisualElement.Q<Label>("longitude").text = Input.location.lastData.longitude.ToString();
+            GameMgmt.Instance.UI.rootVisualElement.Q<Label>("altitude").text =  Input.location.lastData.altitude.ToString();
 
             latitude.Value = Input.location.lastData.latitude;
             longitude.Value = Input.location.lastData.longitude;

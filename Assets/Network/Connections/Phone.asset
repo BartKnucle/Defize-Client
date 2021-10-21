@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d40e25c2a4295af41b484fdccbb46a7f, type: 3}
-  m_Name: GPS latitude
+  m_Script: {fileID: 11500000, guid: f14ea86eba822c2429043ae0d0c28197, type: 3}
+  m_Name: Phone
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
-  reset: 0
-  _value: 44.6383781433105
+  address: ws://192.168.102.43
+  port: 443

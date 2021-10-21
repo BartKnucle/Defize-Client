@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79461f2128cbc5648b7a191aa4e05ba4, type: 3}
+  m_Name: Quest_Paths
+  m_EditorClassIdentifier: 
+  api: /api/game/quest_paths
+  ack: 0
+  fields:
+  - apiName: quest
+    variable: {fileID: 11400000, guid: 58e74e99ccbb4f340850cd745ef9b8fa, type: 2}
+  - apiName: positionx
+    variable: {fileID: 11400000, guid: 96a89de968a93e9409d08a752b894c4e, type: 2}
+  - apiName: positiony
+    variable: {fileID: 11400000, guid: b642601a4434ce24699d55b878a3dcb3, type: 2}
+  - apiName: positionz
+    variable: {fileID: 11400000, guid: 318279346cef9b54f9964b9bac1ad3e5, type: 2}
+  - apiName: latitude
+    variable: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
+  - apiName: longitude
+    variable: {fileID: 11400000, guid: 3cfc946ae90e42d45b7498f84ac5d829, type: 2}
+  - apiName: altitude
+    variable: {fileID: 11400000, guid: 0f2a8df3d2a98464884f0085d93adad7, type: 2}
+  - apiName: horizontal_accuracy
+    variable: {fileID: 11400000, guid: 0a2c9dd9fcbae5549b06399f4ac3ad93, type: 2}
+  - apiName: verticale_accuracy
+    variable: {fileID: 11400000, guid: def0bf7b3d5cf6642a4b071d44623d2f, type: 2}
+  onReception: {fileID: 11400000, guid: aaf1587f602f3b44d92d24c34affc121, type: 2}
