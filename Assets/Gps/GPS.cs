@@ -24,10 +24,6 @@ public class GPS : GenericSingletonClass<GPS>
 
   override public void Awake() {
     base.Awake();
-
-    /*  this._latitude = DebugUI.rootVisualElement.Q<Label>("latitude");
-    this._longitude = DebugUI.rootVisualElement.Q<Label>("longitude");
-    this._altitude = DebugUI.rootVisualElement.Q<Label>("altitude"); */
   }
 
     IEnumerator Start()
@@ -80,6 +76,8 @@ public class GPS : GenericSingletonClass<GPS>
             latitude.Value = Input.location.lastData.latitude;
             longitude.Value = Input.location.lastData.longitude;
             altitude.Value = Input.location.lastData.altitude;
+            horizontalAccuracy.Value = Input.location.lastData.horizontalAccuracy;
+            verticalAccuracy.Value = Input.location.lastData.verticalAccuracy;
         } else {
             this.UI.rootVisualElement.Q<VisualElement>("gps-icon").style.backgroundImage = new StyleBackground(deactivatedIcon);
         }

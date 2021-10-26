@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FunkySheep.Variables;
 using FunkySheep.Network;
 using UnityEngine.XR.ARFoundation;
+
 public class StepsManager : MonoBehaviour
 {
     public Service service;
-    public ARAnchorManager anchorManager;
-        // Start is called before the first frame update
+
     void Start()
     {
         service.FindRecords();

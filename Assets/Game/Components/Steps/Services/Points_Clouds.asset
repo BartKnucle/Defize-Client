@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f14ea86eba822c2429043ae0d0c28197, type: 3}
-  m_Name: CCI
+  m_Script: {fileID: 11500000, guid: 79461f2128cbc5648b7a191aa4e05ba4, type: 3}
+  m_Name: Points_Clouds
   m_EditorClassIdentifier: 
-  address: ws://172.20.9.13
-  port: 443
+  api: /api/game/points_clouds
+  ack: 0
+  fields: []
+  onReception: {fileID: 11400000, guid: 84a1d15df3b3a6546bc637ac911acf62, type: 2}
