@@ -134,6 +134,14 @@
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
+    "net.funkysheep.unity.openstreetmap": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-OpenStreetMap",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.library": "0.2.0"
+      }
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,
