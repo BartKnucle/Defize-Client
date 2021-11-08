@@ -780,7 +780,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1181637306}
   - component: {fileID: 1181637307}
-  - component: {fileID: 1181637308}
   - component: {fileID: 1181637309}
   - component: {fileID: 1181637310}
   m_Layer: 0
@@ -821,22 +820,6 @@ MonoBehaviour:
   zoomLevel: 19
   tiles: []
   onUpdate: {fileID: 11400000, guid: 83e4048ddcfddcf4f9a5bdb83b3c5e3a, type: 2}
---- !u!114 &1181637308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181637305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f21c074d86024caca2a0034ce4f53f73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: cb99009da59358946a9ccc512bc5f871, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 491590c8c5452ef4e97c0ff79682ff23, type: 3}
-  m_SortingOrder: 0
 --- !u!114 &1181637309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,6 +832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5e36eeffcd9ed4fa9479c1bca2cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  document: {fileID: 97332138}
 --- !u!114 &1181637310
 MonoBehaviour:
   m_ObjectHideFlags: 0

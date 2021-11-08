@@ -4,15 +4,14 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using FunkySheep.OSM;
 
-[RequireComponent(typeof(OSMManager)), RequireComponent(typeof(UIDocument))]
+[RequireComponent(typeof(OSMManager))]
 public class MapManager : MonoBehaviour
 {
-    UIDocument document;
+    public UIDocument document;
     OSMManager oSMManager;
     // Start is called before the first frame update
     void Start()
     {
-        document = GetComponent<UIDocument>();
         oSMManager = GetComponent<OSMManager>();
     }
 

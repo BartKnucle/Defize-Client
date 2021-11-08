@@ -1,15 +1,19 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="Network Icon" src="/Assets/Network/UI/Network Icon.uxml" />
     <ui:Template name="Gps Icon" src="/Assets/Gps/UI/Gps Icon.uxml" />
-    <ui:Template name="Debug Icon" src="/Assets/Game/Components/UI/Debug Icon.uxml" />
+    <ui:Template name="Debug Icon" src="Debug Icon.uxml" />
     <ui:Template name="Quests" src="/Assets/Game/Components/Quests/UI/Quests.uxml" />
     <ui:Template name="Network Status" src="/Assets/Network/UI/Network Status.uxml" />
     <ui:Template name="Gps" src="/Assets/Gps/UI/Gps.uxml" />
     <ui:Template name="Compass" src="/Assets/Compass/UI/Compass.uxml" />
-    <ui:VisualElement name="Status_Icons" style="flex-direction: row;">
-        <ui:Instance template="Network Icon" name="Network Icon" />
-        <ui:Instance template="Gps Icon" name="Gps Icon" />
-        <ui:Instance template="Debug Icon" name="Debug Icon" />
+    <ui:Template name="Map" src="/Assets/Game/Components/Map/UI/Map.uxml" />
+    <ui:VisualElement style="flex-direction: row;">
+        <ui:VisualElement name="Status_Icons" style="flex-direction: row; flex-grow: 1;">
+            <ui:Instance template="Network Icon" name="Network Icon" />
+            <ui:Instance template="Gps Icon" name="Gps Icon" />
+            <ui:Instance template="Debug Icon" name="Debug Icon" />
+        </ui:VisualElement>
+        <ui:Instance template="Map" name="Map" />
     </ui:VisualElement>
     <ui:Instance template="Quests" name="Quests" />
     <ui:VisualElement name="Debug">
