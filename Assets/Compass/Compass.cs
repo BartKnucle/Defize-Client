@@ -57,7 +57,7 @@ public class Compass : MonoBehaviour
     {
         if (Input.location.isEnabledByUser) {
             GameMgmt.Instance.UI.rootVisualElement.Q<Label>("heading").text = Input.compass.magneticHeading.ToString();
-            heading.Value = Input.compass.magneticHeading;
+            heading.Value = Input.compass.trueHeading;
         }
     }
 }

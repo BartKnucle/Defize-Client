@@ -1,3 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ve-map" style="width: 200px; height: 200px; border-top-left-radius: 137px; border-bottom-left-radius: 137px; border-top-right-radius: 137px; border-bottom-right-radius: 137px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-left-width: 7px; border-right-width: 7px; border-top-width: 7px; border-bottom-width: 7px; flex-direction: row-reverse;" />
+    <ui:VisualElement name="ve-map-background" style="width: 173px; height: 180px; position: absolute; border-top-left-radius: 229px; border-bottom-left-radius: 229px; border-top-right-radius: 229px; border-bottom-right-radius: 229px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; visibility: visible; bottom: 0; left: 12px;" />
+    <ui:VisualElement name="ve-map-container" style="background-image: url(&apos;/Assets/Game/Components/Map/UI/map.png&apos;); height: 200px; width: 200px;">
+        <ui:VisualElement name="ve-map-arrow" style="position: relative; left: 88px; top: 100px; width: 20px; height: 20px; background-image: url(&apos;/Assets/Game/Components/Map/UI/Arrow.svg&apos;);" />
+    </ui:VisualElement>
 </ui:UXML>

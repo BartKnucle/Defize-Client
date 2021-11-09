@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37053ec4d3c218344b3656842f6f844f, type: 3}
-  m_Name: Player Position Y
+  m_Name: Player Virtual Position X
   m_EditorClassIdentifier: 
   DeveloperDescription: 
   reset: 0

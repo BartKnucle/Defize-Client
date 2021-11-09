@@ -106,9 +106,9 @@ public class GPS : GenericSingletonClass<GPS>
         latitude = latitude * System.Math.PI / 180;
         longitude = longitude * System.Math.PI / 180;
 
-        position.x = (float)(R * System.Math.Cos(latitude) * System.Math.Cos(longitude));
+        /*position.x = (float)(R * System.Math.Cos(latitude) * System.Math.Cos(longitude));
         position.y = (float)altitude;
-        position.z = (float)(R * System.Math.Cos(latitude) * System.Math.Sin(longitude));
+        position.z = (float)(R * System.Math.Cos(latitude) * System.Math.Sin(longitude));*/
         
         var N = R / Math.Sqrt(1 - E * Math.Pow(Math.Sin(latitude), 2));
 
@@ -117,5 +117,12 @@ public class GPS : GenericSingletonClass<GPS>
         position.z = (float)((1 - E) * N * Math.Sin(latitude));
 
         return position;
+    }
+
+    public static (double latitude, double longitude) fromVirtual(double startLatitude, double startLongitude, Vector3 relativePosition) {
+        double lat = startLatitude + (180 / System.Math.PI) * ( relativePosition.z / 6378137 );
+        double lon = startLongitude + (180 / System.Math.PI) *( relativePosition.x / 6378137) / Math.Cos(startLatitude);
+
+        return (lat, lon);
     }
 }

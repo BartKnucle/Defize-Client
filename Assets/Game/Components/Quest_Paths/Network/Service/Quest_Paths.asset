@@ -33,4 +33,8 @@ MonoBehaviour:
     variable: {fileID: 11400000, guid: 0a2c9dd9fcbae5549b06399f4ac3ad93, type: 2}
   - apiName: verticale_accuracy
     variable: {fileID: 11400000, guid: def0bf7b3d5cf6642a4b071d44623d2f, type: 2}
+  - apiName: virtual_latitude
+    variable: {fileID: 11400000, guid: 65108f9a1daa1d8489e87ff4f909706f, type: 2}
+  - apiName: virtual_longitude
+    variable: {fileID: 11400000, guid: 0b0ad6968a9de404d8950a089d3cdb8e, type: 2}
   onReception: {fileID: 11400000, guid: aaf1587f602f3b44d92d24c34affc121, type: 2}
