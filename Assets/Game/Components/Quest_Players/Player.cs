@@ -1,40 +1,37 @@
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 using FunkySheep.Network;
-using FunkySheep.Variables;
+using FunkySheep.Events;
 
+[RequireComponent(typeof(Camera))]
 public class Player : MonoBehaviour
 {
     public Service service;
-    public Camera playerCamera;
-    public FloatVariable playerVirtualPositionX;
-    public FloatVariable playerVirtualPositionY;
-    public FloatVariable playerVirtualPositionZ;
-    public DoubleVariable virtualLatitude;
-    public DoubleVariable virtualLongitude;
-    public int updatePositionFreqency = 1000;
-    private float _lastPositionUpdate = 0;
+    public ARSessionOrigin origin;
+    public FunkySheep.Types.Vector3 position;
+    public FunkySheep.Types.Double calculatedLatitude;
+    public FunkySheep.Types.Double calculatedLongitude;
+    public GameEvent onPlayerMove;
+    Vector3 _lastPosition;
 
     private void Start() {
-        playerVirtualPositionX.Value = playerCamera.transform.localPosition.x;
-        playerVirtualPositionY.Value = playerCamera.transform.localPosition.y;
-        playerVirtualPositionZ.Value = playerCamera.transform.localPosition.z;
+        position.Value = transform.localPosition;
+        _lastPosition = position.Value;
     }
 
     void Update()
     {
-        playerVirtualPositionX.Value = playerCamera.transform.localPosition.x;
-        playerVirtualPositionY.Value = playerCamera.transform.localPosition.y;
-        playerVirtualPositionZ.Value = playerCamera.transform.localPosition.z;
+        position.Value = transform.localPosition;
+        var calculatedGPS = GPS.fromVirtual(GPS.Instance.latitude.Value, GPS.Instance.longitude.Value, position.Value);
+        calculatedLatitude.Value = calculatedGPS.latitude;
+        calculatedLongitude.Value = calculatedGPS.longitude;
 
-        var calculatedGPS = GPS.fromVirtual(GPS.Instance.latitude.Value, GPS.Instance.longitude.Value, playerCamera.transform.position);
-        virtualLatitude.Value = calculatedGPS.latitude;
-        virtualLongitude.Value = calculatedGPS.longitude;
+        float distance = Vector3.Distance(transform.localPosition, _lastPosition);
 
-        _lastPositionUpdate += Time.deltaTime;
-
-        if (_lastPositionUpdate >= updatePositionFreqency / 1000) {
-            _lastPositionUpdate = 0;
-            service.CreateRecords();
+        if (distance >= 0.5) {
+            _lastPosition = transform.localPosition;
+            onPlayerMove.Raise();
+            //service.CreateRecords();
         }
     }
 }

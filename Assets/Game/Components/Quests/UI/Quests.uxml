@@ -1,6 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Label text="Quests&#10;" display-tooltip-when-elided="true" name="Title" style="-unity-text-align: upper-center;" />
-    <ui:VisualElement name="quests_list" style="border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; flex-grow: 1;" />
-    <ui:TextField picking-mode="Ignore" label="Name" value="Name" text="&#x9;" name="hunt-name" />
-    <ui:Button text="Create" display-tooltip-when-elided="true" name="create-hunt" />
+    <ui:VisualElement name="Frame" style="-unity-background-scale-mode: stretch-to-fill; align-items: center; background-color: rgba(46, 128, 128, 0.53); border-left-color: rgba(16, 248, 145, 0.22); border-right-color: rgba(16, 248, 145, 0.22); border-top-color: rgba(16, 248, 145, 0.22); border-bottom-color: rgba(16, 248, 145, 0.22); border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; border-top-left-radius: 21px; border-bottom-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px;">
+        <ui:Label text="Quests&#10;" display-tooltip-when-elided="true" name="Title" style="-unity-text-align: upper-center; -unity-font: resource(&apos;Fonts/Mohave-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/Mohave-Medium SDF&apos;);" />
+        <ui:VisualElement name="quests_list" style="border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; flex-grow: 1; flex-shrink: 1;" />
+        <ui:TextField picking-mode="Ignore" label="Name" value="Name" text="&#x9;" name="hunt-name" style="-unity-font: resource(&apos;Fonts/Mohave-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/Mohave-Medium SDF&apos;); width: 69%;" />
+        <ui:Button text="Create" display-tooltip-when-elided="true" name="create-hunt" style="-unity-font: resource(&apos;Fonts/Mohave-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/Mohave-Medium SDF&apos;);" />
+    </ui:VisualElement>
 </ui:UXML>

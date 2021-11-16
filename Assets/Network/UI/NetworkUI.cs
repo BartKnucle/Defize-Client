@@ -1,11 +1,11 @@
 using UnityEngine;
-using FunkySheep.Variables;
+using FunkySheep;
 using UnityEngine.UIElements;
 
 public class NetworkUI : MonoBehaviour
 {
     public UIDocument UI;  
-    public StringVariable Status;
+    public FunkySheep.Types.String Status;
     public VectorImage offlineImg;
     public VectorImage onlineImg;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using FunkySheep.Variables;
+using FunkySheep;
 using FunkySheep.OSM;
 
 [RequireComponent(typeof(OSMManager))]
@@ -11,7 +11,7 @@ public class MapManager : MonoBehaviour
     public UIDocument document;
     OSMManager oSMManager;
 
-    public FloatVariable headingValue;
+    public FunkySheep.Types.Float headingValue;
     VisualElement heading;
     VisualElement map;
     

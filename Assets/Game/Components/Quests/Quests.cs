@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using FunkySheep.Variables;
+using FunkySheep;
 using FunkySheep.Network;
 
 public class Quests : MonoBehaviour
 {
     public Service service;
 
-    public StringVariable selectedQuestId;
-    public StringVariable quest_name;
+    public FunkySheep.Types.String selectedQuestId;
+    public FunkySheep.Types.String quest_name;
     public UIDocument UI;
     public void Awake()
     {

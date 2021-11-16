@@ -128,10 +128,19 @@
       "url": "https://packages.unity.com"
     },
     "net.funkysheep.unity.library": {
-      "version": "0.2.0",
+      "version": "0.2.2",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "net.funkysheep.unity.network": {
+      "version": "0.1.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "net.funkysheep.unity.library": "0.2.1"
+      },
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.openstreetmap": {
@@ -139,7 +148,7 @@
       "depth": 0,
       "source": "local",
       "dependencies": {
-        "net.funkysheep.unity.library": "0.2.0"
+        "net.funkysheep.unity.library": "0.2.1"
       }
     },
     "com.unity.modules.ai": {

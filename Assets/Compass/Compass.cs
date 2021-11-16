@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep.Variables;
+using FunkySheep;
 using UnityEngine.UIElements;
 #if PLATFORM_ANDROID
 using UnityEngine.Android;
@@ -9,7 +9,7 @@ using UnityEngine.Android;
 
 public class Compass : MonoBehaviour
 {
-    public FloatVariable heading;
+    public FunkySheep.Types.Float heading;
 
     public UIDocument UI;
     

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14ea86eba822c2429043ae0d0c28197, type: 3}
   m_Name: Phone
   m_EditorClassIdentifier: 
-  address: ws://192.168.102.43
+  address: ws://192.168.12.43
   port: 443

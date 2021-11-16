@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep.Variables;
+using FunkySheep;
 using FunkySheep.Network;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -11,23 +11,23 @@ using Unity.Collections.LowLevel.Unsafe;
 
     public class ARPoint {
     
-        StringVariable cloudID;
-        StringVariable pointID;
-        public FloatVariable x;
-        public FloatVariable y;
-        public FloatVariable z;
-        public StringVariable color;
-        public FloatVariable confidence;
+        FunkySheep.Types.String cloudID;
+        FunkySheep.Types.String pointID;
+        public FunkySheep.Types.Float x;
+        public FunkySheep.Types.Float y;
+        public FunkySheep.Types.Float z;
+        public FunkySheep.Types.String color;
+        public FunkySheep.Types.Float confidence;
 
         public ARPoint(string cloudId, string pointId, Vector3 pos, Color color, float confidence)
         {
-            this.cloudID = ScriptableObject.CreateInstance<StringVariable>();
-            this.pointID = ScriptableObject.CreateInstance<StringVariable>();
-            this.x = ScriptableObject.CreateInstance<FloatVariable>();
-            this.y = ScriptableObject.CreateInstance<FloatVariable>();
-            this.z = ScriptableObject.CreateInstance<FloatVariable>();
-            this.color = ScriptableObject.CreateInstance<StringVariable>();
-            this.confidence = ScriptableObject.CreateInstance<FloatVariable>();
+            this.cloudID = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            this.pointID = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            this.x = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
+            this.y = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
+            this.z = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
+            this.color = ScriptableObject.CreateInstance<FunkySheep.Types.String>();
+            this.confidence = ScriptableObject.CreateInstance<FunkySheep.Types.Float>();
 
             this.cloudID.Value = cloudId;
             this.pointID.Value = cloudId + "-" + pointId;

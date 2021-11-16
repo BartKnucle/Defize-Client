@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b8b6b2aca0abbd428b099513eeb68d5, type: 3}
-  m_Name: Step longitude
+  m_Script: {fileID: 11500000, guid: 743ee21aad01f43459af95ef918859ad, type: 3}
+  m_Name: Step Longitude
   m_EditorClassIdentifier: 
   DeveloperDescription: 
   reset: 0

@@ -18,5 +18,5 @@ MonoBehaviour:
   - apiName: _id
     variable: {fileID: 11400000, guid: 58e74e99ccbb4f340850cd745ef9b8fa, type: 2}
   - apiName: name
-    variable: {fileID: 11400000, guid: de341b6d30976c24aaa529579ab83592, type: 2}
+    variable: {fileID: 11400000, guid: 075ff24842cea9c4a980d49dd6851734, type: 2}
   onReception: {fileID: 11400000, guid: a9d7efabcf7346941b795c09879586a9, type: 2}

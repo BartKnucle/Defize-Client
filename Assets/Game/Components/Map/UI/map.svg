@@ -29,14 +29,14 @@
      showgrid="false"
      width="100mm"
      inkscape:zoom="1.4182379"
-     inkscape:cx="114.93135"
+     inkscape:cx="282.74523"
      inkscape:cy="227.7474"
      inkscape:window-width="1920"
      inkscape:window-height="1000"
-     inkscape:window-x="2869"
+     inkscape:window-x="-11"
      inkscape:window-y="-11"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg5" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2">
     <linearGradient
@@ -47,8 +47,12 @@
          offset="0"
          id="stop18385" />
       <stop
-         style="stop-color:#040304;stop-opacity:0.20100503"
-         offset="0.85338014"
+         style="stop-color:#255273;stop-opacity:0.05098039"
+         offset="0.67608017"
+         id="stop2796" />
+      <stop
+         style="stop-color:#04c3a8;stop-opacity:0.55451715"
+         offset="0.86994362"
          id="stop23972" />
       <stop
          style="stop-color:#080008;stop-opacity:1"
@@ -72,27 +76,30 @@
      style="display:inline"
      transform="matrix(1.1775484,0,0,1.1775484,-8.9252392,-4.165652)">
     <path
-       style="color:#000000;opacity:1;fill:url(#radialGradient18391);fill-opacity:1;stroke:#000000;stroke-width:3.4;stroke-miterlimit:5.9;stroke-dasharray:none;stroke-opacity:1"
+       style="color:#000000;opacity:1;fill:url(#radialGradient18391);fill-opacity:1;stroke:#1a99ad;stroke-width:3.4;stroke-miterlimit:5.9;stroke-dasharray:none;stroke-opacity:0.26178011"
        d="M 50,13.240234 C 29.716119,13.240234 13.240234,29.716119 13.240234,50 13.240234,70.283881 29.716119,86.759766 50,86.759766 70.283881,86.759766 86.759766,70.283881 86.759766,50 86.759766,29.716119 70.283881,13.240234 50,13.240234 Z"
        id="path846"
        sodipodi:nodetypes="sssss"
-       inkscape:label="cercle" />
+       inkscape:label="cercle"
+       inkscape:export-filename="C:\Users\sjarde.69r\Documents\FunkySheep\Games\net.funkysheep.defize.client\Assets\Game\Components\Map\UI\map.png"
+       inkscape:export-xdpi="50.799999"
+       inkscape:export-ydpi="50.799999" />
     <path
        id="rect17332"
-       style="fill:#d63541;stroke:none;stroke-width:2.37805;stroke-miterlimit:5.9"
+       style="fill:#d65241;stroke:#1a99ad;stroke-width:2.37805;stroke-miterlimit:5.9;stroke-opacity:0.26178011;fill-opacity:0.67539269"
        d="M 48.41426,3.5375633 54.477388,19.952371 H 42.351131 Z"
        sodipodi:nodetypes="cccc"
        inkscape:label="triangle-nord" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Mohave;-inkscape-font-specification:'Mohave, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000800;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:Mohave;-inkscape-font-specification:'Mohave, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f6d4aa;fill-opacity:0.52094239;stroke:none;stroke-width:0.264583"
        x="45.655548"
        y="18.696836"
        id="text4459"
        inkscape:label="texte-nord"><tspan
          sodipodi:role="line"
          id="tspan4457"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;font-family:Mohave;-inkscape-font-specification:'Mohave, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000800;fill-opacity:1;stroke-width:0.264583"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;font-family:Mohave;-inkscape-font-specification:'Mohave, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#f6d4aa;fill-opacity:0.52094239;stroke-width:0.264583"
          x="45.655548"
          y="18.696836">N</tspan></text>
   </g>

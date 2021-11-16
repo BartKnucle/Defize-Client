@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep.Variables;
+using FunkySheep;
 using FunkySheep.Network;
 using UnityEngine.XR.ARFoundation;
 

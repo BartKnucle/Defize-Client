@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using FunkySheep.Variables;
-public class GameMgmt : GenericSingletonClass<GameMgmt>
+using FunkySheep;
+public class GameMgmt : FunkySheep.Types.SingletonClass<GameMgmt>
 {
     public enum State {
         root

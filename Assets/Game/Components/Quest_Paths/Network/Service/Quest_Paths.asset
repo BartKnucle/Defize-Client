@@ -17,24 +17,20 @@ MonoBehaviour:
   fields:
   - apiName: quest
     variable: {fileID: 11400000, guid: 58e74e99ccbb4f340850cd745ef9b8fa, type: 2}
-  - apiName: positionx
-    variable: {fileID: 11400000, guid: 96a89de968a93e9409d08a752b894c4e, type: 2}
-  - apiName: positiony
-    variable: {fileID: 11400000, guid: b642601a4434ce24699d55b878a3dcb3, type: 2}
-  - apiName: positionz
-    variable: {fileID: 11400000, guid: 318279346cef9b54f9964b9bac1ad3e5, type: 2}
+  - apiName: position
+    variable: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   - apiName: latitude
     variable: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
   - apiName: longitude
-    variable: {fileID: 11400000, guid: 3cfc946ae90e42d45b7498f84ac5d829, type: 2}
+    variable: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   - apiName: altitude
-    variable: {fileID: 11400000, guid: 0f2a8df3d2a98464884f0085d93adad7, type: 2}
+    variable: {fileID: 11400000, guid: 8a1328a41d904ab4ab73a5e4c34ecb75, type: 2}
   - apiName: horizontal_accuracy
-    variable: {fileID: 11400000, guid: 0a2c9dd9fcbae5549b06399f4ac3ad93, type: 2}
+    variable: {fileID: 11400000, guid: f141df47755716f4daf918968a20ac40, type: 2}
   - apiName: verticale_accuracy
-    variable: {fileID: 11400000, guid: def0bf7b3d5cf6642a4b071d44623d2f, type: 2}
+    variable: {fileID: 11400000, guid: 55e797c388779ec4cace283fba5b3b42, type: 2}
   - apiName: virtual_latitude
-    variable: {fileID: 11400000, guid: 65108f9a1daa1d8489e87ff4f909706f, type: 2}
+    variable: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
   - apiName: virtual_longitude
-    variable: {fileID: 11400000, guid: 0b0ad6968a9de404d8950a089d3cdb8e, type: 2}
+    variable: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   onReception: {fileID: 11400000, guid: aaf1587f602f3b44d92d24c34affc121, type: 2}

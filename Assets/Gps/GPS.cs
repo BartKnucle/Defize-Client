@@ -2,20 +2,20 @@ using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UIElements;
-using FunkySheep.Variables;
+using FunkySheep;
 #if PLATFORM_ANDROID
 using UnityEngine.Android;
 #endif
 
 
-public class GPS : GenericSingletonClass<GPS>
+public class GPS : FunkySheep.Types.SingletonClass<GPS>
 {
-    public DoubleVariable latitude;
-    public DoubleVariable longitude;
+    public FunkySheep.Types.Double latitude;
+    public FunkySheep.Types.Double longitude;
 
-    public FloatVariable horizontalAccuracy;
-    public DoubleVariable altitude;
-    public FloatVariable verticalAccuracy;
+    public FunkySheep.Types.Float horizontalAccuracy;
+    public FunkySheep.Types.Double altitude;
+    public FunkySheep.Types.Float verticalAccuracy;
     public UIDocument UI;
     public VectorImage deactivatedIcon;
     public VectorImage activatedIcon;
