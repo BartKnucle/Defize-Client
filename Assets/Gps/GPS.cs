@@ -119,6 +119,15 @@ public class GPS : FunkySheep.Types.SingletonClass<GPS>
         return position;
     }
 
+    /// <summary>
+    /// Calculate new GPS coordinates from GPS references and cartesian coordinates
+    /// </summary>
+    /// <param name="latitude"></param>
+    /// <param name="startLatitude"></param>
+    /// <param name="startLongitude"></param>
+    /// <param name="relativePosition"></param>
+    /// <returns></returns>
+
     public static (double latitude, double longitude) fromVirtual(double startLatitude, double startLongitude, Vector3 relativePosition) {
         double lat = startLatitude + (180 / System.Math.PI) * ( relativePosition.z / 6378137 );
         double lon = startLongitude + (180 / System.Math.PI) *( relativePosition.x / 6378137) / Math.Cos(startLatitude);

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
-using FunkySheep;
 using FunkySheep.OSM;
 
 [RequireComponent(typeof(OSMManager))]
@@ -12,24 +10,49 @@ public class MapManager : MonoBehaviour
     OSMManager oSMManager;
 
     public FunkySheep.Types.Float headingValue;
+    FunkySheep.Types.Int size;
     VisualElement heading;
     VisualElement map;
+    public Tilemap tilemap;
     
     void Start()
     {
         oSMManager = GetComponent<OSMManager>();
+        size = oSMManager.size;
         map = document.rootVisualElement.Q<VisualElement>("ve-map-background");
         heading = document.rootVisualElement.Q<VisualElement>("ve-map-arrow");
     }
 
     public void Refresh() {
-        map.style.backgroundImage = new StyleBackground((Texture2D)oSMManager.tile.texture);
+        int center = ( oSMManager.size.Value - 1 ) / 2;
+
+        tilemap.ClearAllTiles();
+
+        for (int x = 0; x < oSMManager.size.Value; x++)
+        {
+            for (int y = 0; y < oSMManager.size.Value; y++)
+            {
+                Vector3Int position = new Vector3Int(x, -y, 0);
+
+                tilemap.SetTile(position, oSMManager.tiles[x, y].tile);
+                tilemap.RefreshTile(position);
+
+                if (x == center && y == center)
+                    map.style.backgroundImage = new StyleBackground((Texture2D)oSMManager.tiles[x, y].texture);
+            }
+        }
     }
 
     private void Update() {
+        tilemap.tileAnchor = new Vector3(-oSMManager.xInsidePosition.Value, oSMManager.yInsidePosition.Value, 0);
         Rotate(heading, headingValue.Value);
     }
 
+    /// <summary>
+    /// Rotate the compass
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="angleDegrees"></param>
     public void Rotate(VisualElement item, float angleDegrees)
     {
         if (angleDegrees != 0) {

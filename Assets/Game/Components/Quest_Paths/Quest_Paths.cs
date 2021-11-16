@@ -43,7 +43,6 @@ public class Quest_Paths : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
         {
             GameObject point = GameObject.Instantiate(pointModel);
-            Debug.Log(points[i]["position"]);
             Vector3 localPosition = FunkySheep.Types.Vector3.FromString((string)points[i]["position"]);
             AddPoint(localPosition);
         }
