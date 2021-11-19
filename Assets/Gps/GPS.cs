@@ -16,6 +16,7 @@ public class GPS : FunkySheep.Types.SingletonClass<GPS>
     public FunkySheep.Types.Float horizontalAccuracy;
     public FunkySheep.Types.Double altitude;
     public FunkySheep.Types.Float verticalAccuracy;
+    public FunkySheep.Types.Vector3 initialMercatorPosition;
     public UIDocument UI;
     public VectorImage deactivatedIcon;
     public VectorImage activatedIcon;
@@ -81,34 +82,22 @@ public class GPS : FunkySheep.Types.SingletonClass<GPS>
         } else {
             this.UI.rootVisualElement.Q<VisualElement>("gps-icon").style.backgroundImage = new StyleBackground(deactivatedIcon);
         }
+
+        if (initialMercatorPosition.Value == Vector3.zero)
+            initialMercatorPosition.Value = MercatorProjection.toVector3(longitude.Value, latitude.Value);
     }
 
     public Vector3 relativeCartesianPosition(double latitude, double longitude, double altitude) {
-        var rad = Math.PI / 180;
-        var delta = toCartesian(latitude, longitude, altitude) - toCartesian(this.latitude.Value, this.longitude.Value, this.altitude.Value);
-
-        var slat = Math.Sin(latitude * rad);
-        var clat = Math.Cos(latitude * rad);
-        var slon = Math.Sin(longitude * rad);
-        var clon = Math.Cos(longitude * rad);
-
-        var e = -slon * delta.x + clon * delta.y;
-        var n = -clon * slat * delta.x -slat * slon * delta.y+ clat*delta.z;
-        
-        return new Vector3((float)e, (float)(altitude - this.altitude.Value), (float)n);
+        return MercatorProjection.toVector3(longitude, latitude) - MercatorProjection.toVector3(this.longitude.Value, this.latitude.Value);
     }
 
-    public Vector3 toCartesian(double latitude, double longitude, double altitude) {
+    /*public Vector3 toCartesian(double latitude, double longitude, double altitude) {
         Vector3 position = new Vector3();
         double R = 6378137;
         Double E = 0.00669437999014;
 
         latitude = latitude * System.Math.PI / 180;
         longitude = longitude * System.Math.PI / 180;
-
-        /*position.x = (float)(R * System.Math.Cos(latitude) * System.Math.Cos(longitude));
-        position.y = (float)altitude;
-        position.z = (float)(R * System.Math.Cos(latitude) * System.Math.Sin(longitude));*/
         
         var N = R / Math.Sqrt(1 - E * Math.Pow(Math.Sin(latitude), 2));
 
@@ -129,9 +118,16 @@ public class GPS : FunkySheep.Types.SingletonClass<GPS>
     /// <returns></returns>
 
     public static (double latitude, double longitude) fromVirtual(double startLatitude, double startLongitude, Vector3 relativePosition) {
+        double R = 6378137;
+        Double E = 0.00669437999014;
+        var N = R / Math.Sqrt(1 - E * Math.Pow(Math.Sin(startLatitude), 2));
+
         double lat = startLatitude + (180 / System.Math.PI) * ( relativePosition.z / 6378137 );
         double lon = startLongitude + (180 / System.Math.PI) *( relativePosition.x / 6378137) / Math.Cos(startLatitude);
 
         return (lat, lon);
-    }
+    }*/
+
+
+    
 }

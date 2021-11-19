@@ -43,7 +43,8 @@ public class Quest_Paths : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
         {
             GameObject point = GameObject.Instantiate(pointModel);
-            Vector3 localPosition = FunkySheep.Types.Vector3.FromString((string)points[i]["position"]);
+            //Vector3 localPosition = FunkySheep.Types.Vector3.FromString((string)points[i]["position"]);
+            Vector3 localPosition = GPS.Instance.relativeCartesianPosition(points[i]["virtual_latitude"], points[i]["virtual_longitude"], 0);
             AddPoint(localPosition);
         }
     }

@@ -22,16 +22,16 @@ public class Player : MonoBehaviour
     void Update()
     {
         position.Value = transform.localPosition;
-        var calculatedGPS = GPS.fromVirtual(GPS.Instance.latitude.Value, GPS.Instance.longitude.Value, position.Value);
+        var calculatedGPS = MercatorProjection.toGeoCoord(position.Value + GPS.Instance.initialMercatorPosition.Value);
         calculatedLatitude.Value = calculatedGPS.latitude;
         calculatedLongitude.Value = calculatedGPS.longitude;
 
         float distance = Vector3.Distance(transform.localPosition, _lastPosition);
 
-        if (distance >= 0.5) {
+        if (distance >= 10) {
             _lastPosition = transform.localPosition;
             onPlayerMove.Raise();
-            //service.CreateRecords();
+            service.CreateRecords();
         }
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14ea86eba822c2429043ae0d0c28197, type: 3}
   m_Name: CCI
   m_EditorClassIdentifier: 
-  address: ws://172.20.9.10
+  address: ws://172.20.9.12
   port: 443
