@@ -35,6 +35,11 @@ public class Player : MonoBehaviour
         position.Value = transform.position;
         var calculatedGPS = FunkySheep.GPS.Utils.toGeoCoord(position.Value + FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value);
         calculatedLatitude.Value = calculatedGPS.latitude;
-        calculatedLongitude.Value = calculatedGPS.longitude;   
+        calculatedLongitude.Value = calculatedGPS.longitude;
+
+        /*Vector3 gpsPosition = FunkySheep.GPS.Manager.Instance.currentMercatorPosition.Value - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value;
+        if (Vector3.Distance(gpsPosition, position.Value) < 1 ) {
+            this.transform.position = gpsPosition;
+        }*/
     }
 }

@@ -451,10 +451,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9499b25d2da3604f88aa1e257492fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
-  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
+  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
-  material: {fileID: 2100000, guid: cf7ab3245ea434f4a8f9544fc97b07fe, type: 2}
+  material: {fileID: 2100000, guid: 2029557a19f35ae40af28c21b72b33f3, type: 2}
   layers: []
   playerPosition: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   intialMercatorProjection: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
@@ -553,6 +553,18 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 307583618}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1950122671}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -767,7 +779,9 @@ MonoBehaviour:
   altitude: {fileID: 11400000, guid: 8a1328a41d904ab4ab73a5e4c34ecb75, type: 2}
   horizontalAccuracy: {fileID: 11400000, guid: f141df47755716f4daf918968a20ac40, type: 2}
   verticalAccuracy: {fileID: 11400000, guid: 55e797c388779ec4cace283fba5b3b42, type: 2}
+  compass: {fileID: 11400000, guid: 786c0eae409b654468bd75eca1b29fc7, type: 2}
   initialMercatorPosition: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
+  currentMercatorPosition: {fileID: 11400000, guid: 15f19fcf79d8d384ab13276a3bcf36cc, type: 2}
   onStarted: {fileID: 11400000, guid: 3bdf075f8eca25f4f99dd0365917fcce, type: 2}
   onStopped: {fileID: 11400000, guid: cce1352a057d7d841b357316681b361a, type: 2}
   started: 0
@@ -1392,13 +1406,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5e36eeffcd9ed4fa9479c1bca2cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
-  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
+  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
   material: {fileID: 2100000, guid: f562cf339aabc34439ad166483872c49, type: 2}
   layers: []
   initialZoom: {fileID: 11400000, guid: 025d82050621da346a04107bbcb797a2, type: 2}
+  tileSize: {fileID: 11400000, guid: eefabd1d09b80884bb9759d4561fb4d2, type: 2}
   cam: {fileID: 1950122674}
+  zoom: 0
 --- !u!4 &1841424728
 Transform:
   m_ObjectHideFlags: 0
@@ -1480,13 +1496,14 @@ GameObject:
   - component: {fileID: 1950122672}
   - component: {fileID: 1950122674}
   - component: {fileID: 1950122673}
+  - component: {fileID: 1950122675}
   m_Layer: 6
   m_Name: Map Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1950122672
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,7 +1535,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 1
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -1576,6 +1593,19 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1950122675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950122671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0adf5b031fb7044b0ea621f1fe1257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 1841424727}
 --- !u!1001 &2048073014
 PrefabInstance:
   m_ObjectHideFlags: 0
