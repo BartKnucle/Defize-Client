@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wall
-  m_Shader: {fileID: -6465566751694194690, guid: 049f848cc2466ec45a3103c5601bbc49, type: 3}
+  m_Name: Roof
+  m_Shader: {fileID: -6465566751694194690, guid: 856873c908712db4393a44e233017400, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

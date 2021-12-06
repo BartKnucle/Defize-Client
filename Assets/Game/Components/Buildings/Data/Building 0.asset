@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: 0
   points:
-  - {x: 0, y: 0}
-  - {x: 0, y: 10}
   - {x: 10, y: 10}
   - {x: 10, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 10}
   height: 5
+  center: {x: 5, y: 5}
+  area: 40
