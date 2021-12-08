@@ -454,8 +454,8 @@ MonoBehaviour:
   latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
   longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
-  material: {fileID: 2100000, guid: 2029557a19f35ae40af28c21b72b33f3, type: 2}
-  layers: []
+  layers:
+  - {fileID: 594824527}
   playerPosition: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   intialMercatorProjection: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
 --- !u!4 &307583620
@@ -468,7 +468,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 64.59862, y: 18.883894, z: -102.724106}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 594824529}
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -814,6 +815,65 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!1 &594824526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 594824529}
+  - component: {fileID: 594824528}
+  - component: {fileID: 594824527}
+  m_Layer: 0
+  m_Name: building
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &594824527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594824526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30db379f1cb4fd46b45d10052b7e057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  osmRessource: building
+--- !u!114 &594824528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594824526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c14608d57f5e0249b4fcac5d0dcf09a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingPrefab: {fileID: 466937267729526258, guid: 6d2c764430c60244b9c6e52b108dcbd5, type: 3}
+  buildings: []
+--- !u!4 &594824529
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594824526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 307583620}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &604224540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8580201025033797421, guid: 0ce67f3bed790f44c9e045bd40f95e8e, type: 3}
@@ -1409,12 +1469,12 @@ MonoBehaviour:
   latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
   longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
-  material: {fileID: 2100000, guid: f562cf339aabc34439ad166483872c49, type: 2}
   layers: []
   initialZoom: {fileID: 11400000, guid: 025d82050621da346a04107bbcb797a2, type: 2}
   tileSize: {fileID: 11400000, guid: eefabd1d09b80884bb9759d4561fb4d2, type: 2}
   cam: {fileID: 1950122674}
   zoom: 0
+  material: {fileID: 2100000, guid: f562cf339aabc34439ad166483872c49, type: 2}
 --- !u!4 &1841424728
 Transform:
   m_ObjectHideFlags: 0

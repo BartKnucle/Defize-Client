@@ -171,6 +171,14 @@
       },
       "url": "https://packages.unity.com"
     },
+    "net.funkysheep.unity.buildings": {
+      "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Buildings",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {
+        "net.funkysheep.unity.library": "0.2.1"
+      }
+    },
     "net.funkysheep.unity.gps": {
       "version": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-GPS",
       "depth": 0,
@@ -199,7 +207,8 @@
       "source": "local",
       "dependencies": {
         "net.funkysheep.unity.library": "0.2.1",
-        "net.funkysheep.unity.gps": "0.1.0"
+        "net.funkysheep.unity.gps": "0.1.0",
+        "net.funkysheep.unity.buildings": "0.1.0"
       }
     },
     "com.unity.modules.ai": {

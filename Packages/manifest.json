@@ -8,6 +8,7 @@
     "com.unity.vectorgraphics": "2.0.0-preview.18",
     "com.unity.xr.arcore": "4.1.7",
     "com.unity.xr.arfoundation": "4.1.7",
+    "net.funkysheep.unity.buildings": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Buildings",
     "net.funkysheep.unity.gps": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-GPS",
     "net.funkysheep.unity.library": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Library",
     "net.funkysheep.unity.network": "file:C:/Users/sjarde.69r/Documents/FunkySheep/Framework/Unity-Network",

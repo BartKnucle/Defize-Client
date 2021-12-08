@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64f62833246ecf54baff0649056a3fc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bc3e86491a38d3428052f5d431f0cfd, type: 3}
   m_Name: Building 0
   m_EditorClassIdentifier: 
   Id: 0
   points:
-  - {x: 10, y: 10}
+  - {x: 5, y: 15}
+  - {x: 10, y: 15}
   - {x: 10, y: 0}
   - {x: 0, y: 0}
-  - {x: 0, y: 10}
   height: 5
-  center: {x: 5, y: 5}
-  area: 40
+  center: {x: 6.25, y: 7.5}
+  area: 45.811386
