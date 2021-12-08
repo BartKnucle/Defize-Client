@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc3e86491a38d3428052f5d431f0cfd, type: 3}
   m_Name: Building 0
   m_EditorClassIdentifier: 
-  Id: 0
+  id: test
   points:
-  - {x: 5, y: 15}
-  - {x: 10, y: 15}
-  - {x: 10, y: 0}
-  - {x: 0, y: 0}
+  - {x: -1.25, y: 7.5}
+  - {x: 3.75, y: 7.5}
+  - {x: 3.75, y: -7.5}
+  - {x: -6.25, y: -7.5}
   height: 5
-  center: {x: 6.25, y: 7.5}
+  center: {x: 0, y: 0}
   area: 45.811386
