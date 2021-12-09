@@ -451,8 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9499b25d2da3604f88aa1e257492fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
-  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
+  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
+  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
   layers:
   - {fileID: 594824527}
@@ -1466,8 +1466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e5e36eeffcd9ed4fa9479c1bca2cb07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
-  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
+  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
+  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   size: {fileID: 11400000, guid: 3b998d9a8a138e341924946e85f06983, type: 2}
   layers: []
   initialZoom: {fileID: 11400000, guid: 025d82050621da346a04107bbcb797a2, type: 2}
