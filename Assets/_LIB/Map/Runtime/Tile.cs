@@ -14,6 +14,8 @@ namespace FunkySheep.Map
         public string id;
         public Texture2D texture;
         public string url;
+        public Vector2Int position;
+        public int zoom;
         public UnityEngine.Tilemaps.Tile data;
 
         public Tile(string url) {
@@ -68,6 +70,8 @@ namespace FunkySheep.Map
         /// <param name="texture">The texture to set on the tile sprite</param>
         public void SetTile(Texture2D texture)
         {
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Point;
             data = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
             data.sprite = Sprite.Create((Texture2D) texture, new Rect(0.0f, 0.0f, texture.width, texture.height), Vector2.zero, 1);
         }
@@ -103,6 +107,28 @@ namespace FunkySheep.Map
             {
                 File.Delete(filePath + id);
             }
+        }
+
+        /// <summary>
+        /// Calculate the GPS boundaries of the tile
+        /// </summary>
+        /// <returns>A Double[4] containing [StartLatitude, StartLongitude, EndLatitude, EndLongitude]</returns>
+        public Double[] GpsBoundaries()
+        {
+            Double tileSize = Utils.TileSize(zoom);
+            double latitude = Utils.tileZ2lat(zoom, position.y);
+            double longitude = Utils.tileX2long(zoom, position.x);
+            Double latitudeSize = FunkySheep.GPS.Utils.yToLat(tileSize);
+            Double longitudeSize = FunkySheep.GPS.Utils.xToLon(tileSize);
+
+            Double[] boundaries = new Double[4];
+            boundaries[0] = latitude - latitudeSize;
+            boundaries[1] = longitude - longitudeSize;
+            boundaries[2] = latitude + latitudeSize;
+            boundaries[3] = longitude + longitudeSize;
+
+            return boundaries;
+
         }
     }
 }

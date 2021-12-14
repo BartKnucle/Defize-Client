@@ -27,6 +27,8 @@ namespace FunkySheep.Map
             if (tile == null)
             {
                 tile = new Tile(url);
+                tile.position = position;
+                tile.zoom = zoom;
                 tiles.Add(tile);
             }
 

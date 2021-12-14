@@ -21,6 +21,8 @@ namespace FunkySheep.Map
         public Tilemap tilemap;
 
         private void Awake() {
+            // The zero value in Z axis fix the gap between tiles
+            GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
             this.tilemap = GetComponent<Tilemap>();
         }
 
@@ -47,31 +49,36 @@ namespace FunkySheep.Map
 
                 Vector3Int gridPosition3D = new Vector3Int(
                     gridPosition2D.x,
-                    i,
-                    gridPosition2D.y
+                    gridPosition2D.y,
+                    i
                 );
-
-                // Download the main tile
-                DownloadTile(layers[i], realWorldPosition, gridPosition3D);
-               
+             
                 // For each cached tiles
-                for (int x = 1; x < cacheSize.Value + 1; x++)
+                for (int x = -cacheSize.Value; x <= cacheSize.Value; x++)
                 {
-                    for (int y = 1; y < cacheSize.Value + 1; y++)
+                    for (int y = -cacheSize.Value; y <= cacheSize.Value; y++)
                     {
                         DownloadTile(
                             layers[i],
                             realWorldPosition + new Vector3Int(x, 0 , y),
-                            gridPosition3D + new Vector3Int(x, 0, y)
+                            gridPosition3D + new Vector3Int(x, y, 0)
                         );
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Download a tile and insert it in the tilemap
+        /// </summary>
+        /// <param name="layer">The layer used for download</param>
+        /// <param name="realWorldPosition">The real OSM calculated world position</param>
+        /// <param name="gridPosition">The grid position</param>
         public void DownloadTile(Layer layer, Vector3Int realWorldPosition, Vector3Int gridPosition)
         {
-            if (!tilemap.HasTile(realWorldPosition))
+            //Invert Y axis since Unity and OSM positions are inverted
+            gridPosition *= new Vector3Int(1, -1, 1);
+            if (!tilemap.HasTile(gridPosition))
             {
                 Tile tile = layer.CreateTile(zoom.Value, new Vector2Int(realWorldPosition.x, realWorldPosition.z));
                 StartCoroutine(tile.DownLoad(() => {
