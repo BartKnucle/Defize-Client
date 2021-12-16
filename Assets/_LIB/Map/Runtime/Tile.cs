@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Collections;
 using UnityEngine;
-using System.Text;
 using UnityEngine.Networking;
 
 namespace FunkySheep.Map
@@ -20,7 +19,7 @@ namespace FunkySheep.Map
 
         public Tile(string url) {
             this.url = url;
-            this.id = GetId(url);
+            this.id = FunkySheep.Crypto.Hash(url);
 
             if (!Directory.Exists(filePath))
             {
@@ -77,28 +76,6 @@ namespace FunkySheep.Map
         }
 
         /// <summary>
-        /// Get the Id of an Url using MD5
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns>The MD5 hash of the url</returns>
-        public static string GetId(string url)
-        {
-            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-            {
-                byte[] inputBytes = Encoding.ASCII.GetBytes(url);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
-
-                // Convert the byte array to hexadecimal string
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("X2"));
-                }
-                return sb.ToString();
-            }
-        }
-
-        /// <summary>
         /// Delete the cached file
         /// </summary>
         public void ClearCache()
@@ -115,17 +92,17 @@ namespace FunkySheep.Map
         /// <returns>A Double[4] containing [StartLatitude, StartLongitude, EndLatitude, EndLongitude]</returns>
         public Double[] GpsBoundaries()
         {
-            Double tileSize = Utils.TileSize(zoom);
             double latitude = Utils.tileZ2lat(zoom, position.y);
             double longitude = Utils.tileX2long(zoom, position.x);
-            Double latitudeSize = FunkySheep.GPS.Utils.yToLat(tileSize);
-            Double longitudeSize = FunkySheep.GPS.Utils.xToLon(tileSize);
+            double nextLatitude = Utils.tileZ2lat(zoom, position.y + 1);
+            double nextLongitude = Utils.tileX2long(zoom, position.x + 1);
 
             Double[] boundaries = new Double[4];
-            boundaries[0] = latitude - latitudeSize;
-            boundaries[1] = longitude - longitudeSize;
-            boundaries[2] = latitude + latitudeSize;
-            boundaries[3] = longitude + longitudeSize;
+            
+            boundaries[0] = nextLatitude;
+            boundaries[1] = longitude;
+            boundaries[2] = latitude;
+            boundaries[3] = nextLongitude;
 
             return boundaries;
 

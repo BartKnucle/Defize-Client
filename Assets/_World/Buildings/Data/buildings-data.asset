@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1023bdee389800f4293d053516f19e04, type: 3}
   m_Name: buildings-data
   m_EditorClassIdentifier: 
-  cachedTiles: []
+  tiles:
+  - 

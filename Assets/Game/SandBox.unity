@@ -226,11 +226,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559a15de06330214a871c7ccc9162525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialMercatorPosition: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
   layer: {fileID: 11400000, guid: d43db3405d1ef9b46ade8b02dd45fe06, type: 2}
   url: {fileID: 11400000, guid: 311d01f398c280b4f92a7e06f4904a7f, type: 2}
-  OSMNodesTypes:
-  - building
-  data: {fileID: 11400000, guid: 8bc6eaf32e7f15f49af80c7e12427c10, type: 2}
+  tiles: []
+  ways: []
+  relations: []
+  nodes: []
 --- !u!1 &858835017
 GameObject:
   m_ObjectHideFlags: 0

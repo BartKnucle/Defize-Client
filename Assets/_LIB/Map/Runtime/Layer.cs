@@ -21,7 +21,7 @@ namespace FunkySheep.Map
         public Tile CreateTile(int zoom, Vector2Int position)
         {
             string url = InterpolatedUrl(zoom, new Vector2Int(position.x, position.y));
-            string id = Tile.GetId(url);
+            string id = FunkySheep.Crypto.Hash(url);
             Tile tile = tiles.Find(tile => tile.id == id);
 
             if (tile == null)

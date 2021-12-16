@@ -61,8 +61,8 @@ namespace FunkySheep.Map
         /// Calculate size of the OSM tile depending on the zoomValue level.
         /// </summary>
         /// <returns></returns>
-        public static double TileSize(int zoom) {
-            return 40075016.686 / Math.Pow(2, zoom + 8) * 256;
+        public static double TileSize(int zoom, double latitude) {
+            return 156543.03 / Math.Pow(2, zoom) * Math.Cos(latitude) * 256;
         }
     }    
 }
