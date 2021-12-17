@@ -90,6 +90,22 @@ namespace FunkySheep.Map
         /// Calculate the GPS boundaries of the tile
         /// </summary>
         /// <returns>A Double[4] containing [StartLatitude, StartLongitude, EndLatitude, EndLongitude]</returns>
+        public Vector3[] Boundaries()
+        {
+            Double[] gpsBoundaries = GpsBoundaries();
+            Vector3[] boundaries = new Vector3[2];
+
+            boundaries[0] = FunkySheep.GPS.Utils.toCartesianVector(gpsBoundaries[0], gpsBoundaries[1]);
+            boundaries[1] = FunkySheep.GPS.Utils.toCartesianVector(gpsBoundaries[2], gpsBoundaries[3]);
+
+            return boundaries;
+
+        }
+
+        /// <summary>
+        /// Calculate the GPS boundaries of the tile
+        /// </summary>
+        /// <returns>A Double[4] containing [StartLatitude, StartLongitude, EndLatitude, EndLongitude]</returns>
         public Double[] GpsBoundaries()
         {
             double latitude = Utils.tileZ2lat(zoom, position.y);

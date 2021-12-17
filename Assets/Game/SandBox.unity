@@ -229,6 +229,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 1528597900504833971, guid: a5a8775d5d692464894ab59e2aef36b9, type: 3}
   layer: {fileID: 11400000, guid: d43db3405d1ef9b46ade8b02dd45fe06, type: 2}
   url: {fileID: 11400000, guid: 311d01f398c280b4f92a7e06f4904a7f, type: 2}
+  zoom: {fileID: 11400000, guid: c7b2c3019063e7e4db0fe3d0eb069dd6, type: 2}
 --- !u!1 &858835017
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +494,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 994f35b93cd6e4d4486bb49f5b63b446, type: 2}
   - {fileID: 11400000, guid: fdd0f94494a22a64f9a88db012bff67c, type: 2}
   - {fileID: 11400000, guid: d43db3405d1ef9b46ade8b02dd45fe06, type: 2}
-  tilemap: {fileID: 0}
 --- !u!483693784 &1314074241
 TilemapRenderer:
   m_ObjectHideFlags: 0

@@ -16,9 +16,8 @@ namespace FunkySheep.Map
         public  FunkySheep.Types.Double longitude;
         public  FunkySheep.Types.Vector2Int initialPosition;
         public FunkySheep.Types.Int zoom;
-        //public List<Layer> layers;
         public Layer[] layers;
-        public Tilemap tilemap;
+        Tilemap tilemap;
 
         private void Awake() {
             // The zero value in Z axis fix the gap between tiles

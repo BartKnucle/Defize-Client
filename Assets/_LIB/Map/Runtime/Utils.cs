@@ -58,11 +58,19 @@ namespace FunkySheep.Map
         }
 
         /// <summary>
-        /// Calculate size of the OSM tile depending on the zoomValue level.
+        /// Calculate size of the OSM tile depending on the zoomValue level and latitude
         /// </summary>
         /// <returns></returns>
         public static double TileSize(int zoom, double latitude) {
             return 156543.03 / Math.Pow(2, zoom) * Math.Cos(latitude) * 256;
+        }
+
+        /// <summary>
+        /// Calculate size of the OSM tile depending on the zoomValue level.
+        /// </summary>
+        /// <returns></returns>
+        public static double TileSize(int zoom) {
+            return 156543.03 / Math.Pow(2, zoom) * 256;
         }
     }    
 }
