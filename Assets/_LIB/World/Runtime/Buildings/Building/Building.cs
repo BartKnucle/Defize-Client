@@ -16,6 +16,7 @@ namespace FunkySheep.World
         public Vector2 position;
         public Vector2 center = new Vector2(0, 0);
         public float area;
+        public int clock;
 
         public void OnEnable() {
         }
@@ -24,11 +25,15 @@ namespace FunkySheep.World
         /// Initialize the building
         /// </summary>
         public void Init() {
+            
+            //Remove double
+            this.points = this.points.Distinct().ToArray();
+            
             this.position = Position();
             this.area = Area();
 
-            SetClockWise();
             SetFirstPoint();
+            SetClockWise();
             //Array.Sort(points, (x, y) => (int)Math.Atan2(x.x, x.y));
 
             //points = points.OrderBy(x => Math.Atan2(x.x, x.y)).ToList();
@@ -43,12 +48,12 @@ namespace FunkySheep.World
         {
             // Calculate the center
             Vector2 center = Vector2.zero;
-            foreach (Vector2 point in points)
+            for (int i = 0; i < points.Length; i++)
             {
-                center += point;
+                center += points[i];
             }
 
-            center /= points.Length;
+            center /= points.Length -1;
 
             return center;
         }
@@ -77,9 +82,9 @@ namespace FunkySheep.World
         {
             float area = 0;
             
-            for (int i = 0; i < points.Length; i++)
+            for (int i = 0; i < points.Length -1; i++)
             {
-                area += Vector2.Distance(points[i], points[(i + 1) % points.Length]);
+                area += Vector2.Distance(points[i], points[i + 1]);
             }
 
             return area;
@@ -91,8 +96,10 @@ namespace FunkySheep.World
         /// <returns></returns>
         public void SetClockWise()
         {
-            int result = FunkySheep.Vectors.IsClockWise(points);
-            if (result != -360) {
+            // Skip the last point since it is the same as the first
+            int result = FunkySheep.Vectors.IsClockWise(points[points.Length - 1], points[0], center);
+            clock = result;
+            if (result < 0) {
                 Array.Reverse(points);
             }
         }

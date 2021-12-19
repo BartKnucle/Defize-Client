@@ -27,7 +27,7 @@ namespace FunkySheep.World
 
             for (int i = 0; i < building.points.Length; i++)
             {
-                vertices.Add(new MyVector2(building.points[building.points.Length - i -1].x, building.points[building.points.Length - i - 1].y));
+                vertices.Add(new MyVector2(building.points[building.points.Length - i -1].x, building.points[building.points.Length - i -1].y));
             }
 
             Normalizer2 normalizer2 = new Normalizer2(vertices);
