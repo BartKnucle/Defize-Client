@@ -53,7 +53,7 @@ namespace FunkySheep.World
                 center += points[i];
             }
 
-            center /= points.Length -1;
+            center /= points.Length;
 
             return center;
         }
