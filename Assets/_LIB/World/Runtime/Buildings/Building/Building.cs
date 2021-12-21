@@ -97,7 +97,7 @@ namespace FunkySheep.World
         public void SetClockWise()
         {
             // Skip the last point since it is the same as the first
-            int result = FunkySheep.Vectors.IsClockWise(points[points.Length - 1], points[0], center);
+            int result = FunkySheep.Vectors.IsClockWise(points[1], points[points.Length - 1] , points[0]);
             clock = result;
             if (result < 0) {
                 Array.Reverse(points);
