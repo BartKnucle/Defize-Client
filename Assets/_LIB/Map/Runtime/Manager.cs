@@ -26,6 +26,19 @@ namespace FunkySheep.Map
         }
 
         private void Start() {
+            // Set the position inside the tile
+            tilemap.tileAnchor = new Vector3(
+                -Utils.LongitudeToInsideX(zoom.Value, longitude.Value),
+                -1 + Utils.LatitudeToInsideZ(zoom.Value, latitude.Value),
+                0
+            );
+
+            // Set the scale depending oin the zoom
+            tilemap.transform.localScale = new Vector3(
+                (float)Utils.TileSize(zoom.Value) / 256f,
+                (float)Utils.TileSize(zoom.Value) / 256f,
+            1f);
+
             this.initialPosition.Value = new Vector2Int(Utils.LongitudeToX(zoom.Value, longitude.Value), Utils.LatitudeToZ(zoom.Value, latitude.Value));
             Download(this.initialPosition.Value);
         }

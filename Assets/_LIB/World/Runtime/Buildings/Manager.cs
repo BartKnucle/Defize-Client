@@ -16,7 +16,7 @@ namespace FunkySheep.World
 
         private void Start() {
 
-            filePath = Application.persistentDataPath + "/funkysheep/world/buildings/";
+            filePath = Application.persistentDataPath + "/world/buildings/";
 
             //Create the cache directory
             if (!Directory.Exists(filePath))
@@ -80,7 +80,7 @@ namespace FunkySheep.World
         {
             foreach (string file in Directory.GetFiles(filePath))
             {
-                File.Delete(filePath + file);
+                File.Delete(file);
             }
         }
     }

@@ -44,7 +44,7 @@ public class StepsManager : MonoBehaviour
 
         stepObj.GetComponent<MeshRenderer>().sharedMaterial.color = new Color(0, 1, 0, 1);
 
-        stepObj.transform.localPosition = GPS.Instance.GetComponent<GPS>().relativeCartesianPosition(latitude, longitude, altitude);
+        stepObj.transform.localPosition = GPS.Instance.GetComponent<GPS>().relativeCartesianPosition(latitude, longitude);
         //stepObj.AddComponent<ARAnchor>();
     }
 }

@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Game.unity
-    guid: 17c1db91a2a8c03409e443f04d6a4de9
+    path: Assets/Game/Scenes/01 - Loading.unity
+    guid: 3dc053dcb0b1b5447828677e132880c4
+  - enabled: 1
+    path: Assets/Game/Scenes/02 - SandBox.unity
+    guid: 451f9b652cd7d8c40b5ad54dd0db0ef4
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 447a2e0df4f3da44497dd7b1d30b7a56, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: fb915ad5dd76f1d4286f74dcea3531a7, type: 2}

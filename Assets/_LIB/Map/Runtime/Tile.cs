@@ -9,7 +9,7 @@ namespace FunkySheep.Map
     [Serializable]
     public class Tile
     {
-        static string filePath = Application.persistentDataPath + "/funkysheep/map/tiles/";
+        static string filePath = Application.persistentDataPath + "/map/tiles/";
         public string id;
         public Texture2D texture;
         public string url;

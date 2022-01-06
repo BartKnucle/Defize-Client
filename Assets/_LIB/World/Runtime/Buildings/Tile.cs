@@ -26,7 +26,7 @@ namespace FunkySheep.World
             this.id = mapId;
             this.url = url;
 
-            filePath = Application.persistentDataPath + "/funkysheep/world/buildings/" + id;
+            filePath = Application.persistentDataPath + "/world/buildings/" + id;
         }
 
         /// <summary>
