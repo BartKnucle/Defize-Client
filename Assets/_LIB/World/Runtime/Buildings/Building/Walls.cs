@@ -1,57 +1,63 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
+using UnityEngine.ProBuilder.MeshOperations;
+using Parabox.CSG;
 
 namespace FunkySheep.World
 {
+    [RequireComponent(typeof(ProBuilderMesh))]
     public class Walls : MonoBehaviour
     {
-        Building building;
-        
+      Building building;
+      //ProBuilderMesh mesh;
+      public float m_Height = 2.5f;
+      public bool m_FlipNormals = true;
 
       public void Create(Building building)
       {
         this.building = building;
+        //mesh = this.GetComponent<ProBuilderMesh>();
+        
+        // External shape
 
-        AddCenter();
-
-        for (int i = 0; i < building.points.Length; i++)
+        for (int i = 0, c = building.points.Length; i < c; i++)
+        {
+          int prevIndex = i - 1;
+          if (i == 0)
           {
-            AddPoint(building.points[i], i);
-            AddWall(building.points[i], building.points[(i + 1) % building.points.Length], i, 0.2f, 2.5f);
+            prevIndex = building.points.Length - 1;
           }
-      }
+          int nextIndex = (i + 1) % building.points.Length;
+          int lastIndex = (i + 2) % building.points.Length;
 
-      void AddCenter()
-      {
-        GameObject _center = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        _center.name = "Center";
-        _center.GetComponent<MeshRenderer>().material.color = Color.blue;
-        _center.transform.parent = this.transform;
-        _center.transform.localPosition = new Vector3(building.center.x, 0, building.center.y);
-      }
+          Vector3[] points = new Vector3[4];
 
-      void AddPoint(Vector2 position, int index)
-      {
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.name = "Point-" + index.ToString();
-        go.transform.parent = this.transform;
-        go.transform.localPosition = new Vector3(position.x, 0, position.y);
-      }
+          Vector3 prevPoint = new Vector3(building.points[prevIndex].x, 0.1f, building.points[prevIndex].y);
+          Vector3 point = new Vector3(building.points[i].x, 0.1f, building.points[i].y);
+          Vector3 nextPoint = new Vector3(building.points[nextIndex].x, 0.1f, building.points[nextIndex].y);
+          Vector3 lastPoint = new Vector3(building.points[lastIndex].x, 0.1f, building.points[lastIndex].y);
 
-      void AddWall(Vector2 start, Vector2 end, int index, float thickness, float height)
-      {
-        Vector2 center = ((end + start) / 2);
-        float angle = Vector2.SignedAngle(end - start, Vector2.up);
+          points[0] = point;
+          points[1] = nextPoint;
+          points[2] = nextPoint - Vector3.forward * 0.2f ;
+          points[3] = point - Vector3.forward * 0.2f ;
 
-        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        go.name = "Wall-" + index.ToString();
-        go.transform.parent = this.transform;
-        go.GetComponent<MeshRenderer>().material.color = Color.red;
-        go.transform.localRotation = Quaternion.Euler(0, angle, 0);
-        go.transform.localPosition = new Vector3(center.x, height / 2, center.y); // - new Vector3(thickness, 0, 0);
-        go.transform.Translate(new Vector3(thickness / 2, 0, 0));
-        go.transform.localScale = new Vector3(thickness, height, Vector2.Distance(start, end));
-      }
+          GameObject go = new GameObject();
+          go.name = i.ToString();
+          go.transform.parent = this.transform;
+          go.transform.localPosition = Vector3.zero;
+          ProBuilderMesh mesh = go.AddComponent<ProBuilderMesh>();
+          mesh.CreateShapeFromPolygon(points, m_Height, m_FlipNormals);
+          go.GetComponent<MeshRenderer>().material = this.GetComponent<MeshRenderer>().material;
+        }
+
+        // CreateShapeFromPolygon is an extension method that sets the pb_Object mesh data with vertices and faces
+        // generated from a polygon path.
+        
+
+       
     }
+  }
 }

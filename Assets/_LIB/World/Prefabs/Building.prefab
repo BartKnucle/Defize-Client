@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1636169896645892813}
   - component: {fileID: 4001975006201132085}
   - component: {fileID: 2640846041695215440}
+  - component: {fileID: 6751559549481010681}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -96,6 +97,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Height: 0.1
   m_FlipNormals: 0
+--- !u!114 &6751559549481010681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125593106573108379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MeshFormatVersion: 0
+  m_Faces: []
+  m_SharedVertices: []
+  m_SharedTextures: []
+  m_Positions: []
+  m_Textures0: []
+  m_Textures2: []
+  m_Textures3: []
+  m_Tangents: []
+  m_Colors: []
+  m_UnwrapParameters:
+    m_HardAngle: 88
+    m_PackMargin: 20
+    m_AngleError: 8
+    m_AreaError: 15
+  m_PreserveMeshAssetOnDestroy: 0
+  assetGuid: 
+  m_Mesh: {fileID: 0}
+  m_IsSelectable: 1
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1 &6293474727145038292
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +237,7 @@ GameObject:
   - component: {fileID: 6293474727820821213}
   - component: {fileID: 6293474727820821212}
   - component: {fileID: 6293474727820821215}
+  - component: {fileID: 7298370211159806003}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -250,7 +286,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab0cf22fffc037245a02e2646a411a60, type: 2}
+  - {fileID: 2100000, guid: 0b7f0a186a426f44b95e558f2ea4c801, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,6 +320,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba721a73a2e633f46af203e42409a58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Height: 2.5
+  m_FlipNormals: 0
+--- !u!114 &7298370211159806003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6293474727820821201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8233d90336aea43098adf6dbabd606a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MeshFormatVersion: 0
+  m_Faces: []
+  m_SharedVertices: []
+  m_SharedTextures: []
+  m_Positions: []
+  m_Textures0: []
+  m_Textures2: []
+  m_Textures3: []
+  m_Tangents: []
+  m_Colors: []
+  m_UnwrapParameters:
+    m_HardAngle: 88
+    m_PackMargin: 20
+    m_AngleError: 8
+    m_AreaError: 15
+  m_PreserveMeshAssetOnDestroy: 0
+  assetGuid: 
+  m_Mesh: {fileID: 0}
+  m_IsSelectable: 1
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!1 &6293474727937166344
 GameObject:
   m_ObjectHideFlags: 0
