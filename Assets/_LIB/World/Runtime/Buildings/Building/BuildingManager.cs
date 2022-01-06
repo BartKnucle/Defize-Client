@@ -10,6 +10,7 @@ namespace FunkySheep.World
     {
         public Walls walls;
         public Roof roof;
+        public Floor floor;
         public Building building;
     
         /// <summary>
@@ -21,6 +22,7 @@ namespace FunkySheep.World
             this.name = building.id;
             walls.Create(this.building);
             roof.Create(this.building);
+            floor.Create(this.building);
         }
     }    
 }
