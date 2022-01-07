@@ -48,13 +48,13 @@ namespace FunkySheep.World
         points[0] = point;
         points[1] = nextPoint;
         points[2] = nextPoint + new Vector3(
-          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.2f).x,
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.01f * building.area).x,
           0,
-          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.2f).z) * nextPointAngle;
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.01f * building.area).z) * nextPointAngle;
         points[3] = point + new Vector3(
-          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.2f).x,
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.01f * building.area).x,
           0,
-          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.2f).z) * pointAngle;
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.01f * building.area).z) * pointAngle;
 
         GameObject go = new GameObject();
         go.name = i.ToString();
