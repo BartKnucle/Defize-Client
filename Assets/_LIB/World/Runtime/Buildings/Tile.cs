@@ -130,6 +130,15 @@ namespace FunkySheep.World
             for (int j = 0; j < members.Count; j++)
             {
                 Way way = ways.Find(way => way.id == members[j]["ref"]);
+                if (way == null) {
+                  way = new Way(members[j]["ref"]);
+                  JSONArray points = members[j]["geometry"].AsArray;
+                  for (int k = 0; k < points.Count; k++)
+                  {
+                      way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
+                  }
+                }
+                Build(way);
                 relation.ways.Add(way);
             }
 
@@ -139,7 +148,6 @@ namespace FunkySheep.World
             {
                 relation.tags.Add(new Tag(tag.Key, tag.Value));
             }
-
             relations.Add(relation);
             return relation;
         }
@@ -156,7 +164,7 @@ namespace FunkySheep.World
 
             for (int i = 0; i < way.points.Count; i++)
             {
-                building.points[i] = way.points[i].position;
+              building.points[i] = way.points[i].position;
             }
 
             GameObject go = Instantiate(buildingPrefab);
