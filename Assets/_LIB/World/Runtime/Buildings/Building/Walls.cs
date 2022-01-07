@@ -38,37 +38,23 @@ namespace FunkySheep.World
         Vector3 nextPoint = new Vector3(building.points[nextIndex].x, 0.1f, building.points[nextIndex].y);
         Vector3 lastPoint = new Vector3(building.points[lastIndex].x, 0.1f, building.points[lastIndex].y);
 
-        float pointAngle = Vector3.Angle(nextPoint - point, lastPoint - point);
-        float nextPointAngle = Vector3.Angle(lastPoint - nextPoint, point - nextPoint);
+        float pointAngle = Mathf.Sign(Vector3.SignedAngle(nextPoint - point, prevPoint - point, point));
+        if (pointAngle == 0)
+          pointAngle = -1;
+        float nextPointAngle = Mathf.Sign(Vector3.SignedAngle(lastPoint - nextPoint, point - nextPoint, nextPoint));
+        if (nextPointAngle == 0)
+          nextPointAngle = -1;
 
         points[0] = point;
         points[1] = nextPoint;
-        if (nextPoint.x < 0){
-          points[2].x = nextPoint.x + 0.2f;
-        } else {
-          points[2].x = nextPoint.x - 0.2f;
-        }
-        if (nextPoint.z < 0){
-          points[2].z = nextPoint.z + 0.2f;
-        } else {
-          points[2].z = nextPoint.z - 0.2f;
-        }
-        points[2].y = nextPoint.y;
-
-        if (point.x < 0){
-          points[3].x = point.x + 0.2f;
-        } else {
-          points[3].x = point.x - 0.2f;
-        }
-        if (point.z < 0){
-          points[3].z = point.z + 0.2f;
-        } else {
-          points[3].z = point.z - 0.2f;
-        }
-        points[3].y = point.y;
-
-        /*points[2] = nextPoint - new Vector3(0.2f, 0, 0.2f);
-        points[3] = point - new Vector3(0.2f, 0, 0.2f);*/
+        points[2] = nextPoint + new Vector3(
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.2f).x,
+          0,
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * 0.2f).z) * nextPointAngle;
+        points[3] = point + new Vector3(
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.2f).x,
+          0,
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * 0.2f).z) * pointAngle;
 
         GameObject go = new GameObject();
         go.name = i.ToString();
