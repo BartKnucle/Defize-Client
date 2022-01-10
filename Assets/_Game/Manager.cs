@@ -16,10 +16,7 @@ namespace Game
         }
 
         private void Start() {
-            for (int i = 0; i < 20; i++)
-            {
-                status.Add("Starting Game " + i.ToString());   
-            }
+            status.Add("Starting Game");
         }
     }   
 }

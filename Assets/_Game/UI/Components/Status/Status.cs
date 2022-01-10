@@ -24,6 +24,10 @@ namespace Game.UI
         {
             _status.Enqueue(status);
         }
+        public void Add(FunkySheep.Types.String status)
+        {
+            _status.Enqueue(status.Value);
+        }
 
         private void Update() {
             if (_lastUpdate >= delay && _status.Count != 0)
