@@ -1,0 +1,10 @@
+VisualElement {
+    flex-direction: column-reverse;
+}
+
+Label {
+    color: rgba(255, 255, 255, 255);
+    -unity-font-definition: resource('Fonts/Mohave-Medium SDF');
+    -unity-text-align: upper-center;
+    flex-direction: column;
+}
