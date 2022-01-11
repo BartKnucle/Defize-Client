@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac85521b8f27e40438c37a6a7c0371f5, type: 3}
+  m_Name: world
+  m_EditorClassIdentifier: 
+  initialMercatorPosition: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
+  currentMercatorPosition: {fileID: 11400000, guid: 15f19fcf79d8d384ab13276a3bcf36cc, type: 2}
+  Position: {fileID: 11400000, guid: 3299cdfc2d635da4996853d19c8e86e3, type: 2}
+  tileSOs: []

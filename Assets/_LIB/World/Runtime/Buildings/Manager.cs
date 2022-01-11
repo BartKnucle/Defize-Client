@@ -3,16 +3,25 @@ using System.IO;
 using UnityEngine;
 using SimpleJSON;
 
-namespace FunkySheep.World
+namespace FunkySheep.World.Buildings
 {
     [AddComponentMenu("FunkySheep/World/Buildings/Manager")]
+    [RequireComponent(typeof(FunkySheep.Events.GameEventListener))]
     public class Manager : MonoBehaviour
     {
         public GameObject tilePrefab;
         public FunkySheep.Map.Layer layer;
         public FunkySheep.Types.String url;
         public FunkySheep.Types.Int zoom;
+        FunkySheep.Events.GameEventListener tileAdded;
         string filePath;
+
+        private void Awake() {
+          if (layer.onTileAdded == null)
+          {
+            Debug.Log("No Tile Added Event on the layer");
+          }
+        }
 
         private void Start() {
 
@@ -23,8 +32,6 @@ namespace FunkySheep.World
             {
                 Directory.CreateDirectory(filePath);
             }
-
-            Load();
         }
 
         public void Load()

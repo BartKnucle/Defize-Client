@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FunkySheep.Map
 {
@@ -9,8 +10,8 @@ namespace FunkySheep.Map
     public class Layer : ScriptableObject
     {
         public FunkySheep.Types.String url;
-        //List of the tiles [zoom, x, y]
         public List<Tile> tiles = new List<Tile>();
+        public FunkySheep.Events.GameEvent onTileAdded;
 
         /// <summary>
         /// Create a tile at eh given position or get existing one
@@ -30,6 +31,11 @@ namespace FunkySheep.Map
                 tile.position = position;
                 tile.zoom = zoom;
                 tiles.Add(tile);
+
+                if (onTileAdded != null)
+                {
+                  onTileAdded.Raise();
+                }
             }
 
             return tile;

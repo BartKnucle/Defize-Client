@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using FunkySheep.Network;
 
-[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Game.Player.Manager))]
 public class Quest_Paths : MonoBehaviour
 {
-    Player player;
+    Game.Player.Manager player;
     public Service service;
     public ARTrackedImageManager imageManager;
     public GameObject img;
@@ -13,7 +13,7 @@ public class Quest_Paths : MonoBehaviour
 
     
     private void Start() {
-        player = GetComponent<Player>();
+        player = GetComponent<Game.Player.Manager>();
         imageManager.trackedImagesChanged += _onImgDetection;
         service.FindRecords();
     }

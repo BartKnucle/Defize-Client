@@ -13,4 +13,17 @@ MonoBehaviour:
   m_Name: map-layer-osm
   m_EditorClassIdentifier: 
   url: {fileID: 11400000, guid: b5d727ad0c1c6bf41bc89b26096261cb, type: 2}
-  tiles: []
+  tiles:
+  - id: 4A3139C17F83180DD63E546998336DA4
+    texture: {fileID: 0}
+    url: https://tile.openstreetmap.org/15/15552/12535.png
+    position: {x: 15552, y: 12535}
+    zoom: 15
+    data: {fileID: 0}
+  - id: F65B341F15225FC0A801A1729A35A77F
+    texture: {fileID: 0}
+    url: https://tile.openstreetmap.org/15/16783/11836.png
+    position: {x: 16783, y: 11836}
+    zoom: 15
+    data: {fileID: 0}
+  onTileAdded: {fileID: 11400000, guid: a19c82e6c45269e41adf9643b2b09c99, type: 2}

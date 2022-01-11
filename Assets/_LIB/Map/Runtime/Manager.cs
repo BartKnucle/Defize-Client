@@ -15,6 +15,7 @@ namespace FunkySheep.Map
         public  FunkySheep.Types.Double latitude;
         public  FunkySheep.Types.Double longitude;
         public  FunkySheep.Types.Vector2Int initialPosition;
+        public  FunkySheep.Types.Vector2Int currentPosition;
         public FunkySheep.Types.Int zoom;
         public Layer[] layers;
         Tilemap tilemap;
@@ -33,7 +34,7 @@ namespace FunkySheep.Map
                 0
             );
 
-            // Set the scale depending oin the zoom
+            // Set the scale depending on the zoom
             tilemap.transform.localScale = new Vector3(
                 (float)Utils.TileSize(zoom.Value) / 256f,
                 (float)Utils.TileSize(zoom.Value) / 256f,
@@ -41,6 +42,10 @@ namespace FunkySheep.Map
 
             this.initialPosition.Value = new Vector2Int(Utils.LongitudeToX(zoom.Value, longitude.Value), Utils.LatitudeToZ(zoom.Value, latitude.Value));
             Download(this.initialPosition.Value);
+        }
+
+        private void Update() {
+          this.currentPosition.Value = new Vector2Int(Utils.LongitudeToX(zoom.Value, longitude.Value), Utils.LatitudeToZ(zoom.Value, latitude.Value));
         }
 
         /// <summary>
