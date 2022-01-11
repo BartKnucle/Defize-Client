@@ -10,13 +10,14 @@ namespace FunkySheep.Map
     [AddComponentMenu("FunkySheep/Map/Manager")]
     public class Manager : MonoBehaviour
     {
+        public FunkySheep.World.WorldSO worldSO;
         // The square around a tile to download
-        public FunkySheep.Types.Int cacheSize;
-        public  FunkySheep.Types.Double latitude;
+        //public FunkySheep.Types.Int cacheSize;
+        /*public  FunkySheep.Types.Double latitude;
         public  FunkySheep.Types.Double longitude;
         public  FunkySheep.Types.Vector2Int initialPosition;
         public  FunkySheep.Types.Vector2Int currentPosition;
-        public FunkySheep.Types.Int zoom;
+        public FunkySheep.Types.Int zoom;*/
         public Layer[] layers;
         Tilemap tilemap;
 
@@ -29,51 +30,42 @@ namespace FunkySheep.Map
         private void Start() {
             // Set the position inside the tile
             tilemap.tileAnchor = new Vector3(
-                -Utils.LongitudeToInsideX(zoom.Value, longitude.Value),
-                -1 + Utils.LatitudeToInsideZ(zoom.Value, latitude.Value),
+                -Utils.LongitudeToInsideX(worldSO.zoom.Value, worldSO.longitude.Value),
+                -1 + Utils.LatitudeToInsideZ(worldSO.zoom.Value, worldSO.latitude.Value),
                 0
             );
 
             // Set the scale depending on the zoom
             tilemap.transform.localScale = new Vector3(
-                (float)Utils.TileSize(zoom.Value) / 256f,
-                (float)Utils.TileSize(zoom.Value) / 256f,
+                (float)Utils.TileSize(worldSO.zoom.Value) / 256f,
+                (float)Utils.TileSize(worldSO.zoom.Value) / 256f,
             1f);
-
-            this.initialPosition.Value = new Vector2Int(Utils.LongitudeToX(zoom.Value, longitude.Value), Utils.LatitudeToZ(zoom.Value, latitude.Value));
-            Download(this.initialPosition.Value);
-        }
-
-        private void Update() {
-          this.currentPosition.Value = new Vector2Int(Utils.LongitudeToX(zoom.Value, longitude.Value), Utils.LatitudeToZ(zoom.Value, latitude.Value));
         }
 
         /// <summary>
         /// Start a download of all the tiles, cached tiles for all the layers
         /// </summary>
         /// <param name="position"></param>
-        public void Download(Vector2Int realWorldPosition2D)
-        {
-            Vector2Int gridPosition2D = realWorldPosition2D - initialPosition.Value;
-            
+        public void Download()
+        {            
             for (int i = 0; i < layers.Length; i++)
             {
                 Vector3Int realWorldPosition = new Vector3Int(
-                    realWorldPosition2D.x,
+                    worldSO.mapPosition.Value.x,
                     i,
-                    realWorldPosition2D.y
+                    worldSO.mapPosition.Value.y
                 );
 
                 Vector3Int gridPosition3D = new Vector3Int(
-                    gridPosition2D.x,
-                    gridPosition2D.y,
+                    worldSO.gridPosition.Value.x,
+                    worldSO.gridPosition.Value.y,
                     i
                 );
              
                 // For each cached tiles
-                for (int x = -cacheSize.Value; x <= cacheSize.Value; x++)
+                for (int x = -worldSO.cacheSize; x <= worldSO.cacheSize; x++)
                 {
-                    for (int y = -cacheSize.Value; y <= cacheSize.Value; y++)
+                    for (int y = -worldSO.cacheSize; y <= worldSO.cacheSize; y++)
                     {
                         DownloadTile(
                             layers[i],
@@ -93,11 +85,9 @@ namespace FunkySheep.Map
         /// <param name="gridPosition">The grid position</param>
         public void DownloadTile(Layer layer, Vector3Int realWorldPosition, Vector3Int gridPosition)
         {
-            //Invert Y axis since Unity and OSM positions are inverted
-            gridPosition *= new Vector3Int(1, -1, 1);
             if (!tilemap.HasTile(gridPosition))
             {
-                Tile tile = layer.CreateTile(zoom.Value, new Vector2Int(realWorldPosition.x, realWorldPosition.z));
+                Tile tile = layer.CreateTile(worldSO.zoom.Value, new Vector2Int(realWorldPosition.x, realWorldPosition.z));
                 StartCoroutine(tile.DownLoad(() => {
                     tilemap.SetTile(gridPosition, tile.data);
                     tilemap.RefreshTile(gridPosition);

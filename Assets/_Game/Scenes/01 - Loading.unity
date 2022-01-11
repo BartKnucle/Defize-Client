@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -290,7 +290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &613536949
 Transform:
   m_ObjectHideFlags: 0
@@ -359,6 +359,7 @@ GameObject:
   m_Component:
   - component: {fileID: 669289505}
   - component: {fileID: 669289506}
+  - component: {fileID: 669289507}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -396,6 +397,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldSO: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
+--- !u!114 &669289507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 4d23c59dba227ac41bc23090c1c88d51, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 845229686}
+        m_TargetAssemblyTypeName: FunkySheep.Map.Manager, Game Assembly
+        m_MethodName: Download
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &725708728
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +476,7 @@ MonoBehaviour:
   position: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   calculatedLatitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
   calculatedLongitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  calculatedMercatorPosition: {fileID: 11400000, guid: 06c9151f0721cd44090f810d574cd3b2, type: 2}
   status: {fileID: 11400000, guid: f2a004b376141a343bacdd6d46894e20, type: 2}
   onPlayerStarted: {fileID: 11400000, guid: 5b579c7f872b95c41b6d015d9325b110, type: 2}
   onPlayerMove: {fileID: 11400000, guid: 8e4e1daba2356284bb265cb8f5f77366, type: 2}
@@ -478,17 +508,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 845229684}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
+        m_TargetAssemblyTypeName: FunkySheep.World.WorldSO, Game Assembly
+        m_MethodName: UpdatePosition
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &725708732
 MonoBehaviour:
@@ -537,7 +567,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &845229685
 Transform:
   m_ObjectHideFlags: 0
@@ -564,12 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fce0186eafaf34c8ed4a4c1e20fa21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cacheSize: {fileID: 11400000, guid: a9b304f0543c1e541a186c32a9a213a7, type: 2}
-  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
-  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
-  initialPosition: {fileID: 11400000, guid: 319e5d4c701643b468ff3f719520ad4b, type: 2}
-  currentPosition: {fileID: 11400000, guid: 319e5d4c701643b468ff3f719520ad4b, type: 2}
-  zoom: {fileID: 11400000, guid: c7b2c3019063e7e4db0fe3d0eb069dd6, type: 2}
+  worldSO: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
   layers:
   - {fileID: 11400000, guid: 994f35b93cd6e4d4486bb49f5b63b446, type: 2}
   - {fileID: 11400000, guid: fdd0f94494a22a64f9a88db012bff67c, type: 2}
@@ -765,7 +790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1573927193
 Transform:
   m_ObjectHideFlags: 0

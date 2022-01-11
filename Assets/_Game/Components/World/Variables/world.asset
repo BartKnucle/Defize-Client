@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac85521b8f27e40438c37a6a7c0371f5, type: 3}
   m_Name: world
   m_EditorClassIdentifier: 
-  initialMercatorPosition: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}
-  currentMercatorPosition: {fileID: 11400000, guid: 15f19fcf79d8d384ab13276a3bcf36cc, type: 2}
-  Position: {fileID: 11400000, guid: 3299cdfc2d635da4996853d19c8e86e3, type: 2}
-  tileSOs: []
+  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
+  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
+  mapPosition: {fileID: 11400000, guid: 9dd64df578321524da771398c70d7636, type: 2}
+  gridPosition: {fileID: 11400000, guid: 3299cdfc2d635da4996853d19c8e86e3, type: 2}
+  onPositionChanged: {fileID: 11400000, guid: 4d23c59dba227ac41bc23090c1c88d51, type: 2}
+  cacheSize: 0
+  enabled: 0

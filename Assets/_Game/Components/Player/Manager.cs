@@ -12,7 +12,7 @@ namespace Game.Player
       public FunkySheep.Types.Vector3 position;
       public FunkySheep.Types.Double calculatedLatitude;
       public FunkySheep.Types.Double calculatedLongitude;
-      public FunkySheep.Types.Double calculatedMercatorPosition;
+      public FunkySheep.Types.Vector3 calculatedMercatorPosition;
       public FunkySheep.Types.String status;
       public GameEvent onPlayerStarted;
       public GameEvent onPlayerMove;
@@ -43,7 +43,7 @@ namespace Game.Player
           var calculatedGPS = FunkySheep.GPS.Utils.toGeoCoord(position.Value + FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value);
           calculatedLatitude.Value = calculatedGPS.latitude;
           calculatedLongitude.Value = calculatedGPS.longitude;
-          FunkySheep.GPS.Utils.toCartesianVector(calculatedLatitude.Value, calculatedLongitude.Value);
+          calculatedMercatorPosition.Value = FunkySheep.GPS.Utils.toCartesianVector(calculatedLatitude.Value, calculatedLongitude.Value);
 
           /*Vector3 gpsPosition = FunkySheep.GPS.Manager.Instance.currentMercatorPosition.Value - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value;
           if (Vector3.Distance(gpsPosition, position.Value) < 1 ) {
