@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace FunkySheep.OldWorld
+namespace FunkySheep.World.Buildings
 {
     [AddComponentMenu("FunkySheep/World/Buildings/Building/Manager")]
-    public class BuildingManager : MonoBehaviour
+    public class Manager : MonoBehaviour
     {
         public Walls walls;
         public Roof roof;

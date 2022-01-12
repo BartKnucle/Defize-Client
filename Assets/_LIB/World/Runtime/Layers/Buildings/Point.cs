@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-namespace FunkySheep.OldWorld.Buildings
+namespace FunkySheep.World.Buildings
 {
     [Serializable]
     public class Point

@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using SimpleJSON;
 
-namespace FunkySheep.World.Buildings
+namespace FunkySheep.OldWorld.Buildings
 {
     [AddComponentMenu("FunkySheep/World/Buildings/Manager")]
     [RequireComponent(typeof(FunkySheep.Events.GameEventListener))]

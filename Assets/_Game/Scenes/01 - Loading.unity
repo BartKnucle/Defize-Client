@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -508,9 +508,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
-        m_TargetAssemblyTypeName: FunkySheep.World.WorldSO, Game Assembly
-        m_MethodName: UpdatePosition
+      - m_Target: {fileID: 669289506}
+        m_TargetAssemblyTypeName: FunkySheep.World.Manager, Game Assembly
+        m_MethodName: UpdatePlayerPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -536,9 +536,9 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
-        m_TargetAssemblyTypeName: FunkySheep.World.WorldSO, Game Assembly
-        m_MethodName: UpdatePosition
+      - m_Target: {fileID: 669289506}
+        m_TargetAssemblyTypeName: FunkySheep.World.Manager, Game Assembly
+        m_MethodName: UpdatePlayerPosition
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FunkySheep.OldWorld
+namespace FunkySheep.World
 {
     [CreateAssetMenu(fileName = "Building", menuName = "FunkySheep/World/Buildings/Building", order = 1)]
     public class Building : ScriptableObject

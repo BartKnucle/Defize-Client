@@ -8,16 +8,19 @@ namespace FunkySheep.World
   public class Manager : MonoBehaviour
   {
     public WorldSO worldSO;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Awake() {
+      foreach (LayerSO layer in worldSO.layersSO)
+      {
+        GameObject go = new GameObject(layer.name);
+        Layer layerComponent = go.AddComponent<Layer>();
+        layerComponent.layerSO = layer;
+        go.transform.parent = this.transform;
+      }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void UpdatePlayerPosition()
     {
-        
+      worldSO.UpdatePosition(this);
     }
   }    
 }

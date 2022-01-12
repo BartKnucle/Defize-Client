@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep.World.Tiles;
 
 namespace FunkySheep.World
 {
@@ -19,14 +18,24 @@ namespace FunkySheep.World
     Vector2Int _initialGridPosition;
     public FunkySheep.Events.GameEvent onPositionChanged;
     public int cacheSize = 0;
-    public bool enabled = false;
+    public List<LayerSO> layersSO;
+    public List<Tile> tiles;
+    bool active = false;
 
     private void OnEnable() {
-      enabled = false;
+      active = false;
+      foreach (Tile tile in tiles)
+      {
+        tile.created = false;          
+      }
     }
-    public void UpdatePosition()
+
+    /// <summary>
+    /// Update the player position on the grid
+    /// </summary>
+    public void UpdatePosition(Manager world)
     {
-      if (!enabled)
+      if (!active)
       {
         _initialGridPosition = new Vector2Int(FunkySheep.Map.Utils.LongitudeToX(zoom.Value, longitude.Value), FunkySheep.Map.Utils.LatitudeToZ(zoom.Value, latitude.Value));
       }
@@ -37,13 +46,38 @@ namespace FunkySheep.World
       // Invert Y position since reverted from mercator
       gridPosition.Value *= new Vector2Int(1, -1);
 
-      if (_lastMapPosition != mapPosition.Value || !enabled)
+      if (_lastMapPosition != mapPosition.Value || !active)
       {
+        AddTiles(world, mapPosition.Value);
         onPositionChanged.Raise();
         _lastMapPosition = mapPosition.Value;
       }
 
-      enabled = true;
+      active = true;
+    }
+
+    /// <summary>
+    /// Add a tile to the world for each layer
+    /// </summary>
+    /// <param name="mapPosition">The tile earth position</param>
+    /// <returns></returns>
+    public void AddTiles(Manager world, Vector2Int mapPosition)
+    {
+      foreach (Layer layer in world.transform.GetComponentsInChildren<Layer>())
+      {
+        Tile tile = tiles.Find(tile => (tile.mapPosition == mapPosition && tile.layerSO == layer.layerSO));
+        if (tile == null)
+        {
+          tile = new Tile(this, layer.layerSO);
+          tiles.Add(tile);
+        }
+
+        if (!tile.created)
+        {
+          layer.layerSO.Create(layer, tile);
+          tile.created = true;
+        }
+      }
     }
   }
 }

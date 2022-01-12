@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FunkySheep.OldWorld.Buildings
+namespace FunkySheep.World.Buildings
 {
     public class Item
     {

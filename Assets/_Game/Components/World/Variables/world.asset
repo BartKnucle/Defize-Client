@@ -19,4 +19,14 @@ MonoBehaviour:
   gridPosition: {fileID: 11400000, guid: 3299cdfc2d635da4996853d19c8e86e3, type: 2}
   onPositionChanged: {fileID: 11400000, guid: 4d23c59dba227ac41bc23090c1c88d51, type: 2}
   cacheSize: 0
-  enabled: 0
+  layersSO:
+  - {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
+  tiles:
+  - mapPosition: {x: 16783, y: 11836}
+    worldSO: {fileID: 11400000}
+    layerSO: {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
+    gpsBoundaries:
+    - 44.613933947306265
+    - 4.383544921875
+    - 44.62175409623324
+    - 4.39453125

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
 
-namespace FunkySheep.World
+namespace FunkySheep.OldWorld
 {
     [RequireComponent(typeof(ProBuilderMesh))]
     public class Floor : MonoBehaviour

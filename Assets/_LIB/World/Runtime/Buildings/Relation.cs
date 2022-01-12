@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace FunkySheep.World
+namespace FunkySheep.OldWorld.Buildings
 {
     [Serializable]
     public class Relation : Item

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using SimpleJSON;
 
-namespace FunkySheep.World
+namespace FunkySheep.OldWorld.Buildings
 {
     [AddComponentMenu("FunkySheep/World/Buildings/Tile")]
     public class Tile : MonoBehaviour

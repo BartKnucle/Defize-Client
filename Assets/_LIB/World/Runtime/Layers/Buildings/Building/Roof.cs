@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
 
-namespace FunkySheep.OldWorld
+namespace FunkySheep.World
 {
     [RequireComponent(typeof(ProBuilderMesh))]
     public class Roof : MonoBehaviour
