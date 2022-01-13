@@ -9,6 +9,7 @@ namespace FunkySheep.World
   public class Tile
   {
     public Vector2Int mapPosition;
+    public Vector2Int gridPosition;
     public WorldSO worldSO;
     public LayerSO layerSO;
     public Double[] gpsBoundaries;
@@ -17,6 +18,7 @@ namespace FunkySheep.World
       this.worldSO = worldSO;
       this.layerSO = layerSO;
       this.mapPosition = worldSO.mapPosition.Value;
+      this.gridPosition = worldSO.gridPosition.Value;
       gpsBoundaries = CaclulateGpsBoundaries();
     }
 

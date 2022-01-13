@@ -29,13 +29,14 @@ namespace FunkySheep.World
 
     public void Create(Manager world)
     {
-      foreach (LayerSO layer in layersSO)
+      foreach (LayerSO layerSO in layersSO)
       {
-        GameObject go = new GameObject(layer.name);
-        Layer layerComponent = go.AddComponent<Layer>();
-        layerComponent.layerSO = layer;
+        GameObject go = new GameObject(layerSO.name);
+        layerSO.CreateManager(go, this);
         go.transform.parent = world.transform;
       }
+
+      UpdatePosition(world);
     }
 
     /// <summary>

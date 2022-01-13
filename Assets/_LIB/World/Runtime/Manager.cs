@@ -8,7 +8,7 @@ namespace FunkySheep.World
   public class Manager : MonoBehaviour
   {
     public WorldSO worldSO;
-    private void Awake() {
+    public void Create() {
       worldSO.Create(this);
     }
     

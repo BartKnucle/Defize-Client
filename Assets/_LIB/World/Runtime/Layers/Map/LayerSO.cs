@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Tilemaps;
 
 namespace FunkySheep.World.Map
 {
@@ -21,14 +21,95 @@ namespace FunkySheep.World.Map
         Directory.CreateDirectory(path);
       }
     }
-    
-    public override Layer CreateManager()
+
+    public override void CreateManager(GameObject go, WorldSO worldSO)
     {
-      return new Layer();
+      Layer layerComponent = go.AddComponent<Layer>();
+      layerComponent.layerSO = this;
+      layerComponent.worldSO = worldSO;
     }
 
-    public override void AddTile(Layer layer, Tile tile)
+    public override void AddTile(FunkySheep.World.Layer layer, Tile tile)
     {
+      string url = InterpolatedUrl(tile);
+      Tilemap tilemap = layer.GetComponent<Tilemap>();
+
+      Vector3Int tileMapPosition = new Vector3Int(tile.gridPosition.x, tile.gridPosition.y, 0);
+
+      layer.StartCoroutine(DownLoad(url, (tileDate) => {
+        tilemap.SetTile(tileMapPosition, tileDate);
+        tilemap.RefreshTile(tileMapPosition);
+      }));
+    }
+
+    /// <summary>
+    /// Interpolate the url inserting the coordinates and zoom values
+    /// </summary>
+    /// <param name="zoom">The zoom value</param>
+    /// <param name="position">The coordinates</param>
+    /// <returns>The interpolated Url</returns>
+    public string InterpolatedUrl(Tile tile)
+    {
+        string [] parameters = new string[3];
+        string [] parametersNames = new string[3];
+
+        parameters[0] = tile.worldSO.zoom.Value.ToString();
+        parametersNames[0] = "zoom";
+        
+        parameters[1] = tile.worldSO.mapPosition.Value.x.ToString();
+        parametersNames[1] = "position.x";
+        
+        parameters[2] = tile.worldSO.mapPosition.Value.y.ToString();
+        parametersNames[2] = "position.y";
+
+        return url.Interpolate(parameters, parametersNames);
+    }
+
+    /// <summary>
+    /// Download the tile
+    /// </summary>
+    public IEnumerator DownLoad(string url, Action<UnityEngine.Tilemaps.Tile> callback) {
+        string hash = FunkySheep.Crypto.Hash(url);
+        Texture2D texture;
+        texture = new Texture2D(256, 256);
+        
+        if (File.Exists(path + hash))
+        {
+            byte[] fileData;
+            fileData = File.ReadAllBytes(path + hash);
+            texture.LoadImage(fileData);
+        }
+
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        yield return request.SendWebRequest();
+        if(request.result != UnityWebRequest.Result.Success) 
+        {
+            Debug.Log(request.error);
+        }                
+        else
+        {
+            texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            SetTile(texture);
+            File.WriteAllBytes(path + hash, request.downloadHandler.data);
+        }
+
+        UnityEngine.Tilemaps.Tile tileData = SetTile(texture);
+        callback(tileData);
+        yield break;
+    }
+
+    /// <summary>
+    /// Set the tile object
+    /// </summary>
+    /// <param name="texture">The texture to set on the tile sprite</param>
+    public UnityEngine.Tilemaps.Tile SetTile(Texture2D texture)
+    {
+      UnityEngine.Tilemaps.Tile tileData;
+      texture.wrapMode = TextureWrapMode.Clamp;
+      texture.filterMode = FilterMode.Point;
+      tileData = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
+      tileData.sprite = Sprite.Create((Texture2D) texture, new Rect(0.0f, 0.0f, texture.width, texture.height), Vector2.zero, 1);
+      return tileData;
     }
 
     public void ClearCache()
