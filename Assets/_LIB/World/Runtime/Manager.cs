@@ -9,13 +9,7 @@ namespace FunkySheep.World
   {
     public WorldSO worldSO;
     private void Awake() {
-      foreach (LayerSO layer in worldSO.layersSO)
-      {
-        GameObject go = new GameObject(layer.name);
-        Layer layerComponent = go.AddComponent<Layer>();
-        layerComponent.layerSO = layer;
-        go.transform.parent = this.transform;
-      }
+      worldSO.Create(this);
     }
     
     public void UpdatePlayerPosition()

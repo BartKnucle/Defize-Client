@@ -24,9 +24,17 @@ namespace FunkySheep.World
 
     private void OnEnable() {
       active = false;
-      foreach (Tile tile in tiles)
+      tiles = new List<Tile>();
+    }
+
+    public void Create(Manager world)
+    {
+      foreach (LayerSO layer in layersSO)
       {
-        tile.created = false;          
+        GameObject go = new GameObject(layer.name);
+        Layer layerComponent = go.AddComponent<Layer>();
+        layerComponent.layerSO = layer;
+        go.transform.parent = world.transform;
       }
     }
 
@@ -69,13 +77,8 @@ namespace FunkySheep.World
         if (tile == null)
         {
           tile = new Tile(this, layer.layerSO);
+          layer.layerSO.AddTile(layer, tile);
           tiles.Add(tile);
-        }
-
-        if (!tile.created)
-        {
-          layer.layerSO.Create(layer, tile);
-          tile.created = true;
         }
       }
     }

@@ -2,16 +2,16 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace FunkySheep.OldWorld.Buildings
+namespace FunkySheep.World.Map
 {
-    [CustomEditor(typeof(Manager), editorForChildClasses: true)]
-    public class ManagerEditor : Editor
+    [CustomEditor(typeof(LayerSO), editorForChildClasses: true)]
+    public class EditorLayerSO : Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            Manager e = target as Manager;
+            LayerSO e = target as LayerSO;
 
             if (GUILayout.Button("Clear cache"))
                 e.ClearCache();

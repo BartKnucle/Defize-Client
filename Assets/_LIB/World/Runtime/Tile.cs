@@ -12,7 +12,6 @@ namespace FunkySheep.World
     public WorldSO worldSO;
     public LayerSO layerSO;
     public Double[] gpsBoundaries;
-    public bool created = false;
     public Tile(WorldSO worldSO, LayerSO layerSO)
     {
       this.worldSO = worldSO;

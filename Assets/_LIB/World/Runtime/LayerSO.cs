@@ -6,6 +6,7 @@ namespace FunkySheep.World
 {
   public abstract class LayerSO : ScriptableObject
   {
-    public abstract void Create(Layer layer, Tile tile);
+    public abstract Layer CreateManager();
+    public abstract void AddTile(Layer layer, Tile tile);
   }
 }
