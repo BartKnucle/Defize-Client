@@ -142,9 +142,7 @@ namespace FunkySheep.World.Terrain
 
             // Use the tile size in meters at the given zoom level to determine the relative
             // scale of elevation values in the mesh.
-            const double earthCircumferenceMeters = 6378137.0 * Math.PI * 2.0;
-            double tileSize = earthCircumferenceMeters / (1 << tile.world.worldSO.zoom.Value);
-            double height = elevation / tileSize;
+            double height = elevation / tile.world.worldSO.tileRealSize.x;
             vertices[i].y = (float)height;
         }
         // Assign the new vertex positions to the mesh.
