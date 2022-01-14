@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FunkySheep.World.Terrain
+namespace FunkySheep.World.OldTerrain
 {
     [AddComponentMenu("FunkySheep/World/Terrain/Manager")]
     public class Manager : MonoBehaviour

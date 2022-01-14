@@ -22,15 +22,16 @@ namespace FunkySheep.World.Map
       }
     }
 
-    public override void CreateManager(GameObject go, WorldSO worldSO)
+    public override void CreateManager(GameObject go, Manager world)
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
-      layerComponent.worldSO = worldSO;
+      layerComponent.worldSO = world.worldSO;
     }
 
-    public override void AddTile(FunkySheep.World.Layer layer, Tile tile)
+    public override Tile AddTile(Manager world, FunkySheep.World.Layer layer)
     {
+      Tile tile = new Tile(world, layer);
       string url = InterpolatedUrl(tile);
       Tilemap tilemap = layer.GetComponent<Tilemap>();
 
@@ -40,6 +41,7 @@ namespace FunkySheep.World.Map
         tilemap.SetTile(tileMapPosition, tileDate);
         tilemap.RefreshTile(tileMapPosition);
       }));
+      return tile;
     }
 
     /// <summary>
@@ -53,13 +55,13 @@ namespace FunkySheep.World.Map
         string [] parameters = new string[3];
         string [] parametersNames = new string[3];
 
-        parameters[0] = tile.worldSO.zoom.Value.ToString();
+        parameters[0] = tile.world.worldSO.zoom.Value.ToString();
         parametersNames[0] = "zoom";
         
-        parameters[1] = tile.worldSO.mapPosition.Value.x.ToString();
+        parameters[1] = tile.world.worldSO.mapPosition.Value.x.ToString();
         parametersNames[1] = "position.x";
         
-        parameters[2] = tile.worldSO.mapPosition.Value.y.ToString();
+        parameters[2] = tile.world.worldSO.mapPosition.Value.y.ToString();
         parametersNames[2] = "position.y";
 
         return url.Interpolate(parameters, parametersNames);

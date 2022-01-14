@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FunkySheep.World.Terrain
+namespace FunkySheep.World.OldTerrain
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     [AddComponentMenu("FunkySheep/World/Terrain/Tile")]

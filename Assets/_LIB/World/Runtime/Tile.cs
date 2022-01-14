@@ -10,15 +10,15 @@ namespace FunkySheep.World
   {
     public Vector2Int mapPosition;
     public Vector2Int gridPosition;
-    public WorldSO worldSO;
-    public LayerSO layerSO;
+    public Manager world;
+    public Layer layer;
     public Double[] gpsBoundaries;
-    public Tile(WorldSO worldSO, LayerSO layerSO)
+    public Tile(Manager world, Layer layer)
     {
-      this.worldSO = worldSO;
-      this.layerSO = layerSO;
-      this.mapPosition = worldSO.mapPosition.Value;
-      this.gridPosition = worldSO.gridPosition.Value;
+      this.world = world;
+      this.layer = layer;
+      this.mapPosition = world.worldSO.mapPosition.Value;
+      this.gridPosition = world.worldSO.gridPosition.Value;
       gpsBoundaries = CaclulateGpsBoundaries();
     }
 
@@ -28,10 +28,10 @@ namespace FunkySheep.World
     /// <returns>A Double[4] containing [StartLatitude, StartLongitude, EndLatitude, EndLongitude]</returns>
     public Double[] CaclulateGpsBoundaries()
     {
-        double latitude = Utils.tileZ2lat(worldSO.zoom.Value, mapPosition.y);
-        double longitude = Utils.tileX2long(worldSO.zoom.Value, mapPosition.x);
-        double nextLatitude = Utils.tileZ2lat(worldSO.zoom.Value, mapPosition.y + 1);
-        double nextLongitude = Utils.tileX2long(worldSO.zoom.Value, mapPosition.x + 1);
+        double latitude = Utils.tileZ2lat(world.worldSO.zoom.Value, mapPosition.y);
+        double longitude = Utils.tileX2long(world.worldSO.zoom.Value, mapPosition.x);
+        double nextLatitude = Utils.tileZ2lat(world.worldSO.zoom.Value, mapPosition.y + 1);
+        double nextLongitude = Utils.tileX2long(world.worldSO.zoom.Value, mapPosition.x + 1);
 
         Double[] boundaries = new Double[4];
         

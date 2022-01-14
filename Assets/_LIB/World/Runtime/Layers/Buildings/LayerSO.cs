@@ -26,12 +26,14 @@ namespace FunkySheep.World.Buildings
         Directory.CreateDirectory(path);
       }
     }
-    public override void AddTile(Layer layer, Tile tile)
+    public override Tile AddTile(FunkySheep.World.Manager world, Layer layer)
     {
+      Tile tile = new Tile(world, layer);
       string url = InterpolatedUrl(tile.gpsBoundaries);
       layer.StartCoroutine(Load(url, (data) => {
           ParseTileData(tile, layer, data["elements"].AsArray);
       }));
+      return tile;
     }
 
     /// <summary>

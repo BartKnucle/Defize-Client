@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac85521b8f27e40438c37a6a7c0371f5, type: 3}
   m_Name: world
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
-  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  currentlatitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
+  currentlongitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  initialOffset: {x: 0, y: 0, z: 0}
   zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
   mapPosition: {fileID: 11400000, guid: 9dd64df578321524da771398c70d7636, type: 2}
   gridPosition: {fileID: 11400000, guid: 3299cdfc2d635da4996853d19c8e86e3, type: 2}
@@ -22,20 +23,5 @@ MonoBehaviour:
   layersSO:
   - {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
   - {fileID: 11400000, guid: 0911f3d415bd35749827c902f082ff64, type: 2}
-  tiles:
-  - mapPosition: {x: 16783, y: 11836}
-    worldSO: {fileID: 11400000}
-    layerSO: {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
-    gpsBoundaries:
-    - 44.613933947306265
-    - 4.383544921875
-    - 44.62175409623324
-    - 4.39453125
-  - mapPosition: {x: 16783, y: 11836}
-    worldSO: {fileID: 11400000}
-    layerSO: {fileID: 11400000, guid: 0911f3d415bd35749827c902f082ff64, type: 2}
-    gpsBoundaries:
-    - 44.613933947306265
-    - 4.383544921875
-    - 44.62175409623324
-    - 4.39453125
+  - {fileID: 11400000, guid: e814a0d208ee47c4d91e2a1fe186bdac, type: 2}
+  tiles: []
