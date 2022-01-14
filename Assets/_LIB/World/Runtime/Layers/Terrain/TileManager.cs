@@ -6,10 +6,33 @@ using UnityEngine;
 namespace FunkySheep.World.Terrain
 {
   [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+  [RequireComponent(typeof(UnityEngine.Terrain))]
   public class TileManager : MonoBehaviour
   {
     public LayerSO layerSO;
     public Tile tile;
+    
+    public UnityEngine.Terrain terrain;
+    public UnityEngine.TerrainData terrainData;
+
+    private void Awake() {
+      terrain = GetComponent<UnityEngine.Terrain>();
+      terrainData = new TerrainData();
+      terrain.terrainData = terrainData;
+    }
+    private void Start() {
+      // Set the scale depending on the zoom
+      this.transform.localScale = tile.world.worldSO.tileRealSize;
+
+      this.transform.localPosition = new Vector3(
+        (-(tile.world.worldSO.initialOffset.x) * tile.world.worldSO.tileRealSize.x) + tile.gridPosition.x * tile.world.worldSO.tileRealSize.x,
+          0,
+        ((tile.world.worldSO.initialOffset.z - 1) * tile.world.worldSO.tileRealSize.z) + tile.gridPosition.y * tile.world.worldSO.tileRealSize.z
+      );
+
+      terrainData.size = tile.world.worldSO.tileRealSize;
+      applyHeight();
+    }
     
     public void SetuseNormalMap(bool use)
     {
@@ -32,19 +55,11 @@ namespace FunkySheep.World.Terrain
     // Generate a uniform grid of vertices, elevate them according to a texture, and apply a normal map.
     public void CreateMesh()
     {
-        // Set the scale depending on the zoom
-        this.transform.localScale = tile.world.worldSO.tileRealSize;
-
-        this.transform.localPosition = new Vector3(
-          (-(tile.world.worldSO.initialOffset.x - 0.5f) * this.transform.localScale.x) + tile.gridPosition.x * tile.world.worldSO.tileRealSize.x,
-          0,
-          ((tile.world.worldSO.initialOffset.z - 0.5f) * this.transform.localScale.y) + tile.gridPosition.y * tile.world.worldSO.tileRealSize.z
-        );
         // Get the mesh for this GameObject.
         var mesh = GetComponent<MeshFilter>().mesh;
 
         // Generate a vertex grid for the mesh. The offset vector makes the final mesh centered on 0 in X and Z.
-        GenerateElevationGrid(mesh, layerSO.resolution, new Vector3(-0.5f, 0.0f, -0.5f));
+        GenerateElevationGrid(mesh, layerSO.resolution, Vector3.zero);
 
         // Elevate the vertices of the mesh.
         ApplyElevation(mesh);
@@ -127,6 +142,9 @@ namespace FunkySheep.World.Terrain
 
     public void ApplyElevation(Mesh mesh)
     {
+        // Unity terrain heights
+        
+
         // Iterate over the vertex positions and UVs of the mesh.
         var vertices = mesh.vertices;
         var uvs = mesh.uv;
@@ -147,6 +165,31 @@ namespace FunkySheep.World.Terrain
         }
         // Assign the new vertex positions to the mesh.
         mesh.vertices = vertices;
+    }
+
+    public void applyHeight()
+    {
+      float[,] heights = new float[terrainData.heightmapResolution, terrainData.heightmapResolution];
+      for (int x = 0; x < terrainData.heightmapResolution; x++)
+      {
+          for (int y = 0; y < terrainData.heightmapResolution; y++)
+          {
+            Color color = tile.heightTexture.GetPixel(
+              Convert.ToInt32(tile.heightTexture.height / (terrainData.heightmapResolution - 1) * y),
+              Convert.ToInt32(tile.heightTexture.width / (terrainData.heightmapResolution -1) * x)
+            );
+
+            // Convert the resulting color value to an elevation in meters.
+            float elevation = ColorToElevation(color);
+
+            // Use the tile size in meters at the given zoom level to determine the relative
+            // scale of elevation values in the mesh.
+            double height = elevation / tile.world.worldSO.tileRealSize.x;
+            heights[x, y] = (float)height;
+          }
+      }
+
+      terrainData.SetHeights(0, 0, heights);
     }
 
     public void ApplyNormalTexture(Material material)
