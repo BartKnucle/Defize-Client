@@ -10,6 +10,7 @@ namespace FunkySheep.World.Terrain
   {
     public FunkySheep.World.LayerSO heightLayerSO;
     public FunkySheep.World.LayerSO normalLayerSO;
+    public Material material;
     public bool useNormalMap = true;
     public int resolution = 32;
     List<Tile> pendingTiles = new List<Tile>();
@@ -86,7 +87,6 @@ namespace FunkySheep.World.Terrain
 
       go.name = tile.gridPosition.ToString();
       go.transform.parent = tile.layer.transform;
-      tileManager.CreateMesh();
     }
   }
 }

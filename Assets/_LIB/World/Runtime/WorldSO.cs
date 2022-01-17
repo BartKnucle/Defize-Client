@@ -105,11 +105,14 @@ namespace FunkySheep.World
     {
       foreach (Layer layer in world.transform.GetComponentsInChildren<Layer>())
       {
-        Tile tile = tiles.Find(tile => (tile.mapPosition == mapPosition && tile.layer == layer));
-        if (tile == null)
+        if (layer.layerSO.activated == true)
         {
-          tile = layer.layerSO.AddTile(world, layer);
-          tiles.Add(tile);
+          Tile tile = tiles.Find(tile => (tile.mapPosition == mapPosition && tile.layer == layer));
+          if (tile == null)
+          {
+            tile = layer.layerSO.AddTile(world, layer);
+            tiles.Add(tile);
+          }
         }
       }
     }

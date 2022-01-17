@@ -6,6 +6,7 @@ namespace FunkySheep.World
 {
   public abstract class LayerSO : ScriptableObject
   {
+    public bool activated = true;
     public virtual void CreateManager(GameObject go, Manager world)
     {
       Layer layerComponent = go.AddComponent<Layer>();
