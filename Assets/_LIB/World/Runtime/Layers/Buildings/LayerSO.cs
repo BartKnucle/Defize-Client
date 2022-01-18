@@ -19,6 +19,9 @@ namespace FunkySheep.World.Buildings
     public FunkySheep.Types.Vector3 initialMercatorPosition;
     public GameObject buildingPrefab;
     private void OnEnable() {
+      ways = new List<Way>();
+      relations = new List<Relation>();
+
       path = Application.persistentDataPath + cacheRelativePath;
       //Create the cache directory
       if (!Directory.Exists(path))
@@ -26,12 +29,20 @@ namespace FunkySheep.World.Buildings
         Directory.CreateDirectory(path);
       }
     }
-    public override Tile AddTile(FunkySheep.World.Manager world, Layer layer)
+
+    public override void CreateManager(GameObject go, FunkySheep.World.Manager world)
+    {
+      Layer layerComponent = go.AddComponent<Layer>();
+      layerComponent.layerSO = this;
+      layerComponent.world = world;
+    }
+
+    public override Tile AddTile(FunkySheep.World.Manager world, FunkySheep.World.Layer layer)
     {
       Tile tile = new Tile(world, layer);
       string url = InterpolatedUrl(tile.gpsBoundaries);
       layer.StartCoroutine(Load(url, (data) => {
-          ParseTileData(tile, layer, data["elements"].AsArray);
+          ParseTileData(tile, data["elements"].AsArray);
       }));
       return tile;
     }
@@ -121,7 +132,7 @@ namespace FunkySheep.World.Buildings
     /// <summary>
     /// Parse the data from the file
     /// </summary>
-    public void ParseTileData(Tile tile, Layer layer, JSONArray elements)
+    public void ParseTileData(Tile tile, JSONArray elements)
     {
         // Add all the nodes first
         for (int i = 0; i < elements.Count; i++)
@@ -129,10 +140,10 @@ namespace FunkySheep.World.Buildings
             switch ((string)elements[i]["type"])
             {
                 case "way":
-                    AddWay(tile, layer, elements[i]);
+                    AddWay(tile, elements[i]);
                     break;
                 case "relation":
-                    AddRelation(tile, layer, elements[i]);
+                    AddRelation(tile, elements[i]);
                     break;
                 default:
                     break;
@@ -140,9 +151,9 @@ namespace FunkySheep.World.Buildings
         }
     }
 
-    public Way AddWay(Tile tile, Layer layer, JSONNode wayJSON)
+    public Way AddWay(Tile tile, JSONNode wayJSON)
     {
-        Way way = new Way(wayJSON["id"]);
+        Way way = new Way(wayJSON["id"], tile);
         // Add the node id to the nodes list
         JSONArray points = wayJSON["geometry"].AsArray;
 
@@ -157,13 +168,13 @@ namespace FunkySheep.World.Buildings
         {
             way.tags.Add(new Tag(tag.Key, tag.Value));
         }
-        Build(way, layer);
+        Build(way);
         ways.Add(way);
         
         return way;
     }
 
-    public Relation AddRelation(Tile tile, Layer layer, JSONNode relationJSON)
+    public Relation AddRelation(Tile tile, JSONNode relationJSON)
     {
         Relation relation = new Relation(relationJSON["id"]);
 
@@ -173,14 +184,14 @@ namespace FunkySheep.World.Buildings
         {
             Way way = ways.Find(way => way.id == members[j]["ref"]);
             if (way == null) {
-              way = new Way(members[j]["ref"]);
+              way = new Way(members[j]["ref"], tile);
               JSONArray points = members[j]["geometry"].AsArray;
               for (int k = 0; k < points.Count; k++)
               {
                   way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
               }
             }
-            Build(way, layer);
+            Build(way);
             relation.ways.Add(way);
         }
 
@@ -198,7 +209,7 @@ namespace FunkySheep.World.Buildings
     /// Build the 3D Object
     /// </summary>
     /// <param name="way"></param>
-    public void Build(Way way, Layer layer)
+    public void Build(Way way)
     {
         Building building = ScriptableObject.CreateInstance<Building>();
         building.points = new Vector2[way.points.Count];
@@ -212,7 +223,7 @@ namespace FunkySheep.World.Buildings
         GameObject go = Instantiate(buildingPrefab);
         building.Init();
         go.name = building.id;
-        go.transform.parent = layer.transform;
+        go.transform.parent = way.tile.layer.transform;
         go.transform.position = new Vector3(building.position.x, 0, building.position.y);
         go.GetComponent<Manager>().Create(building);
     }

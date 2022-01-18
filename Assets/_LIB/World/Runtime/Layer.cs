@@ -7,6 +7,6 @@ namespace FunkySheep.World
   public class Layer : MonoBehaviour
   {
     public LayerSO layerSO;
-    public WorldSO worldSO;
+    public Manager world;
   }
 }

@@ -17,15 +17,15 @@ namespace FunkySheep.World.Map
       Tilemap tilemap = GetComponent<Tilemap>();
       // Set the position inside the tile
       tilemap.tileAnchor = new Vector3(
-          -worldSO.initialOffset.x,
-          -1 + worldSO.initialOffset.z,
+          -world.worldSO.initialOffset.x,
+          -1 + world.worldSO.initialOffset.z,
           0
       );
 
       // Set the scale depending on the zoom
       tilemap.transform.localScale = new Vector3(
-          worldSO.tileRealSize.x / 256f,
-          worldSO.tileRealSize.z / 256f,
+          world.worldSO.tileRealSize.x / 256f,
+          world.worldSO.tileRealSize.z / 256f,
       1f);
     }
   }

@@ -26,7 +26,7 @@ namespace FunkySheep.World.Map
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
-      layerComponent.worldSO = world.worldSO;
+      layerComponent.world = world;
     }
 
     public override Tile AddTile(Manager world, FunkySheep.World.Layer layer)

@@ -11,7 +11,7 @@ namespace FunkySheep.World
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
-      layerComponent.worldSO = world.worldSO;
+      layerComponent.world = world;
     }
     public virtual Tile AddTile(Manager world, Layer layer) {
       return new Tile(world, layer);

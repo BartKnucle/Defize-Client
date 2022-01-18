@@ -65,7 +65,7 @@ namespace FunkySheep.World.Terrain
             );
 
             // Convert the resulting color value to an elevation in meters.
-            float elevation = ColorToElevation(color);
+            float elevation = Layer.ColorToElevation(color);
 
             // Use the tile size in meters at the given zoom level to determine the relative
             // scale of elevation values in the mesh.
@@ -74,13 +74,6 @@ namespace FunkySheep.World.Terrain
           }
       }
       terrainData.SetHeights(0, 0, heights);
-    }
-
-    public static float ColorToElevation(Color color)
-    {
-        // Convert from color channel values in 0.0-1.0 range to elevation in meters:
-        // https://mapzen.com/documentation/terrain-tiles/formats/#terrarium
-        return (color.r * 256.0f * 256.0f + color.g * 256.0f + color.b) - 32768.0f;
     }
 
     void ConnectTop(UnityEngine.Terrain top)

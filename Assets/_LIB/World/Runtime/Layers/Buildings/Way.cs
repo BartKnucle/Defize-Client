@@ -8,9 +8,11 @@ namespace FunkySheep.World.Buildings
     {
         public List<Point> points = new List<Point>();
         public List<Tag> tags = new List<Tag>();
-        public Way(int id)
+        public Tile tile;
+        public Way(int id, Tile tile)
         {
-            this.id = id;
+          this.id = id;
+          this.tile = tile;
         }
     }
 }

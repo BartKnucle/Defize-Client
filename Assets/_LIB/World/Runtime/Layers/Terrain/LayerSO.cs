@@ -25,7 +25,7 @@ namespace FunkySheep.World.Terrain
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
-      layerComponent.worldSO = world.worldSO;
+      layerComponent.world = world;
 
       Tilemap.tilemapTileChanged += onTileChanged;
 
