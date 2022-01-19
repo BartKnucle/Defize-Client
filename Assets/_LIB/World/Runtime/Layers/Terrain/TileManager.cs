@@ -11,7 +11,7 @@ namespace FunkySheep.World.Terrain
   {
     public LayerSO layerSO;
     public Tile tile;
-    
+
     public UnityEngine.Terrain terrain;
     public UnityEngine.TerrainData terrainData;
 
@@ -23,8 +23,10 @@ namespace FunkySheep.World.Terrain
       terrainData = new TerrainData();
       terrain.allowAutoConnect = true;
       terrain.terrainData = terrainData;
+      GetComponent<UnityEngine.TerrainCollider>().terrainData = terrainData;
     }
     public void Init() {
+      terrainData.heightmapResolution = layerSO.resolution;
       terrain.materialTemplate = layerSO.material;
       // Set the scale depending on the zoom
       this.transform.localScale = tile.world.worldSO.tileRealSize;

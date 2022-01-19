@@ -19,9 +19,6 @@ namespace FunkySheep.World
         public Vector2 center = new Vector2(0, 0);
         public float area;
         public int clock;
-
-        public void OnEnable() {
-        }
         
         /// <summary>
         /// Initialize the building

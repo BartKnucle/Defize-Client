@@ -65,7 +65,7 @@ namespace FunkySheep.World
     {
       if (!active)
       {
-        _initialGridPosition = new Vector2Int(FunkySheep.Map.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.Map.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
+        _initialGridPosition = new Vector2Int(FunkySheep.World.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.World.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
 
         // The initial offset inside a tile (from 0 to 1)
         initialOffset = new Vector2(
@@ -86,7 +86,7 @@ namespace FunkySheep.World
         );
       }
 
-      mapPosition.Value = new Vector2Int(FunkySheep.Map.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.Map.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
+      mapPosition.Value = new Vector2Int(FunkySheep.World.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.World.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
       
       gridPosition.Value = mapPosition.Value - _initialGridPosition;
       // Invert Y position since reverted from mercator
