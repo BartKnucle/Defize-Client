@@ -11,7 +11,8 @@ namespace FunkySheep.World
   {
     Building building;
     //ProBuilderMesh mesh;
-    public float m_Height = 2.5f;
+    public float m_Height = 5f;
+    
     public bool m_FlipNormals = true;
 
     public void Create(Building building)
@@ -33,10 +34,10 @@ namespace FunkySheep.World
 
         Vector3[] points = new Vector3[4];
 
-        Vector3 prevPoint = new Vector3(building.points[prevIndex].x, 0.1f, building.points[prevIndex].y);
-        Vector3 point = new Vector3(building.points[i].x, 0.1f, building.points[i].y);
-        Vector3 nextPoint = new Vector3(building.points[nextIndex].x, 0.1f, building.points[nextIndex].y);
-        Vector3 lastPoint = new Vector3(building.points[lastIndex].x, 0.1f, building.points[lastIndex].y);
+        Vector3 prevPoint = new Vector3(building.points[prevIndex].x, building.terrainTop, building.points[prevIndex].y);
+        Vector3 point = new Vector3(building.points[i].x, building.terrainTop, building.points[i].y);
+        Vector3 nextPoint = new Vector3(building.points[nextIndex].x, building.terrainTop, building.points[nextIndex].y);
+        Vector3 lastPoint = new Vector3(building.points[lastIndex].x, building.terrainTop, building.points[lastIndex].y);
 
         float pointAngle = Mathf.Sign(Vector3.SignedAngle(nextPoint - point, prevPoint - point, point));
         if (pointAngle == 0)

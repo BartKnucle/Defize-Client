@@ -208,13 +208,14 @@ namespace FunkySheep.World.Buildings
     /// <param name="way"></param>
     public void Build(Way way)
     {
-        Building building = ScriptableObject.CreateInstance<Building>();
+        Building building = new Building();
         building.points = new Vector2[way.points.Count];
         building.id = way.id.ToString();
 
         Layer layer = (Layer)way.tile.layer;
 
-        float maxHeight = 0;
+        float terrainTop = 0;
+        float terrainBottom = 0;
         for (int i = 0; i < way.points.Count; i++)
         {
           Vector2 InsideGridRelative =
@@ -226,17 +227,26 @@ namespace FunkySheep.World.Buildings
 
           float height = layer.GetHeight(InsideGridRelative);
           building.points[i] = way.points[i].position;
-          if (maxHeight < height || i == 0)
+
+          if (terrainTop < height || i == 0)
           {
-            maxHeight = height;
+            terrainTop = height;
+          }
+
+          if (terrainBottom > height || i == 0)
+          {
+            terrainBottom = height;
           }
         }
+
+        building.terrainBottom = terrainBottom;
+        building.terrainTop = terrainTop;
 
         GameObject go = Instantiate(buildingPrefab);
         building.Init();
         go.name = building.id;
         go.transform.parent = way.tile.layer.transform;
-        go.transform.position = new Vector3(building.position.x, maxHeight, building.position.y);
+        go.transform.position = new Vector3(building.position.x, 0, building.position.y);
         go.GetComponent<Manager>().Create(building);
     }
   }

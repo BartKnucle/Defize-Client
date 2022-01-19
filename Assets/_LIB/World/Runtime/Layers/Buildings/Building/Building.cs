@@ -6,14 +6,16 @@ using UnityEngine;
 
 namespace FunkySheep.World
 {
-    [CreateAssetMenu(fileName = "Building", menuName = "FunkySheep/World/Buildings/Building", order = 1)]
-    public class Building : ScriptableObject
+    public class Building
     {
         
         public string id;
         public Vector2[] points;
         public float height = 5;
         public Vector2 position;
+
+        public float terrainBottom = 0;
+        public float terrainTop = 0.2f;
         public Vector2 center = new Vector2(0, 0);
         public float area;
         public int clock;

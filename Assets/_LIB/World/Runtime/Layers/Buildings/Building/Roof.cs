@@ -27,7 +27,7 @@ namespace FunkySheep.World
           for (int i = 0, c = building.points.Length; i < c; i++)
           {
             float angle = Mathf.Deg2Rad * ((i / (float)c) * 360f);
-            points[i] = new Vector3(building.points[i].x, 2.6f, building.points[i].y);
+            points[i] = new Vector3(building.points[i].x, building.terrainTop + 5f, building.points[i].y);
           }
 
           // CreateShapeFromPolygon is an extension method that sets the pb_Object mesh data with vertices and faces

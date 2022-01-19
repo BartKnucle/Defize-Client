@@ -12,7 +12,7 @@ namespace FunkySheep.World
     {
         Building building;
         ProBuilderMesh mesh;
-        public float m_Height = 0.1f;
+        public float m_Height = 0.2f;
         public bool m_FlipNormals = false;
 
         /// <summary>
@@ -20,6 +20,7 @@ namespace FunkySheep.World
         /// </summary>
         /// <param name="building"></param>
         public void Create(Building building) {
+          m_Height = building.terrainTop - building.terrainBottom;
           mesh = this.GetComponent<ProBuilderMesh>();
           
           Vector3[] points = new Vector3[building.points.Length];
@@ -27,7 +28,7 @@ namespace FunkySheep.World
           for (int i = 0, c = building.points.Length; i < c; i++)
           {
             float angle = Mathf.Deg2Rad * ((i / (float)c) * 360f);
-            points[i] = new Vector3(building.points[i].x, 0f, building.points[i].y);
+            points[i] = new Vector3(building.points[i].x, building.terrainBottom, building.points[i].y);
           }
 
           // CreateShapeFromPolygon is an extension method that sets the pb_Object mesh data with vertices and faces

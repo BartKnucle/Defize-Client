@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c92109c9454cb43902be8dcd822d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Height: 2.5
+  m_Height: 5
   m_FlipNormals: 0
 --- !u!1 &6293474727937166344
 GameObject:
@@ -442,4 +442,3 @@ MonoBehaviour:
   walls: {fileID: 7899125782300716247}
   roof: {fileID: 2293023547310318146}
   floor: {fileID: 7356754774984174639}
-  building: {fileID: 0}
