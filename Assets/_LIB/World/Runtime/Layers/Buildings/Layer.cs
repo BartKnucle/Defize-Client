@@ -3,11 +3,13 @@ using UnityEngine.Tilemaps;
 
 namespace FunkySheep.World.Buildings
 {
-  public class Layer : FunkySheep.World.Layer
+  public class Layer : FunkySheep.World.Layer, IDropable
   {
-    public UnityEngine.Terrain terrain;
-    private void Start() {
-      terrain = world.GetComponentInChildren<UnityEngine.Terrain>();
+    public UnityEngine.TerrainData terrainData {get; set;}
+    
+    public float GetHeight(Vector2 position)
+    {
+      return terrainData.GetInterpolatedHeight(position.x, position.y);
     }
   }
 }

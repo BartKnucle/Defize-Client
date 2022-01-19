@@ -30,8 +30,8 @@ namespace FunkySheep.Map
         private void Start() {
             // Set the position inside the tile
             tilemap.tileAnchor = new Vector3(
-                -worldSO.initialOffset.x,
-                -1 + worldSO.initialOffset.z,
+                worldSO.initialOffset.x,
+                worldSO.initialOffset.y,
                 0
             );
 

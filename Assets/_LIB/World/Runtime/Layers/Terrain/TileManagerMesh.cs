@@ -17,9 +17,9 @@ namespace FunkySheep.World.Terrain
       this.transform.localScale = tile.world.worldSO.tileRealSize;
 
       this.transform.localPosition = new Vector3(
-        (-(tile.world.worldSO.initialOffset.x) * tile.world.worldSO.tileRealSize.x) + tile.gridPosition.x * tile.world.worldSO.tileRealSize.x,
+        ((tile.world.worldSO.initialOffset.x) * tile.world.worldSO.tileRealSize.x) + tile.gridPosition.x * tile.world.worldSO.tileRealSize.x,
           0,
-        ((tile.world.worldSO.initialOffset.z - 1) * tile.world.worldSO.tileRealSize.z) + tile.gridPosition.y * tile.world.worldSO.tileRealSize.z
+        ((tile.world.worldSO.initialOffset.y) * tile.world.worldSO.tileRealSize.z) + tile.gridPosition.y * tile.world.worldSO.tileRealSize.z
       );
     }
     

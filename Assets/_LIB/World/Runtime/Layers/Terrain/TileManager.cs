@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace FunkySheep.World.Terrain
 {
-  [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
   [RequireComponent(typeof(UnityEngine.Terrain))]
+  [RequireComponent(typeof(UnityEngine.TerrainCollider))]
   public class TileManager : MonoBehaviour
   {
     public LayerSO layerSO;
@@ -20,20 +20,17 @@ namespace FunkySheep.World.Terrain
 
     private void Awake() {
       terrain = GetComponent<UnityEngine.Terrain>();
-      terrain.allowAutoConnect = true;
       terrainData = new TerrainData();
+      terrain.allowAutoConnect = true;
       terrain.terrainData = terrainData;
     }
-    private void Start() {
+    public void Init() {
       terrain.materialTemplate = layerSO.material;
       // Set the scale depending on the zoom
       this.transform.localScale = tile.world.worldSO.tileRealSize;
 
-      this.transform.localPosition = new Vector3(
-        (-(tile.world.worldSO.initialOffset.x) * tile.world.worldSO.tileRealSize.x) + tile.gridPosition.x * tile.world.worldSO.tileRealSize.x,
-          0,
-        ((tile.world.worldSO.initialOffset.z - 1) * tile.world.worldSO.tileRealSize.z) + tile.gridPosition.y * tile.world.worldSO.tileRealSize.z
-      );
+      this.transform.localPosition = tile.world.worldSO.RealWorldPosition(tile) - tile.world.worldSO.initialDisplacement;
+      
 
       terrainData.size = tile.world.worldSO.tileRealSize;
       applyHeight();
@@ -73,6 +70,7 @@ namespace FunkySheep.World.Terrain
             heights[x, y] = (float)height;
           }
       }
+      
       terrainData.SetHeights(0, 0, heights);
     }
 

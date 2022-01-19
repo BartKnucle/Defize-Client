@@ -9,7 +9,8 @@ namespace FunkySheep.World
   {
     public FunkySheep.Types.Double currentlatitude;
     public FunkySheep.Types.Double currentlongitude;
-    public Vector3 initialOffset;
+    public Vector2 initialOffset;
+    public Vector3 initialDisplacement;
     public Vector3 tileRealSize;
     public FunkySheep.Types.Int zoom;
     // The earth world position
@@ -67,10 +68,9 @@ namespace FunkySheep.World
         _initialGridPosition = new Vector2Int(FunkySheep.Map.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.Map.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
 
         // The initial offset inside a tile (from 0 to 1)
-        initialOffset = new Vector3(
-          Utils.LongitudeToInsideX(zoom.Value, currentlongitude.Value),
-          0,
-          Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
+        initialOffset = new Vector2(
+          -Utils.LongitudeToInsideX(zoom.Value, currentlongitude.Value),
+          -1 + Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
         );
 
         // The tile size in meters
@@ -78,6 +78,12 @@ namespace FunkySheep.World
           (float)Utils.TileSize(zoom.Value),
           (float)Utils.TileSize(zoom.Value),
           (float)Utils.TileSize(zoom.Value));
+
+        initialDisplacement = new Vector3(
+          initialOffset.x * tileRealSize.x,
+          0,
+          initialOffset.y * tileRealSize.y
+        );
       }
 
       mapPosition.Value = new Vector2Int(FunkySheep.Map.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.Map.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
@@ -115,6 +121,28 @@ namespace FunkySheep.World
           }
         }
       }
+    }
+    public Vector2 RelativeInsidePosition(Vector2 position)
+    {
+      //position.y = 1 - position.y;
+      position.x %= tileRealSize.x;
+      position.y %= tileRealSize.y;
+
+      position.x /= tileRealSize.x;
+      position.y /= tileRealSize.y;
+
+      return position;
+    }
+
+    public Vector3 RealWorldPosition(Tile tile)
+    {
+      Vector3 position = new Vector3(
+        tile.gridPosition.x * tileRealSize.x,
+        0,
+        tile.gridPosition.y * tileRealSize.z
+      ) + initialDisplacement;
+
+      return position;
     }
   }
 }

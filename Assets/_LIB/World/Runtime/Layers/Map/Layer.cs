@@ -17,8 +17,8 @@ namespace FunkySheep.World.Map
       Tilemap tilemap = GetComponent<Tilemap>();
       // Set the position inside the tile
       tilemap.tileAnchor = new Vector3(
-          -world.worldSO.initialOffset.x,
-          -1 + world.worldSO.initialOffset.z,
+          world.worldSO.initialOffset.x,
+          world.worldSO.initialOffset.y,
           0
       );
 

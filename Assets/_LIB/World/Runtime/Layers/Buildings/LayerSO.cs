@@ -14,13 +14,13 @@ namespace FunkySheep.World.Buildings
     public string cacheRelativePath = "/world/buildings/";
     string path;
     public FunkySheep.Types.String url;
-    public List<Way> ways = new List<Way>();
-    public List<Relation> relations = new List<Relation>();
+    //public List<Way> ways = new List<Way>();
+    //public List<Relation> relations = new List<Relation>();
     public FunkySheep.Types.Vector3 initialMercatorPosition;
     public GameObject buildingPrefab;
     private void OnEnable() {
-      ways = new List<Way>();
-      relations = new List<Relation>();
+      //ways = new List<Way>();
+      //relations = new List<Relation>();
 
       path = Application.persistentDataPath + cacheRelativePath;
       //Create the cache directory
@@ -30,11 +30,12 @@ namespace FunkySheep.World.Buildings
       }
     }
 
-    public override void CreateManager(GameObject go, FunkySheep.World.Manager world)
+    public override World.Layer CreateManager(GameObject go, FunkySheep.World.Manager world)
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
       layerComponent.world = world;
+      return layerComponent;
     }
 
     public override Tile AddTile(FunkySheep.World.Manager world, FunkySheep.World.Layer layer)
@@ -169,7 +170,7 @@ namespace FunkySheep.World.Buildings
             way.tags.Add(new Tag(tag.Key, tag.Value));
         }
         Build(way);
-        ways.Add(way);
+        //ways.Add(way);
         
         return way;
     }
@@ -182,17 +183,14 @@ namespace FunkySheep.World.Buildings
 
         for (int j = 0; j < members.Count; j++)
         {
-            Way way = ways.Find(way => way.id == members[j]["ref"]);
-            if (way == null) {
-              way = new Way(members[j]["ref"], tile);
-              JSONArray points = members[j]["geometry"].AsArray;
-              for (int k = 0; k < points.Count; k++)
-              {
-                  way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
-              }
+            Way way = new Way(members[j]["ref"], tile);
+            JSONArray points = members[j]["geometry"].AsArray;
+            for (int k = 0; k < points.Count; k++)
+            {
+              way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
             }
             Build(way);
-            relation.ways.Add(way);
+            //relation.ways.Add(way);
         }
 
         JSONObject tags = relationJSON["tags"].AsObject;
@@ -201,7 +199,6 @@ namespace FunkySheep.World.Buildings
         {
             relation.tags.Add(new Tag(tag.Key, tag.Value));
         }
-        relations.Add(relation);
         return relation;
     }
 
@@ -215,16 +212,31 @@ namespace FunkySheep.World.Buildings
         building.points = new Vector2[way.points.Count];
         building.id = way.id.ToString();
 
+        Layer layer = (Layer)way.tile.layer;
+
+        float maxHeight = 0;
         for (int i = 0; i < way.points.Count; i++)
         {
+          Vector2 InsideGridRelative =
+            (way.points[i].position -
+            new Vector2(
+              way.tile.world.worldSO.RealWorldPosition(way.tile).x,
+              way.tile.world.worldSO.RealWorldPosition(way.tile).z
+            )) / way.tile.world.worldSO.tileRealSize.x;
+
+          float height = layer.GetHeight(InsideGridRelative);
           building.points[i] = way.points[i].position;
+          if (maxHeight < height || i == 0)
+          {
+            maxHeight = height;
+          }
         }
 
         GameObject go = Instantiate(buildingPrefab);
         building.Init();
         go.name = building.id;
         go.transform.parent = way.tile.layer.transform;
-        go.transform.position = new Vector3(building.position.x, 0, building.position.y);
+        go.transform.position = new Vector3(building.position.x, maxHeight, building.position.y);
         go.GetComponent<Manager>().Create(building);
     }
   }

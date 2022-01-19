@@ -22,11 +22,12 @@ namespace FunkySheep.World.Map
       }
     }
 
-    public override void CreateManager(GameObject go, Manager world)
+    public override World.Layer CreateManager(GameObject go, Manager world)
     {
       Layer layerComponent = go.AddComponent<Layer>();
       layerComponent.layerSO = this;
       layerComponent.world = world;
+      return layerComponent;
     }
 
     public override Tile AddTile(Manager world, FunkySheep.World.Layer layer)

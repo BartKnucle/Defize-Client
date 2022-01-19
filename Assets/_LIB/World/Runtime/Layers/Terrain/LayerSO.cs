@@ -16,14 +16,17 @@ namespace FunkySheep.World.Terrain
     List<Tile> pendingTiles = new List<Tile>();
     List<Vector2Int> pendingTilesElevations = new List<Vector2Int>();
 
+    public List<World.LayerSO> dropables;
+
     private void OnEnable() {
       pendingTiles = new List<Tile>();
       pendingTilesElevations = new List<Vector2Int>();
     }
 
-    public override void CreateManager(GameObject go, Manager world)
+    public override World.Layer CreateManager(GameObject go, Manager world)
     {
       Layer layerComponent = go.AddComponent<Layer>();
+      go.transform.position = world.worldSO.initialDisplacement;
       layerComponent.layerSO = this;
       layerComponent.world = world;
 
@@ -31,6 +34,7 @@ namespace FunkySheep.World.Terrain
 
       layerComponent.heightLayer = world.worldSO.AddLayer(heightLayerSO, world).GetComponent<Tilemap>();
       layerComponent.normalLayer = world.worldSO.AddLayer(normalLayerSO, world).GetComponent<Tilemap>();
+      return layerComponent;
     }
 
     // Not used since it is the tile map event that trigger the creation
@@ -78,6 +82,7 @@ namespace FunkySheep.World.Terrain
     void CreateTile(Tile tile)
     {
       GameObject go = new GameObject();
+      go.transform.parent = tile.layer.transform;
       TileManager tileManager = go.AddComponent<TileManager>();
       tileManager.tile = tile;
       tileManager.layerSO = this;
@@ -86,7 +91,20 @@ namespace FunkySheep.World.Terrain
       tile.normalTexture = tile.layer.GetComponent<Layer>().normalLayer.GetSprite(new Vector3Int(tile.gridPosition.x, tile.gridPosition.y, 0)).texture;
 
       go.name = tile.gridPosition.ToString();
-      go.transform.parent = tile.layer.transform;
+
+      tileManager.Init();
+
+      foreach (World.LayerSO layerSO in dropables)
+      {
+        GameObject layerGO = new GameObject(layerSO.name);
+        layerGO.transform.localPosition = tile.world.worldSO.RealWorldPosition(tile);
+        layerGO.transform.parent = go.transform.parent;
+        World.Layer layer = layerSO.CreateManager(layerGO, tile.world);
+        IDropable Ilayer = (IDropable)layer;
+        Ilayer.terrainData = tileManager.terrainData;
+        layerSO.activated = false;
+        layerSO.AddTile(tile.world, layerGO.GetComponent<World.Layer>());
+      }
     }
   }
 }
