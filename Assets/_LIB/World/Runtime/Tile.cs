@@ -13,12 +13,12 @@ namespace FunkySheep.World
     public Manager world;
     public Layer layer;
     public Double[] gpsBoundaries;
-    public Tile(Manager world, Layer layer)
+    public Tile(Manager world, Layer layer, Vector2Int gridPosition, Vector2Int mapPosition)
     {
       this.world = world;
       this.layer = layer;
-      this.mapPosition = world.worldSO.mapPosition.Value;
-      this.gridPosition = world.worldSO.gridPosition.Value;
+      this.mapPosition = mapPosition;
+      this.gridPosition = gridPosition;
       gpsBoundaries = CaclulateGpsBoundaries();
     }
 

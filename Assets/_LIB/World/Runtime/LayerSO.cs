@@ -14,8 +14,8 @@ namespace FunkySheep.World
       layerComponent.world = world;
       return layerComponent;
     }
-    public virtual Tile AddTile(Manager world, Layer layer) {
-      return new Tile(world, layer);
+    public virtual Tile AddTile(Manager world, Layer layer, Vector2Int gridPosition, Vector2Int mapPosition) {
+      return new Tile(world, layer, gridPosition, mapPosition);
     }
   }
 }

@@ -39,9 +39,9 @@ namespace FunkySheep.World.Terrain
     }
 
     // Not used since it is the tile map event that trigger the creation
-    public override FunkySheep.World.Tile AddTile(Manager world, FunkySheep.World.Layer layer)
+    public override FunkySheep.World.Tile AddTile(Manager world, FunkySheep.World.Layer layer, Vector2Int gridPosition, Vector2Int mapPosition)
     {
-      Tile tile = new Tile(world, layer);
+      Tile tile = new Tile(world, layer, gridPosition, mapPosition);
       pendingTiles.Add(tile);
       TryMatch();
       return tile;
@@ -104,7 +104,7 @@ namespace FunkySheep.World.Terrain
         IDropable Ilayer = (IDropable)layer;
         Ilayer.terrainData = tileManager.terrainData;
         layerSO.activated = false;
-        layerSO.AddTile(tile.world, layerGO.GetComponent<World.Layer>());
+        layerSO.AddTile(tile.world, layerGO.GetComponent<World.Layer>(), tile.gridPosition, tile.mapPosition);
       }
     }
   }

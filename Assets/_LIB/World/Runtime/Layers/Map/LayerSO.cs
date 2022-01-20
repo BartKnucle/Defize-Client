@@ -30,9 +30,9 @@ namespace FunkySheep.World.Map
       return layerComponent;
     }
 
-    public override Tile AddTile(Manager world, FunkySheep.World.Layer layer)
+    public override Tile AddTile(Manager world, FunkySheep.World.Layer layer, Vector2Int gridPosition, Vector2Int mapPosition)
     {
-      Tile tile = new Tile(world, layer);
+      Tile tile = new Tile(world, layer, gridPosition, mapPosition);
       string url = InterpolatedUrl(tile);
       Tilemap tilemap = layer.GetComponent<Tilemap>();
 
@@ -59,10 +59,10 @@ namespace FunkySheep.World.Map
         parameters[0] = tile.world.worldSO.zoom.Value.ToString();
         parametersNames[0] = "zoom";
         
-        parameters[1] = tile.world.worldSO.mapPosition.Value.x.ToString();
+        parameters[1] = tile.mapPosition.x.ToString();
         parametersNames[1] = "position.x";
         
-        parameters[2] = tile.world.worldSO.mapPosition.Value.y.ToString();
+        parameters[2] = tile.mapPosition.y.ToString();
         parametersNames[2] = "position.y";
 
         return url.Interpolate(parameters, parametersNames);

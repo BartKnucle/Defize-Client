@@ -11,6 +11,8 @@ namespace FunkySheep.World
     public FunkySheep.Types.Double currentlongitude;
     public Vector2 initialOffset;
     public Vector2 currentOffset;
+    public Vector2Int insideCellPosition;
+    public Vector2Int lastInsideCellPosition;
     public Vector3 initialDisplacement;
     public Vector3 tileRealSize;
     public FunkySheep.Types.Int zoom;
@@ -74,6 +76,22 @@ namespace FunkySheep.World
           -1 + Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
         );
 
+        if (-currentOffset.x >= 0.5f)
+        {
+          insideCellPosition.x = 1;
+        } else {
+          insideCellPosition.x = -1;
+        }
+
+        if (-currentOffset.y >= 0.5f)
+        {
+          insideCellPosition.y = 1;
+        } else {
+          insideCellPosition.y = -1;
+        }
+
+        lastInsideCellPosition = insideCellPosition;
+
         // The tile size in meters
         tileRealSize = new Vector3(
           (float)Utils.TileSize(zoom.Value),
@@ -93,17 +111,37 @@ namespace FunkySheep.World
         -1 + Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
       );
 
+      if (-currentOffset.x >= 0.5f)
+      {
+        insideCellPosition.x = 1;
+      } else {
+        insideCellPosition.x = -1;
+      }
+
+      if (-currentOffset.y >= 0.5f)
+      {
+        insideCellPosition.y = 1;
+      } else {
+        insideCellPosition.y = -1;
+      }
+
       mapPosition.Value = new Vector2Int(FunkySheep.World.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.World.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
       
       gridPosition.Value = mapPosition.Value - _initialGridPosition;
       // Invert Y position since reverted from mercator
       gridPosition.Value *= new Vector2Int(1, -1);
 
-      if (_lastMapPosition != mapPosition.Value || !active)
+      if (_lastMapPosition != mapPosition.Value || insideCellPosition != lastInsideCellPosition || !active)
       {
-        AddTiles(world, mapPosition.Value);
+        AddTiles(world, gridPosition.Value, mapPosition.Value);
+
+        // Add next tiles
+        AddTiles(world, gridPosition.Value + world.worldSO.insideCellPosition, mapPosition.Value + new Vector2Int(world.worldSO.insideCellPosition.x, -world.worldSO.insideCellPosition.y));
+        AddTiles(world, gridPosition.Value + world.worldSO.insideCellPosition * Vector2Int.up, mapPosition.Value + world.worldSO.insideCellPosition * Vector2Int.down);
+        AddTiles(world, gridPosition.Value + world.worldSO.insideCellPosition * Vector2Int.right, mapPosition.Value + world.worldSO.insideCellPosition * Vector2Int.right);
         onPositionChanged.Raise();
         _lastMapPosition = mapPosition.Value;
+        lastInsideCellPosition = insideCellPosition;
       }
 
       active = true;
@@ -114,17 +152,16 @@ namespace FunkySheep.World
     /// </summary>
     /// <param name="mapPosition">The tile earth position</param>
     /// <returns></returns>
-    public void AddTiles(Manager world, Vector2Int mapPosition)
+    public void AddTiles(Manager world, Vector2Int gridPosition, Vector2Int mapPosition)
     {
       foreach (Layer layer in world.transform.GetComponentsInChildren<Layer>())
       {
         if (layer.layerSO.activated == true)
         {
-          Tile tile = tiles.Find(tile => (tile.mapPosition == mapPosition && tile.layer == layer));
+          Tile tile = tiles.Find(tile => (tile.gridPosition == gridPosition && tile.layer == layer));
           if (tile == null)
           {
-            tile = layer.layerSO.AddTile(world, layer);
-            tiles.Add(tile);
+            tiles.Add(layer.layerSO.AddTile(world, layer, gridPosition, mapPosition));
           }
         }
       }

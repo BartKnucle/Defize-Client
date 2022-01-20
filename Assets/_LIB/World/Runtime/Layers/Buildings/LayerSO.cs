@@ -38,9 +38,9 @@ namespace FunkySheep.World.Buildings
       return layerComponent;
     }
 
-    public override Tile AddTile(FunkySheep.World.Manager world, FunkySheep.World.Layer layer)
+    public override Tile AddTile(FunkySheep.World.Manager world, FunkySheep.World.Layer layer, Vector2Int gridPosition, Vector2Int mapPosition)
     {
-      Tile tile = new Tile(world, layer);
+      Tile tile = new Tile(world, layer, gridPosition, mapPosition);
       string url = InterpolatedUrl(tile.gpsBoundaries);
       layer.StartCoroutine(Load(url, (data) => {
           ParseTileData(tile, data["elements"].AsArray);
