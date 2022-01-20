@@ -22,6 +22,10 @@ namespace Game.Player
       
       Vector3 _lastPosition;
 
+      private void Awake() {
+        GetComponent<CharacterController>().enabled = false;
+      }
+
       public void Create() {
           CalculatePositions();
           position.Value = _lastPosition = transform.position;
@@ -33,7 +37,15 @@ namespace Game.Player
       {
           CalculatePositions();
           float distance = Vector3.Distance(transform.position, _lastPosition);
-          this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z) + Vector3.up * currentHeight.Value;
+          if (this.transform.position == Vector3.zero)
+          {
+            this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z) + Vector3.up * currentHeight.Value;
+            if (this.transform.position != Vector3.zero)
+            {
+              GetComponent<CharacterController>().enabled = true;
+            }
+            
+          }
 
           if (distance >= 10) {
               onPlayerMove.Raise();
