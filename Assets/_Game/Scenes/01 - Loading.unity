@@ -228,6 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 409437357}
   - component: {fileID: 409437359}
+  - component: {fileID: 409437358}
   m_Layer: 0
   m_Name: Gps
   m_TagString: Untagged
@@ -249,6 +250,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &409437358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409437356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 3bdf075f8eca25f4f99dd0365917fcce, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 725708730}
+        m_TargetAssemblyTypeName: Game.Player.Manager, Game Assembly
+        m_MethodName: Create
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &409437359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,8 +290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7d414d89be1a44f99c6e572e65d438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  latitude: {fileID: 11400000, guid: 5df365a983d83dc47b84b644c18786af, type: 2}
-  longitude: {fileID: 11400000, guid: 0d4d7d364f9a86e478dbbd603179f850, type: 2}
+  initialLatitude: {fileID: 11400000, guid: 3caed6033fdf59045ac600244d94cc87, type: 2}
+  initialLongitude: {fileID: 11400000, guid: c1dfa8d1ae2709145a3d686ea51efd14, type: 2}
+  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
+  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
   altitude: {fileID: 11400000, guid: 8a1328a41d904ab4ab73a5e4c34ecb75, type: 2}
   horizontalAccuracy: {fileID: 11400000, guid: f141df47755716f4daf918968a20ac40, type: 2}
   verticalAccuracy: {fileID: 11400000, guid: 55e797c388779ec4cace283fba5b3b42, type: 2}
@@ -481,18 +512,6 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1735890226}
-        m_TargetAssemblyTypeName: Game.UI.Status, Game Assembly
-        m_MethodName: Add
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: f2a004b376141a343bacdd6d46894e20, type: 2}
-          m_ObjectArgumentAssemblyTypeName: FunkySheep.Types.String, FunkySheep
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 669289506}
         m_TargetAssemblyTypeName: FunkySheep.World.Manager, Game Assembly
         m_MethodName: Create

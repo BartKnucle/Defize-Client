@@ -198,13 +198,12 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.gps": {
-      "version": "0.1.5",
+      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-GPS",
       "depth": 0,
-      "source": "registry",
+      "source": "local",
       "dependencies": {
         "net.funkysheep.unity.library": "0.2.4"
-      },
-      "url": "https://registry.npmjs.org"
+      }
     },
     "net.funkysheep.unity.habrador": {
       "version": "0.1.0",

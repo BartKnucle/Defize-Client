@@ -19,7 +19,7 @@ namespace Game.Player
       
       Vector3 _lastPosition;
 
-      private void Start() {
+      public void Create() {
           CalculatePositions();
           position.Value = _lastPosition = transform.position;
           status.Value = "Player Started";
