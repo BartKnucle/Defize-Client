@@ -8,6 +8,10 @@ namespace FunkySheep.World.Terrain
     public Tilemap heightLayer;
     public Tilemap normalLayer;
 
+    private void Start() {
+      transform.localPosition = world.worldSO.initialDisplacement;
+    }
+
     public static float ColorToElevation(Color color)
     {
         // Convert from color channel values in 0.0-1.0 range to elevation in meters:
