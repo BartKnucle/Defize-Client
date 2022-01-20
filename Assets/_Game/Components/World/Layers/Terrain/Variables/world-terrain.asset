@@ -15,6 +15,7 @@ MonoBehaviour:
   activated: 1
   heightLayerSO: {fileID: 11400000, guid: d4b6f13f0b64cdb4aa168e1768fd986e, type: 2}
   normalLayerSO: {fileID: 11400000, guid: 88dbf3397fda44f4889a1aa550f20ee0, type: 2}
+  currentHeight: {fileID: 11400000, guid: 9a17160ecbdb3854aaa6a60225a58c45, type: 2}
   material: {fileID: 2100000, guid: 9897d50658091914bb48dbdce50e2583, type: 2}
   useNormalMap: 1
   resolution: 32

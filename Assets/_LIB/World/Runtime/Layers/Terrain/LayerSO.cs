@@ -10,6 +10,7 @@ namespace FunkySheep.World.Terrain
   {
     public FunkySheep.World.LayerSO heightLayerSO;
     public FunkySheep.World.LayerSO normalLayerSO;
+    public FunkySheep.Types.Float currentHeight;
     public Material material;
     public bool useNormalMap = true;
     public int resolution = 32;

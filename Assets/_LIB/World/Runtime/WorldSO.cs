@@ -10,6 +10,7 @@ namespace FunkySheep.World
     public FunkySheep.Types.Double currentlatitude;
     public FunkySheep.Types.Double currentlongitude;
     public Vector2 initialOffset;
+    public Vector2 currentOffset;
     public Vector3 initialDisplacement;
     public Vector3 tileRealSize;
     public FunkySheep.Types.Int zoom;
@@ -68,7 +69,7 @@ namespace FunkySheep.World
         _initialGridPosition = new Vector2Int(FunkySheep.World.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.World.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
 
         // The initial offset inside a tile (from 0 to 1)
-        initialOffset = new Vector2(
+        currentOffset = initialOffset = new Vector2(
           -Utils.LongitudeToInsideX(zoom.Value, currentlongitude.Value),
           -1 + Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
         );
@@ -85,6 +86,12 @@ namespace FunkySheep.World
           initialOffset.y * tileRealSize.y
         );
       }
+
+      // The initial offset inside a tile (from 0 to 1)
+      currentOffset = new Vector2(
+        -Utils.LongitudeToInsideX(zoom.Value, currentlongitude.Value),
+        -1 + Utils.LatitudeToInsideZ(zoom.Value, currentlatitude.Value)
+      );
 
       mapPosition.Value = new Vector2Int(FunkySheep.World.Utils.LongitudeToX(zoom.Value, currentlongitude.Value), FunkySheep.World.Utils.LatitudeToZ(zoom.Value, currentlatitude.Value));
       
@@ -122,6 +129,7 @@ namespace FunkySheep.World
         }
       }
     }
+
     public Vector2 RelativeInsidePosition(Vector2 position)
     {
       //position.y = 1 - position.y;

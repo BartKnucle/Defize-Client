@@ -10,12 +10,15 @@ namespace Game.Player
       public Service networkService;
       //public ARSessionOrigin origin;
       public FunkySheep.Types.Vector3 position;
+      public FunkySheep.Types.Float currentHeight;
       public FunkySheep.Types.Double calculatedLatitude;
       public FunkySheep.Types.Double calculatedLongitude;
       public FunkySheep.Types.Vector3 calculatedMercatorPosition;
       public FunkySheep.Types.String status;
       public GameEvent onPlayerStarted;
       public GameEvent onPlayerMove;
+
+      public FunkySheep.World.WorldSO worldSO;
       
       Vector3 _lastPosition;
 
@@ -30,6 +33,7 @@ namespace Game.Player
       {
           CalculatePositions();
           float distance = Vector3.Distance(transform.position, _lastPosition);
+          this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z) + Vector3.up * currentHeight.Value;
 
           if (distance >= 10) {
               onPlayerMove.Raise();
@@ -44,11 +48,6 @@ namespace Game.Player
           calculatedLatitude.Value = calculatedGPS.latitude;
           calculatedLongitude.Value = calculatedGPS.longitude;
           calculatedMercatorPosition.Value = FunkySheep.GPS.Utils.toCartesianVector(calculatedLatitude.Value, calculatedLongitude.Value);
-
-          /*Vector3 gpsPosition = FunkySheep.GPS.Manager.Instance.currentMercatorPosition.Value - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value;
-          if (Vector3.Distance(gpsPosition, position.Value) < 1 ) {
-              this.transform.position = gpsPosition;
-          }*/
       }
   }
     

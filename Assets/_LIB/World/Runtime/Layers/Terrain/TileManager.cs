@@ -49,6 +49,12 @@ namespace FunkySheep.World.Terrain
       {
         ConnectLeft(terrain.leftNeighbor);
       }
+
+      if (tile.gridPosition == tile.world.worldSO.gridPosition.Value)
+      {
+        LayerSO layerSO = (LayerSO)tile.layer.layerSO;
+        layerSO.currentHeight.Value = terrainData.GetInterpolatedHeight(-tile.world.worldSO.currentOffset.x, -tile.world.worldSO.currentOffset.y);
+      }
     }
     
     public void applyHeight()
