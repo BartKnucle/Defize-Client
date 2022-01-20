@@ -76,10 +76,10 @@ namespace FunkySheep.World.Map
         Texture2D texture;
         texture = new Texture2D(256, 256);
         
-        if (File.Exists(path + hash))
+        if (File.Exists(path + hash + url.Substring(url.Length - 4)))
         {
             byte[] fileData;
-            fileData = File.ReadAllBytes(path + hash);
+            fileData = File.ReadAllBytes(path + hash + url.Substring(url.Length - 4));
             texture.LoadImage(fileData);
         }
 
@@ -93,7 +93,7 @@ namespace FunkySheep.World.Map
         {
             texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
             SetTile(texture);
-            File.WriteAllBytes(path + hash, request.downloadHandler.data);
+            File.WriteAllBytes(path + hash + url.Substring(url.Length - 4), request.downloadHandler.data);
         }
 
         UnityEngine.Tilemaps.Tile tileData = SetTile(texture);

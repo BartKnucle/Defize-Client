@@ -14,13 +14,13 @@ namespace FunkySheep.World.Buildings
     public string cacheRelativePath = "/world/buildings/";
     string path;
     public FunkySheep.Types.String url;
-    //public List<Way> ways = new List<Way>();
-    //public List<Relation> relations = new List<Relation>();
+    public List<Way> ways = new List<Way>();
+    public List<Relation> relations = new List<Relation>();
     public FunkySheep.Types.Vector3 initialMercatorPosition;
     public GameObject buildingPrefab;
     private void OnEnable() {
-      //ways = new List<Way>();
-      //relations = new List<Relation>();
+    ways = new List<Way>();
+    relations = new List<Relation>();
 
       path = Application.persistentDataPath + cacheRelativePath;
       //Create the cache directory
@@ -169,8 +169,8 @@ namespace FunkySheep.World.Buildings
         {
             way.tags.Add(new Tag(tag.Key, tag.Value));
         }
-        Build(way);
-        //ways.Add(way);
+        //Build(way);
+        ways.Add(way);
         
         return way;
     }
@@ -190,7 +190,7 @@ namespace FunkySheep.World.Buildings
               way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
             }
             Build(way);
-            //relation.ways.Add(way);
+            relation.ways.Add(way);
         }
 
         JSONObject tags = relationJSON["tags"].AsObject;

@@ -18,6 +18,6 @@ MonoBehaviour:
   currentHeight: {fileID: 11400000, guid: 9a17160ecbdb3854aaa6a60225a58c45, type: 2}
   material: {fileID: 2100000, guid: 9897d50658091914bb48dbdce50e2583, type: 2}
   useNormalMap: 1
-  resolution: 32
+  resolution: 256
   dropables:
   - {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}

@@ -34,7 +34,11 @@ namespace FunkySheep.World.Terrain
       this.transform.localPosition = tile.world.worldSO.RealWorldPosition(tile) - tile.world.worldSO.initialDisplacement;
       
 
-      terrainData.size = tile.world.worldSO.tileRealSize;
+      terrainData.size = new Vector3(
+        tile.world.worldSO.tileRealSize.x,
+        9000,
+        tile.world.worldSO.tileRealSize.z
+      );
       applyHeight();
     }
 
@@ -74,7 +78,7 @@ namespace FunkySheep.World.Terrain
 
             // Use the tile size in meters at the given zoom level to determine the relative
             // scale of elevation values in the mesh.
-            double height = elevation / tile.world.worldSO.tileRealSize.x;
+            double height = elevation / 9000;
             heights[x, y] = (float)height;
           }
       }
