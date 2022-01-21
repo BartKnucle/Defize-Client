@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using FunkySheep.World.OSM;
 
 namespace FunkySheep.World.Buildings
 {

@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 using SimpleJSON;
 using FunkySheep.World.OSM;
 
-namespace FunkySheep.World.Buildings
+namespace FunkySheep.World.Roads
 {
-  [CreateAssetMenu(menuName = "FunkySheep/World/Layers/Buildings")]
+  [CreateAssetMenu(menuName = "FunkySheep/World/Layers/Roads")]
   public class LayerSO : FunkySheep.World.LayerSO
   {
     public string cacheRelativePath = "/world/buildings/";

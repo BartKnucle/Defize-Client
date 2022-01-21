@@ -16,6 +16,7 @@ namespace FunkySheep.World.Terrain
     public int resolution = 32;
     List<Tile> pendingTiles = new List<Tile>();
     List<Vector2Int> pendingTilesElevations = new List<Vector2Int>();
+    public GameObject prefab;
 
     public List<World.LayerSO> dropables;
 
@@ -82,7 +83,7 @@ namespace FunkySheep.World.Terrain
 
     void CreateTile(Tile tile)
     {
-      GameObject go = new GameObject();
+      GameObject go = GameObject.Instantiate(prefab);
       go.transform.parent = tile.layer.transform;
       TileManager tileManager = go.AddComponent<TileManager>();
       tileManager.tile = tile;
@@ -97,7 +98,7 @@ namespace FunkySheep.World.Terrain
 
       foreach (World.LayerSO layerSO in dropables)
       {
-        GameObject layerGO = new GameObject(layerSO.name);
+        GameObject layerGO = new GameObject(tile.gridPosition + layerSO.name);
         layerGO.transform.localPosition = tile.world.worldSO.RealWorldPosition(tile);
         layerGO.transform.parent = go.transform.parent;
         World.Layer layer = layerSO.CreateManager(layerGO, tile.world);

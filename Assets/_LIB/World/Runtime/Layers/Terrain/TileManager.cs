@@ -21,6 +21,7 @@ namespace FunkySheep.World.Terrain
     private void Awake() {
       terrain = GetComponent<UnityEngine.Terrain>();
       terrainData = new TerrainData();
+      terrainData.terrainLayers = terrain.terrainData.terrainLayers;
       terrain.allowAutoConnect = true;
       terrain.terrainData = terrainData;
       GetComponent<UnityEngine.TerrainCollider>().terrainData = terrainData;

@@ -19,5 +19,6 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 9897d50658091914bb48dbdce50e2583, type: 2}
   useNormalMap: 1
   resolution: 256
+  prefab: {fileID: 5768935757503757290, guid: b4d291fa5b3d63f4caf4b5e7b5f5c587, type: 3}
   dropables:
   - {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
