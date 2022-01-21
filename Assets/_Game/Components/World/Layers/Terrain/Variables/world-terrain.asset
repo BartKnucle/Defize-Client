@@ -21,4 +21,4 @@ MonoBehaviour:
   resolution: 256
   prefab: {fileID: 5768935757503757290, guid: b4d291fa5b3d63f4caf4b5e7b5f5c587, type: 3}
   dropables:
-  - {fileID: 11400000, guid: 2d60b18fb95280f42925b4f919ab2449, type: 2}
+  - {fileID: 11400000, guid: 6eb19126e111f0040910f9edfb528b60, type: 2}

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bd5b8a5e06d8a44c972885f8035d4f5, type: 3}
   m_Name: world-layers-roads
   m_EditorClassIdentifier: 
-  activated: 1
+  activated: 0
   cacheRelativePath: /world/roads/
   url: {fileID: 11400000, guid: 51bc3452aeb413e429716445bccec14a, type: 2}
   ways: []
   relations: []
-  initialMercatorPosition: {fileID: 0}
-  buildingPrefab: {fileID: 0}
+  initialMercatorPosition: {fileID: 11400000, guid: 0bfd2339f2483f64d8433349227bbeab, type: 2}

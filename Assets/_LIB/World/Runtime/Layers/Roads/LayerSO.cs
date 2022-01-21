@@ -18,7 +18,6 @@ namespace FunkySheep.World.Roads
     public List<Way> ways = new List<Way>();
     public List<Relation> relations = new List<Relation>();
     public FunkySheep.Types.Vector3 initialMercatorPosition;
-    public GameObject buildingPrefab;
     private void OnEnable() {
     ways = new List<Way>();
     relations = new List<Relation>();
@@ -144,9 +143,6 @@ namespace FunkySheep.World.Roads
                 case "way":
                     AddWay(tile, elements[i]);
                     break;
-                case "relation":
-                    AddRelation(tile, elements[i]);
-                    break;
                 default:
                     break;
             }
@@ -168,39 +164,11 @@ namespace FunkySheep.World.Roads
 
         foreach (KeyValuePair<string, JSONNode> tag in (JSONObject)tags)
         {
-            way.tags.Add(new Tag(tag.Key, tag.Value));
+          way.tags.Add(new Tag(tag.Key, tag.Value));
         }
         Queue(way);
-        //ways.Add(way);
         
         return way;
-    }
-
-    public Relation AddRelation(Tile tile, JSONNode relationJSON)
-    {
-        Relation relation = new Relation(relationJSON["id"]);
-
-        JSONArray members = relationJSON["members"].AsArray;
-
-        for (int j = 0; j < members.Count; j++)
-        {
-            Way way = new Way(members[j]["ref"], tile);
-            JSONArray points = members[j]["geometry"].AsArray;
-            for (int k = 0; k < points.Count; k++)
-            {
-              way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
-            }
-            Queue(way);
-            //relation.ways.Add(way);
-        }
-
-        JSONObject tags = relationJSON["tags"].AsObject;
-
-        foreach (KeyValuePair<string, JSONNode> tag in (JSONObject)tags)
-        {
-            relation.tags.Add(new Tag(tag.Key, tag.Value));
-        }
-        return relation;
     }
 
     /// <summary>
