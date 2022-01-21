@@ -169,8 +169,8 @@ namespace FunkySheep.World.Buildings
         {
             way.tags.Add(new Tag(tag.Key, tag.Value));
         }
-        //Build(way);
-        ways.Add(way);
+        Queue(way);
+        //ways.Add(way);
         
         return way;
     }
@@ -189,8 +189,8 @@ namespace FunkySheep.World.Buildings
             {
               way.points.Add(new Point(points[k]["lat"], points[k]["lon"], this.initialMercatorPosition.Value));
             }
-            Build(way);
-            relation.ways.Add(way);
+            Queue(way);
+            //relation.ways.Add(way);
         }
 
         JSONObject tags = relationJSON["tags"].AsObject;
@@ -203,51 +203,13 @@ namespace FunkySheep.World.Buildings
     }
 
     /// <summary>
-    /// Build the 3D Object
+    /// Queue the 3D Object
     /// </summary>
     /// <param name="way"></param>
-    public void Build(Way way)
+    public void Queue(Way way)
     {
-        Building building = new Building();
-        building.points = new Vector2[way.points.Count];
-        building.id = way.id.ToString();
-
         Layer layer = (Layer)way.tile.layer;
-
-        float terrainTop = 0;
-        float terrainBottom = 0;
-        for (int i = 0; i < way.points.Count; i++)
-        {
-          Vector2 InsideGridRelative =
-            (way.points[i].position -
-            new Vector2(
-              way.tile.world.worldSO.RealWorldPosition(way.tile).x,
-              way.tile.world.worldSO.RealWorldPosition(way.tile).z
-            )) / way.tile.world.worldSO.tileRealSize.x;
-
-          float height = layer.GetHeight(InsideGridRelative);
-          building.points[i] = way.points[i].position;
-
-          if (terrainTop < height || i == 0)
-          {
-            terrainTop = height;
-          }
-
-          if (terrainBottom > height || i == 0)
-          {
-            terrainBottom = height;
-          }
-        }
-
-        building.terrainBottom = terrainBottom;
-        building.terrainTop = terrainTop;
-
-        GameObject go = Instantiate(buildingPrefab);
-        building.Init();
-        go.name = building.id;
-        go.transform.parent = way.tile.layer.transform;
-        go.transform.position = new Vector3(building.position.x, 0, building.position.y);
-        go.GetComponent<Manager>().Create(building);
+        layer.ways.Enqueue(way);
     }
   }
 }
