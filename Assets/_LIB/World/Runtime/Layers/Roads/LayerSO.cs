@@ -16,11 +16,12 @@ namespace FunkySheep.World.Roads
     string path;
     public FunkySheep.Types.String url;
     public List<Way> ways = new List<Way>();
-    public List<Relation> relations = new List<Relation>();
+    public List<Point> nodes = new List<Point>();
     public FunkySheep.Types.Vector3 initialMercatorPosition;
+    public Material material;
     private void OnEnable() {
     ways = new List<Way>();
-    relations = new List<Relation>();
+    nodes = new List<Point>();
 
       path = Application.persistentDataPath + cacheRelativePath;
       //Create the cache directory
@@ -157,7 +158,15 @@ namespace FunkySheep.World.Roads
 
         for (int j = 0; j < points.Count; j++)
         {
-            way.points.Add(new Point(points[j]["lat"], points[j]["lon"], this.initialMercatorPosition.Value));
+          Point node = nodes.Find(node => (node.latitude == points[j]["lat"] && node.longitude == points[j]["lon"]));
+          if (node == null)
+          {
+            node = new Point(points[j]["lat"], points[j]["lon"], this.initialMercatorPosition.Value);
+            nodes.Add(node);
+          } else {
+            node.interserction = true;
+          }
+          way.points.Add(node);
         }
 
         JSONObject tags = wayJSON["tags"].AsObject;

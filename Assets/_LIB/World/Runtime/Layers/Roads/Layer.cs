@@ -49,23 +49,34 @@ namespace FunkySheep.World.Roads
 
         float height = layer.GetHeight(InsideGridRelative);
 
-        GameObject pointGo = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject pointGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        Point point = (Point)way.points[i];
+        if (point.interserction == true)
+        {
+          pointGo.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
         pointGo.name = i.ToString();
         pointGo.transform.parent = roadGo.transform;
         pointGo.transform.position = new Vector3(way.points[i].position.x, height, way.points[i].position.y);
 
         if (i != 0)
         {
-          Debug.DrawLine(lastPoint, pointGo.transform.position, Color.red, 600);
+          //Debug.DrawLine(lastPoint, pointGo.transform.position, Color.red, 600);
           nodes.Insert(i - 1, pointGo.transform.position + Quaternion.Euler(0, 90, 0) * (pointGo.transform.position - lastPoint).normalized * 3);
           nodes.Insert(i, pointGo.transform.position + Quaternion.Euler(0, -90, 0) * (pointGo.transform.position - lastPoint).normalized * 3);
           lastPoint = pointGo.transform.position;
         } else {
+          nodes.Add(pointGo.transform.position + Quaternion.Euler(0, -90, 0) * (new Vector3(way.points[i + 1].position.x, height, way.points[i + 1].position.y) - pointGo.transform.position).normalized * 3);
+          nodes.Add(pointGo.transform.position + Quaternion.Euler(0, 90, 0) * (new Vector3(way.points[i + 1].position.x, height, way.points[i + 1].position.y) - pointGo.transform.position).normalized * 3);
           lastPoint = pointGo.transform.position;
         }
       }
 
-      mesh.CreateShapeFromPolygon(nodes, 0.2f, true);
+      mesh.CreateShapeFromPolygon(nodes, 1f, false);
+      LayerSO layerSO = (LayerSO)this.layerSO;
+      mesh.SetMaterial(mesh.faces, layerSO.material);
     }
   }
 }
