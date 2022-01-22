@@ -156,15 +156,34 @@ namespace FunkySheep.World.Roads
         // Add the node id to the nodes list
         JSONArray points = wayJSON["geometry"].AsArray;
 
+        bool nextNodeLinked = false;
         for (int j = 0; j < points.Count; j++)
         {
           Point node = nodes.Find(node => (node.latitude == points[j]["lat"] && node.longitude == points[j]["lon"]));
           if (node == null)
           {
             node = new Point(points[j]["lat"], points[j]["lon"], this.initialMercatorPosition.Value);
+
+            if (nextNodeLinked)
+            {
+              node.liked = true;
+              nextNodeLinked = false;
+            }
+
             nodes.Add(node);
           } else {
-            node.interserction = true;
+            node.inter = true;
+
+            if(j == points.Count - 1)
+            {
+              nodes[nodes.Count - 1].liked = true;
+            } else if (j == 0)
+            {
+              nextNodeLinked = true;
+            } else {
+              nodes[nodes.Count - 1].liked = true;
+              nextNodeLinked = true;
+            }
           }
           way.points.Add(node);
         }

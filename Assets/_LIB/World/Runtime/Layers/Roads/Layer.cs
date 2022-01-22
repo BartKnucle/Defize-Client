@@ -52,9 +52,14 @@ namespace FunkySheep.World.Roads
         GameObject pointGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
         Point point = (Point)way.points[i];
-        if (point.interserction == true)
+        if (point.inter == true)
         {
           pointGo.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+
+        if (point.liked == true)
+        {
+          pointGo.GetComponent<MeshRenderer>().material.color = Color.green;
         }
 
         pointGo.name = i.ToString();
