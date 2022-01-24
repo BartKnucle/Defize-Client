@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07d7472132edcea4f9824d53b12bd477, type: 3}
-  m_Name: world
+  m_Script: {fileID: 11500000, guid: b5fcb4f28729a42479afea558c922532, type: 3}
+  m_Name: buildings
   m_EditorClassIdentifier: 
   dependencies:
-  - {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
-  zoom: {fileID: 0}
-  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
-  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
+  - {fileID: 11400000, guid: 2792fd4043eb3774396f18b279670b75, type: 2}
+  - {fileID: 11400000, guid: 426b156d491682246acabd68ad95b6dc, type: 2}
+  urlTemplate: {fileID: 11400000, guid: 311d01f398c280b4f92a7e06f4904a7f, type: 2}
   startLatitude: {fileID: 11400000, guid: 7357230a63c76cb44a391b0e0dcb80d2, type: 2}
   startLongitude: {fileID: 11400000, guid: d18d87f2942105b498fd16329163fb01, type: 2}
   endLatitude: {fileID: 11400000, guid: 1944fb5a2957d724da43590b7d9c01aa, type: 2}
