@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Network Status" src="/Assets/Network/UI/Network Status.uxml" />
-    <ui:Template name="Compass" src="/Assets/Compass/UI/Compass.uxml" />
-    <ui:Template name="Gps" src="/Assets/Gps/UI/Gps.uxml" />
-    <ui:Instance template="Network Status" name="Network Status" />
-    <ui:Instance template="Gps" name="Gps" />
-    <ui:Instance template="Compass" name="Compass" />
-</ui:UXML>

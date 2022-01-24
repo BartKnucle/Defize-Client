@@ -208,13 +208,13 @@
     },
     "net.funkysheep.unity.habrador": {
       "version": "0.1.0",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.library": {
-      "version": "0.2.4",
+      "version": "0.2.5",
       "depth": 0,
       "source": "registry",
       "dependencies": {},

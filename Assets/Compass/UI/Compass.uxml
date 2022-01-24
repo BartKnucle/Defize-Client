@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-direction: row;">
-        <ui:Label name="lblHeading" text="Heading: " style="-unity-font: resource(&apos;Fonts/Mohave-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/Mohave-Medium SDF&apos;);" />
-        <ui:Label text="0" display-tooltip-when-elided="true" name="heading" style="-unity-font: resource(&apos;Fonts/Mohave-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/Mohave-Medium SDF&apos;);" />
-    </ui:VisualElement>
-</ui:UXML>
