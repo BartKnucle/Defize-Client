@@ -1,31 +1,31 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace FunkySheep.Map
+namespace FunkySheep.Maps
 {
   public class Tile
   {
-    public Vector3Int position;
+    public Vector3Int tilemapPosition;
+    public Vector2Int mapPosition;
     public UnityEngine.Tilemaps.Tile data;
-    public Tile(Vector3Int position, UnityEngine.Tilemaps.Tile data)
+    public Tile(Vector3Int tilemapPosition, Vector2Int mapPosition, UnityEngine.Tilemaps.Tile data)
     {
-      this.position = position;
+      this.tilemapPosition = tilemapPosition;
+      this.mapPosition = mapPosition;
       this.data = data;
     }
   }
 
 
-  [CreateAssetMenu(menuName = "FunkySheep/OSM/Map")]
+  [CreateAssetMenu(menuName = "FunkySheep/Maps/Map")]
   public class SO : FunkySheep.SO
   {
     public FunkySheep.Types.String urlTemplate;
     public FunkySheep.Types.Int zoom;
-    public FunkySheep.Types.Double latitude;
-    public FunkySheep.Types.Double longitude;
-    Vector2Int _initialMapPosition;
+    Vector2Int? _initialMapPosition;
 
     private void OnEnable() {
-      _initialMapPosition = Utils.GpsToMap(zoom.Value, latitude.Value, longitude.Value);
+      _initialMapPosition = null;
     }
 
     public override void Create(FunkySheep.Manager manager)
@@ -36,18 +36,25 @@ namespace FunkySheep.Map
       manager.root.AddComponent<Grid>();
     }
 
-    public void AddTile(Manager manager)
+    public void AddTile(Manager manager, Vector2Int mapPosition)
     {
-      DownloadTile(manager);
+      if (!_initialMapPosition.HasValue)
+      {
+        _initialMapPosition = mapPosition;
+      }
+
+      // Reverse mercator and grid positions
+      Vector2Int gridPosition = (mapPosition -_initialMapPosition.Value) * new Vector2Int(1, -1);
+      Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
+      string url = InterpolatedUrl(mapPosition);
+
+      DownloadTile(manager, tileMapPosition, mapPosition, url);
     }
     
-    public void DownloadTile(Manager manager)
+    public void DownloadTile(Manager manager, Vector3Int tileMapPosition, Vector2Int mapPosition, string url)
     {
-      Vector2Int gridPosition = _initialMapPosition - Utils.GpsToMap(zoom.Value, latitude.Value, longitude.Value);
-      Vector3Int tileMapPosition = new Vector3Int(gridPosition.x, gridPosition.y, 0);
-
-      manager.StartCoroutine(FunkySheep.Network.Downloader.Download(InterpolatedUrl(), (fileID, file) => {
-        manager.tiles.Enqueue(new Tile(tileMapPosition, SetTile(file)));
+      manager.StartCoroutine(FunkySheep.Network.Downloader.Download(url, (fileID, file) => {
+        manager.tiles.Enqueue(new Tile(tileMapPosition, mapPosition, SetTile(file)));
       }));
     }
 
@@ -73,7 +80,7 @@ namespace FunkySheep.Map
     /// <param name="zoom">The zoom value</param>
     /// <param name="position">The coordinates</param>
     /// <returns>The interpolated Url</returns>
-    public string InterpolatedUrl()
+    public string InterpolatedUrl(Vector2Int mapPosition)
     {
       string [] parameters = new string[3];
       string [] parametersNames = new string[3];
@@ -81,10 +88,10 @@ namespace FunkySheep.Map
       parameters[0] = zoom.Value.ToString();
       parametersNames[0] = "zoom";
       
-      parameters[1] =  Utils.GpsToMap(zoom.Value, latitude.Value, longitude.Value).x.ToString();
+      parameters[1] =  mapPosition.x.ToString();
       parametersNames[1] = "position.x";
       
-      parameters[2] =  Utils.GpsToMap(zoom.Value, latitude.Value, longitude.Value).y.ToString();
+      parameters[2] =  mapPosition.y.ToString();
       parametersNames[2] = "position.y";
 
       return urlTemplate.Interpolate(parameters, parametersNames);

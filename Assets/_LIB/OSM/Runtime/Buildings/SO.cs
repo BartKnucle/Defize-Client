@@ -8,20 +8,10 @@ namespace FunkySheep.OSM.Buildings
   public class SO : FunkySheep.SO
   {
     public FunkySheep.Types.String urlTemplate;
-    public FunkySheep.Types.Double startLatitude;
-    public FunkySheep.Types.Double startLongitude;
-    public FunkySheep.Types.Double endLatitude;
-    public FunkySheep.Types.Double endLongitude;
 
-    public override void Create(FunkySheep.Manager manager)
+    public void Download(Manager manager, double[] boundaries)
     {
-      base.Create(manager);
-      Download(manager as Manager);
-    }
-
-    public void Download(Manager manager)
-    {
-      manager.StartCoroutine(FunkySheep.Network.Downloader.Download(InterpolatedUrl(), (fileID, file) => {
+      manager.StartCoroutine(FunkySheep.Network.Downloader.Download(InterpolatedUrl(boundaries), (fileID, file) => {
       }));
     }
 
@@ -30,21 +20,21 @@ namespace FunkySheep.OSM.Buildings
     /// </summary>
     /// <param boundaries="boundaries">The gps boundaries to download in</param>
     /// <returns>The interpolated Url</returns>
-    public string InterpolatedUrl()
+    public string InterpolatedUrl(double[] boundaries)
     {
         string [] parameters = new string[5];
         string [] parametersNames = new string[5];
 
-        parameters[0] = startLatitude.ToString().Replace(',', '.');
+        parameters[0] = boundaries[0].ToString().Replace(',', '.');
         parametersNames[0] = "startLatitude";
 
-        parameters[1] = startLongitude.ToString().Replace(',', '.');
+        parameters[1] = boundaries[1].ToString().Replace(',', '.');
         parametersNames[1] = "startLongitude";
 
-        parameters[2] = endLatitude.ToString().Replace(',', '.');
+        parameters[2] = boundaries[2].ToString().Replace(',', '.');
         parametersNames[2] = "endLatitude";
 
-        parameters[3] = endLongitude.ToString().Replace(',', '.');
+        parameters[3] = boundaries[3].ToString().Replace(',', '.');
         parametersNames[3] = "endLongitude";
 
         return urlTemplate.Interpolate(parameters, parametersNames);

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: world
   m_EditorClassIdentifier: 
   dependencies:
+  - {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
   - {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
-  zoom: {fileID: 0}
-  latitude: {fileID: 11400000, guid: 8a970826fa0c22340a98e29b54e2c10f, type: 2}
-  longitude: {fileID: 11400000, guid: 76a1027dee8de7441ab386fa0f6bd75f, type: 2}
-  startLatitude: {fileID: 11400000, guid: 7357230a63c76cb44a391b0e0dcb80d2, type: 2}
-  startLongitude: {fileID: 11400000, guid: d18d87f2942105b498fd16329163fb01, type: 2}
-  endLatitude: {fileID: 11400000, guid: 1944fb5a2957d724da43590b7d9c01aa, type: 2}
-  endLongitude: {fileID: 11400000, guid: 254040e8c8d63cd4eabdb5e222d645a0, type: 2}
+  zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
+  earthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
+  buildingsSO: {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
+  latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
+  longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
+  tileSize: {fileID: 11400000, guid: 1042c78dc9010de4ea7531d58c96ffb5, type: 2}

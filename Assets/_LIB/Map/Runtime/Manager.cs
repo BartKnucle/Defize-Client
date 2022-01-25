@@ -3,16 +3,14 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
 
-namespace FunkySheep.Map
+namespace FunkySheep.Maps
 {
-  [AddComponentMenu ("FunkySheep/OSM/Map")]
+  [AddComponentMenu ("FunkySheep/Maps/Map")]
   public class Manager : FunkySheep.Manager
   {
     public Queue<Tile> tiles = new Queue<Tile>();
-    private void Start() {
-      (so as SO).AddTile(this);
-    }
-
+    public AddedTileEvent addedTileEvent;
+    
     private void Update() {
       if (tiles.Count != 0)
       {
@@ -22,8 +20,13 @@ namespace FunkySheep.Map
 
     public void BuildTile(Tile tile)
     {
-      root.GetComponent<Tilemap>().SetTile(tile.position, tile.data);
-      root.GetComponent<Tilemap>().RefreshTile(tile.position);
+      root.GetComponent<Tilemap>().SetTile(tile.tilemapPosition, tile.data);
+      root.GetComponent<Tilemap>().RefreshTile(tile.tilemapPosition);
+
+      if (addedTileEvent != null)
+      {
+        addedTileEvent.Raise(this, tile);
+      }
     }
   }
 }

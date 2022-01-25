@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 743ee21aad01f43459af95ef918859ad, type: 3}
-  m_Name: world-start-latitude
+  m_Script: {fileID: 11500000, guid: f03d34c2ee9b6cc459fe85f54acbb142, type: 3}
+  m_Name: map-height-added-tile-event
   m_EditorClassIdentifier: 
-  DeveloperDescription: 
-  reset: 0
-  _value: 0

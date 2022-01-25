@@ -7,7 +7,7 @@ namespace Game.Player
 {
     public class Manager : MonoBehaviour
   {
-      public Service networkService;
+      //public Service networkService;
       //public ARSessionOrigin origin;
       public FunkySheep.Types.Vector3 position;
       public FunkySheep.Types.Float currentHeight;
@@ -18,7 +18,7 @@ namespace Game.Player
       public GameEvent onPlayerStarted;
       public GameEvent onPlayerMove;
 
-      public FunkySheep.World.WorldSO worldSO;
+      //public FunkySheep.World.WorldSO worldSO;
       
       Vector3 _lastPosition;
 
@@ -49,7 +49,7 @@ namespace Game.Player
 
           if (distance >= 10) {
               onPlayerMove.Raise();
-              networkService.CreateRecords();
+              //networkService.CreateRecords();
               _lastPosition = transform.position;
           }
       }
