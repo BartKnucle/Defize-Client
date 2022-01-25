@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,6 +16,11 @@ namespace FunkySheep.Game.World
     public FunkySheep.Types.Vector2 tileSize;
     public Vector2Int currentMapPosition;
     public Vector2Int? lastMapPosition;
+    public List<Vector2> tiles;
+
+    private void OnEnable() {
+      tiles = new List<Vector2>();
+    }
 
     public override void Create (FunkySheep.Manager manager)
     {
@@ -100,10 +106,13 @@ namespace FunkySheep.Game.World
 
     public void AddTile(FunkySheep.Manager manager)
     {
-      earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, currentMapPosition);
-
-      double[] boundaries = FunkySheep.Maps.Utils.CaclulateGpsBoundaries(zoom.Value, latitude.Value, longitude.Value);
-      buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
+      if (!tiles.Contains(currentMapPosition))
+      {
+        earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, currentMapPosition);
+        double[] boundaries = FunkySheep.Maps.Utils.CaclulateGpsBoundaries(zoom.Value, latitude.Value, longitude.Value);
+        buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
+        tiles.Add(currentMapPosition);
+      }
     }
   }
 }
