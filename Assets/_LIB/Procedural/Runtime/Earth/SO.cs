@@ -58,12 +58,14 @@ namespace FunkySheep.Procedural.Earth
       UnityEngine.TerrainData terrainData = new TerrainData();
       terrainData.heightmapResolution = resolution;
       terrainData.size = terrainSize;
-
+      
       //terrainData.terrainLayers = terrain.terrainData.terrainLayers;
       terrain.terrainData = terrainData;
 
       UnityEngine.TerrainCollider terrainCollider = go.AddComponent<UnityEngine.TerrainCollider>();
       terrainCollider.terrainData = terrainData;
+
+      go.AddComponent<TerrainConnector>();
 
       SetHeights(terrainData, tile);
     }
