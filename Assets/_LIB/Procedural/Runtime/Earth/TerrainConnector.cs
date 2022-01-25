@@ -85,7 +85,7 @@ namespace FunkySheep.Procedural.Earth
       terrainData.SetHeights(0, terrainData.heightmapResolution - 1, heights);
       terrain.leftNeighbor.terrainData.SetHeights(terrainData.heightmapResolution - 1, terrainData.heightmapResolution - 1, heights);
       terrain.topNeighbor.terrainData.SetHeights(0, 0, heights);
-      terrain.topNeighbor.leftNeighbor.terrainData.SetHeights(0, terrainData.heightmapResolution - 1, heights);
+      terrain.topNeighbor.leftNeighbor.terrainData.SetHeights(terrainData.heightmapResolution - 1, 0 , heights);
       cornerConnected = true;
     }
   }
