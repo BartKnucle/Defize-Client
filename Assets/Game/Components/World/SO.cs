@@ -10,6 +10,7 @@ namespace FunkySheep.Game.World
     public FunkySheep.Types.Int zoom;
 
     public FunkySheep.Procedural.Earth.SO earthSO;
+    public FunkySheep.Maps.SO osmSO;
     public FunkySheep.OSM.Buildings.SO buildingsSO;
     public FunkySheep.Types.Double latitude;
     public FunkySheep.Types.Double longitude;
@@ -81,6 +82,21 @@ namespace FunkySheep.Game.World
           tileSize.Value.y / 256f,
       1f);
 
+      FunkySheep.Maps.Manager osm = (osmSO.Get(manager, osmSO) as FunkySheep.Maps.Manager);
+      osm.root.transform.Rotate(new Vector3(90, 0, 0));
+      osm.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
+      Tilemap osmTilemap = osm.root.GetComponent<Tilemap>();
+      osmTilemap.tileAnchor = new Vector3(
+          initialOffset.x,
+          initialOffset.y,
+          0
+      );
+
+      osmTilemap.transform.localScale = new Vector3(
+          tileSize.Value.x / 256f,
+          tileSize.Value.y / 256f,
+      1f);
+
       CalculatePositions(manager);
       AddTile(manager);
     }
@@ -109,6 +125,7 @@ namespace FunkySheep.Game.World
       if (!tiles.Contains(currentMapPosition))
       {
         earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, currentMapPosition);
+        osmSO.AddTile(Get(manager, osmSO) as FunkySheep.Maps.Manager, currentMapPosition);
         double[] boundaries = FunkySheep.Maps.Utils.CaclulateGpsBoundaries(zoom.Value, latitude.Value, longitude.Value);
         buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
         tiles.Add(currentMapPosition);
