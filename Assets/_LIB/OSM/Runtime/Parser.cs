@@ -26,8 +26,6 @@ namespace FunkySheep.OSM
 
     public Way AddWay(JSONNode wayJSON)
     {
-      wayJSON["id"] = wayJSON["ref"] ?? wayJSON["id"];
-
       Way way = ways.Find(way => way.id == wayJSON["id"]);
 
       if (way == null)
@@ -69,11 +67,26 @@ namespace FunkySheep.OSM
 
       JSONArray members = relationJSON["members"].AsArray;
 
-      for (int j = 0; j < members.Count; j++)
+      for (int i = 0; i < members.Count; i++)
       {
-        AddElement(members);
+        members[i].Add("id", members[i]["ref"]);
+        switch ((string)members[i]["type"])
+        {
+            case "way":
+                relation.ways.Add(AddWay(members[i]));
+                break;
+            default:
+                break;
+        }
       }
-      
+
+      JSONObject tags = relationJSON["tags"].AsObject;
+
+      foreach (KeyValuePair<string, JSONNode> tag in (JSONObject)tags)
+      {
+        relation.tags.Add(new Tag(tag.Key, tag.Value));
+      }
+
       relations.Add(relation);
       return relation;
     }
