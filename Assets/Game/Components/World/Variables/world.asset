@@ -15,6 +15,7 @@ MonoBehaviour:
   dependencies:
   - {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
   - {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
+  - {fileID: 11400000, guid: 051b02b2dd9875742bcfea1eb0525d39, type: 2}
   zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
   earthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
   osmSO: {fileID: 11400000, guid: 947e9bc6a63c7d4459405fb76eab3e8d, type: 2}
@@ -22,14 +23,5 @@ MonoBehaviour:
   latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
   longitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   tileSize: {fileID: 11400000, guid: 1042c78dc9010de4ea7531d58c96ffb5, type: 2}
-  currentMapPosition: {x: 16783, y: 11835}
-  tiles:
-  - {x: 16783, y: 11836}
-  - {x: 16782, y: 11836}
-  - {x: 16782, y: 11835}
-  - {x: 16783, y: 11835}
-  - {x: 16784, y: 11836}
-  - {x: 16784, y: 11835}
-  - {x: 16782, y: 11834}
-  - {x: 16783, y: 11834}
-  - {x: 16784, y: 11834}
+  currentMapPosition: {x: 16783, y: 11836}
+  tiles: []

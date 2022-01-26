@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5fcb4f28729a42479afea558c922532, type: 3}
-  m_Name: buildings
+  m_Name: osm buildings
   m_EditorClassIdentifier: 
   dependencies: []
   urlTemplate: {fileID: 11400000, guid: 311d01f398c280b4f92a7e06f4904a7f, type: 2}
+  onOSMBuildingsDownloaded: {fileID: 11400000, guid: 06f0c1a9f2e52e44ca8e796d263b368a, type: 2}

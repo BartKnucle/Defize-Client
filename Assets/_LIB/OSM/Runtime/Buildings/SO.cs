@@ -8,11 +8,13 @@ namespace FunkySheep.OSM.Buildings
   public class SO : FunkySheep.SO
   {
     public FunkySheep.Types.String urlTemplate;
+    public FunkySheep.OSM.Events.OSMEventData onOSMBuildingsDownloaded;
 
     public void Download(Manager manager, double[] boundaries)
     {
       manager.StartCoroutine(FunkySheep.Network.Downloader.Download(InterpolatedUrl(boundaries), (fileID, file) => {
         FunkySheep.OSM.Data data = FunkySheep.OSM.Parser.Parse(file);
+        onOSMBuildingsDownloaded.Raise(data);
       }));
     }
 
