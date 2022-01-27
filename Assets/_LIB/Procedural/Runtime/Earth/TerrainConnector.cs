@@ -34,6 +34,7 @@ namespace FunkySheep.Procedural.Earth
       if (terrain.leftNeighbor != null && terrain.topNeighbor != null && terrain.leftNeighbor.topNeighbor != null && !cornerConnected)
       {
         ConnectCorners();
+        enabled = false;
       }
     }
     

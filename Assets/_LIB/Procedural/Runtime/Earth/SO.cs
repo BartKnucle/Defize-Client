@@ -25,6 +25,7 @@ namespace FunkySheep.Procedural.Earth
     public Vector3 terrainSize;
     public int resolution = 64;
     public Material material;
+    public AddedTileEvent addedTileEvent;
 
     public override void Create(FunkySheep.Manager manager)
     {
@@ -40,7 +41,7 @@ namespace FunkySheep.Procedural.Earth
       normalSO.AddTile(Get(manager, normalSO) as FunkySheep.Maps.Manager, mapPosition);
     }
 
-    public void BuildTile(Manager manager, TerrainTile tile)
+    public Tile BuildTile(Manager manager, TerrainTile tile)
     {
       GameObject go = new GameObject();
       go.name = tile.tilemapPosition.ToString();
@@ -68,6 +69,18 @@ namespace FunkySheep.Procedural.Earth
       go.AddComponent<TerrainConnector>();
 
       SetHeights(terrainData, tile);
+
+      Tile earthTile = new Tile(
+        new Vector2(
+          tile.tilemapPosition.x,
+          tile.tilemapPosition.y
+        ),
+        terrainData
+      );
+
+      manager.tiles.Add(earthTile);
+      addedTileEvent.Raise(manager, earthTile);
+      return earthTile;
     }
 
     public void SetHeights(UnityEngine.TerrainData terrainData, TerrainTile tile)
@@ -95,6 +108,26 @@ namespace FunkySheep.Procedural.Earth
       }
       
       terrainData.SetHeights(0, 0, heights);
+    }
+
+    public float GetHeight(Manager manager, Vector2 position)
+    {
+      Vector2Int gridPosition = new Vector2Int(
+        (int)Mathf.Floor(position.x / terrainSize.x),
+        (int)Mathf.Floor(position.y / terrainSize.y)
+      );
+
+      Vector2 insideCellPosition = new Vector2(
+        position.x - gridPosition.x * terrainSize.x,
+        position.y - gridPosition.y * terrainSize.y
+      );
+
+      return manager.tiles.Find(tile => tile.gridPosition == gridPosition).terrainData.GetInterpolatedHeight(insideCellPosition.x / terrainSize.x, insideCellPosition.y / terrainSize.y);
+    }
+
+    public float GetHeight(Manager manager, Vector3 position)
+    {
+      return GetHeight(manager, new Vector2(position.x, position.z));
     }
   }  
 }

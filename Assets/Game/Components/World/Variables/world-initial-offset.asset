@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e087664c0c32c4fae7b59b4500a6ae, type: 3}
-  m_Name: procedural building
+  m_Script: {fileID: 11500000, guid: 698bcac57d894ed418727b75a9ce1f7d, type: 3}
+  m_Name: world-initial-offset
   m_EditorClassIdentifier: 
-  dependencies: []
-  EarthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
+  DeveloperDescription: 
+  reset: 0
+  _value: {x: 0, y: 0}

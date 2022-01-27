@@ -4,11 +4,25 @@ using UnityEngine;
 
 namespace FunkySheep.Procedural.Earth
 {
+  public class Tile
+  {
+    public Vector2 gridPosition;
+    public TerrainData terrainData;
+
+    public Tile(Vector2 gridPosition, TerrainData terrainData)
+    {
+      this.gridPosition = gridPosition;
+      this.terrainData = terrainData;
+    }
+  }
+
   [AddComponentMenu("FunkySheep/Procedural/Earth")]
   public class Manager : FunkySheep.Manager
   {
     public List<TerrainTile> pendingTiles = new List<TerrainTile>();
     public Queue<TerrainTile> buildTiles = new Queue<TerrainTile>();
+
+    public List<Tile> tiles = new List<Tile>();
 
     private void Update() {
       if (buildTiles.Count != 0)
@@ -45,6 +59,16 @@ namespace FunkySheep.Procedural.Earth
         buildTiles.Enqueue(pendingTile);
         pendingTiles.Remove(pendingTile);
       }
+    }
+
+    public float GetHeight(Vector2 position)
+    {
+      return (so as SO).GetHeight(this, position);
+    }
+
+    public float GetHeight(Vector3 position)
+    {
+      return (so as SO).GetHeight(this, position);
     }
   }
 }

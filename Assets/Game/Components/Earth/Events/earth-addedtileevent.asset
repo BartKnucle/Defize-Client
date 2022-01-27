@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14e087664c0c32c4fae7b59b4500a6ae, type: 3}
-  m_Name: procedural building
+  m_Script: {fileID: 11500000, guid: 61a041910d49d78479c3a3b733b2b4e9, type: 3}
+  m_Name: earth-addedtileevent
   m_EditorClassIdentifier: 
-  dependencies: []
-  EarthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}

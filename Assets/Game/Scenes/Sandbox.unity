@@ -316,6 +316,7 @@ GameObject:
   - component: {fileID: 669289511}
   - component: {fileID: 669289512}
   - component: {fileID: 669289510}
+  - component: {fileID: 669289516}
   - component: {fileID: 669289507}
   - component: {fileID: 669289514}
   - component: {fileID: 669289515}
@@ -502,7 +503,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 669289515}
         m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
-        m_MethodName: Build
+        m_MethodName: Merge
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -526,6 +527,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   so: {fileID: 11400000, guid: 051b02b2dd9875742bcfea1eb0525d39, type: 2}
   root: {fileID: 1547030226}
+  initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
+--- !u!114 &669289516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa2147235f645244bbf980d61c51193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0024c03abf8a09542b5f5b8b86192e6d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: AddedEarthTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &725708728
 GameObject:
   m_ObjectHideFlags: 0

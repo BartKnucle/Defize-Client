@@ -8,27 +8,18 @@ namespace FunkySheep.Procedural.Buildings
   [CreateAssetMenu(menuName = "FunkySheep/Procedural/Buildings")]
   public class SO : FunkySheep.SO
   {
-    public void Build(Manager manager, Data data)
-    {
-      foreach (Way way in data.ways)
-      {
-        foreach (Node node in way.nodes)
-        {
-          GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-          go.transform.parent = manager.root.transform;
-        } 
-      }
+    public FunkySheep.Procedural.Earth.SO EarthSO;
 
-      foreach (Relation relation in data.relations)
+    public void AddBuilding(Manager manager, Way way, List<Vector3> nodePositions)
+    {
+      GameObject goFloor = new GameObject();
+      goFloor.name = way.id.ToString();
+      goFloor.transform.parent = manager.root.transform;
+      Building.Floor floor =  goFloor.AddComponent<Buildings.Building.Floor>();
+
+      foreach (Vector3 nodePosition in nodePositions)
       {
-        foreach (Way way in relation.ways)
-        {
-          foreach (Node node in way.nodes)
-          {
-            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            go.transform.parent = manager.root.transform;
-          } 
-        }
+        floor.AddNode(nodePosition);
       }
     }
   }

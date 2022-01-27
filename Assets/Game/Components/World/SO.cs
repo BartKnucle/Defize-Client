@@ -15,6 +15,9 @@ namespace FunkySheep.Game.World
     public FunkySheep.Types.Double latitude;
     public FunkySheep.Types.Double longitude;
     public FunkySheep.Types.Vector2 tileSize;
+    
+    public FunkySheep.Types.Vector2 initialOffset;
+    public FunkySheep.Types.Vector2 initialDisplacement;
     public Vector2Int currentMapPosition;
     public Vector2Int? lastMapPosition;
     public List<Vector2> tiles;
@@ -40,16 +43,21 @@ namespace FunkySheep.Game.World
         (float)FunkySheep.Maps.Utils.TileSize(zoom.Value)
       );
 
-      Vector2 initialOffset = new Vector2(
+      initialOffset.Value = new Vector2(
         -FunkySheep.Maps.Utils.LongitudeToInsideX(zoom.Value, longitude.Value),
         -1 + FunkySheep.Maps.Utils.LatitudeToInsideZ(zoom.Value, latitude.Value)
       );
 
+      initialDisplacement.Value = new Vector2(
+        initialOffset.Value.x * tileSize.Value.x,
+        initialOffset.Value.y * tileSize.Value.y
+      );
+
       earthSO.terrainSize = new Vector3(tileSize.Value.x, 9000, tileSize.Value.y);
       (earthSO.Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager).root.transform.localPosition = new Vector3(
-        initialOffset.x * tileSize.Value.x,
+        initialOffset.Value.x * tileSize.Value.x,
         0,
-        initialOffset.y * tileSize.Value.y
+        initialOffset.Value.y * tileSize.Value.y
       );
 
       FunkySheep.Maps.Manager height = (earthSO.heightSO.Get(manager, earthSO.heightSO) as FunkySheep.Maps.Manager);      
@@ -57,8 +65,8 @@ namespace FunkySheep.Game.World
       height.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
       Tilemap heightTilemap = height.root.GetComponent<Tilemap>();
       heightTilemap.tileAnchor = new Vector3(
-          initialOffset.x,
-          initialOffset.y,
+          initialOffset.Value.x,
+          initialOffset.Value.y,
           0
       );
 
@@ -72,8 +80,8 @@ namespace FunkySheep.Game.World
       normal.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
       Tilemap normalTilemap = normal.root.GetComponent<Tilemap>();
       normalTilemap.tileAnchor = new Vector3(
-          initialOffset.x,
-          initialOffset.y,
+          initialOffset.Value.x,
+          initialOffset.Value.y,
           0
       );
 
@@ -87,8 +95,8 @@ namespace FunkySheep.Game.World
       osm.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
       Tilemap osmTilemap = osm.root.GetComponent<Tilemap>();
       osmTilemap.tileAnchor = new Vector3(
-          initialOffset.x,
-          initialOffset.y,
+          initialOffset.Value.x,
+          initialOffset.Value.y,
           0
       );
 

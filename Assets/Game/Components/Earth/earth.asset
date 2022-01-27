@@ -17,5 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 426b156d491682246acabd68ad95b6dc, type: 2}
   heightSO: {fileID: 11400000, guid: 2792fd4043eb3774396f18b279670b75, type: 2}
   normalSO: {fileID: 11400000, guid: 426b156d491682246acabd68ad95b6dc, type: 2}
+  terrainSize: {x: 1222.9924, y: 9000, z: 1222.9924}
   resolution: 64
   material: {fileID: 2100000, guid: 9897d50658091914bb48dbdce50e2583, type: 2}
+  addedTileEvent: {fileID: 11400000, guid: 0024c03abf8a09542b5f5b8b86192e6d, type: 2}
