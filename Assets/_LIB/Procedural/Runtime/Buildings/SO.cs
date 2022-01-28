@@ -8,19 +8,19 @@ namespace FunkySheep.Procedural.Buildings
   [CreateAssetMenu(menuName = "FunkySheep/Procedural/Buildings")]
   public class SO : FunkySheep.SO
   {
+    public Material floorMat;
+    public int drawDistance = 100;
+    public FunkySheep.Types.Vector3 drawPosition;
     public FunkySheep.Procedural.Earth.SO EarthSO;
 
-    public void AddBuilding(Manager manager, Way way, List<Vector3> nodePositions)
+    public void AddBuilding(Manager manager, Way way, Building building)
     {
       GameObject goFloor = new GameObject();
-      goFloor.name = way.id.ToString();
+      goFloor.name = building.id;
       goFloor.transform.parent = manager.root.transform;
-      Building.Floor floor =  goFloor.AddComponent<Buildings.Building.Floor>();
-
-      foreach (Vector3 nodePosition in nodePositions)
-      {
-        floor.AddNode(nodePosition);
-      }
+      Floor floor =  goFloor.AddComponent<Buildings.Floor>();
+      floor.material = floorMat;
+      floor.Create(building);
     }
   }
 }

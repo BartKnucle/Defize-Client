@@ -23,6 +23,8 @@ namespace FunkySheep.Procedural.Buildings
         foreach (Way way in data.ways)
         {
           bool addWay = true;
+          float? lowPoint = null;
+          float? hightPoint = null;
           List<Vector3> nodePositions = new List<Vector3>();
           List<Vector2Int> nodeGridPositions = new List<Vector2Int>();
           List<Vector2> insideCellPositions = new List<Vector2>();
@@ -37,29 +39,46 @@ namespace FunkySheep.Procedural.Buildings
 
             Vector2Int nodeGridPosition = new Vector2Int(
               Mathf.FloorToInt((nodePosition.x - initialDisplacement.Value.x) / tile.terrainData.size.x),
-              Mathf.FloorToInt((nodePosition.z - initialDisplacement.Value.y) / tile.terrainData.size.y)
+              Mathf.FloorToInt((nodePosition.z - initialDisplacement.Value.y) / tile.terrainData.size.z)
             );
             nodeGridPositions.Add(nodeGridPosition);
+            float distance = (Vector2.Distance(
+              new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
+              new Vector2(nodePosition.x, nodePosition.z)));
 
-            if (nodeGridPosition != tile.gridPosition)
+            if (distance > (so as SO).drawDistance || nodeGridPosition != tile.gridPosition)
             {
               addWay = false;
               break;
             } else {
               Vector2 insideCellPosition = new Vector2(
-              nodePosition.x - (nodeGridPosition.x * tile.terrainData.size.x),
-              nodePosition.z - (nodeGridPosition.y * tile.terrainData.size.y)
+              (nodePosition.x - initialDisplacement.Value.x - (nodeGridPosition.x * tile.terrainData.size.x)) / tile.terrainData.size.x,
+              (nodePosition.z - initialDisplacement.Value.y - (nodeGridPosition.y * tile.terrainData.size.z)) / tile.terrainData.size.z
               );
               insideCellPositions.Add(insideCellPosition);
 
-              nodePosition.y = tile.terrainData.GetInterpolatedHeight(insideCellPosition.x / tile.terrainData.size.x, insideCellPosition.y / tile.terrainData.size.z);
+              nodePosition.y = tile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
               nodePositions.Add(nodePosition);
+
+              if (nodePosition.y < lowPoint || lowPoint == null)
+              {
+                lowPoint = nodePosition.y;
+              }
+              if (nodePosition.y > hightPoint || hightPoint == null)
+              {
+                hightPoint = nodePosition.y;
+              }
             }
           }
 
           if (addWay == true)
           {
-            (so as SO).AddBuilding(this, way, nodePositions);
+            Buildings.Building building = new Building(way.id.ToString());
+            building.points = nodePositions;
+            building.lowPoint = lowPoint.Value;
+            building.hightPoint = hightPoint.Value;
+
+            (so as SO).AddBuilding(this, way, building);
             addedWays.Add(way);
           }
         }

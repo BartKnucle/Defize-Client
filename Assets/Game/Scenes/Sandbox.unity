@@ -527,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   so: {fileID: 11400000, guid: 051b02b2dd9875742bcfea1eb0525d39, type: 2}
   root: {fileID: 1547030226}
+  drawDistance: 300
   initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
 --- !u!114 &669289516
 MonoBehaviour:
@@ -567,8 +568,8 @@ GameObject:
   - component: {fileID: 725708729}
   - component: {fileID: 725708730}
   - component: {fileID: 725708733}
-  - component: {fileID: 725708731}
   - component: {fileID: 725708732}
+  - component: {fileID: 725708731}
   - component: {fileID: 725708734}
   m_Layer: 0
   m_Name: Player
@@ -585,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725708728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 500, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974222800}
@@ -611,8 +612,8 @@ MonoBehaviour:
   calculatedLongitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   calculatedMercatorPosition: {fileID: 11400000, guid: 06c9151f0721cd44090f810d574cd3b2, type: 2}
   status: {fileID: 11400000, guid: f2a004b376141a343bacdd6d46894e20, type: 2}
-  onPlayerStarted: {fileID: 11400000, guid: 5b579c7f872b95c41b6d015d9325b110, type: 2}
-  onPlayerMove: {fileID: 11400000, guid: 8e4e1daba2356284bb265cb8f5f77366, type: 2}
+  onPlayerStarted: {fileID: 11400000, guid: 44eefb9f21578614696f259bcb91b558, type: 2}
+  onPlayerMove: {fileID: 11400000, guid: 9731114fae0e4c543a2adb54e575c559, type: 2}
 --- !u!114 &725708731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,17 +623,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 725708728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 5b579c7f872b95c41b6d015d9325b110, type: 2}
+  Event: {fileID: 11400000, guid: 9731114fae0e4c543a2adb54e575c559, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 669289506}
         m_TargetAssemblyTypeName: FunkySheep.Game.World.Manager, Game Assembly
-        m_MethodName: Init
+        m_MethodName: CalculatePositions
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: Draw
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -650,16 +663,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 725708728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8e4e1daba2356284bb265cb8f5f77366, type: 2}
+  Event: {fileID: 11400000, guid: 44eefb9f21578614696f259bcb91b558, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 669289506}
         m_TargetAssemblyTypeName: FunkySheep.Game.World.Manager, Game Assembly
-        m_MethodName: CalculatePositions
+        m_MethodName: Init
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

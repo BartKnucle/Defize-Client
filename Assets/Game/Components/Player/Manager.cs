@@ -15,8 +15,8 @@ namespace Game.Player
       public FunkySheep.Types.Double calculatedLongitude;
       public FunkySheep.Types.Vector3 calculatedMercatorPosition;
       public FunkySheep.Types.String status;
-      public GameEvent onPlayerStarted;
-      public GameEvent onPlayerMove;
+      public GameEventGO onPlayerStarted;
+      public GameEventGO onPlayerMove;
 
       //public FunkySheep.World.WorldSO worldSO;
       
@@ -30,7 +30,7 @@ namespace Game.Player
           CalculatePositions();
           position.Value = _lastPosition = transform.position;
           status.Value = "Player Started";
-          onPlayerStarted.Raise();
+          onPlayerStarted.Raise(this.gameObject);
       }
 
       void Update()
@@ -48,7 +48,7 @@ namespace Game.Player
           }
 
           if (distance >= 10) {
-              onPlayerMove.Raise();
+              onPlayerMove.Raise(this.gameObject);
               //networkService.CreateRecords();
               _lastPosition = transform.position;
           }
