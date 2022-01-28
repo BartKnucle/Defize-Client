@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: procedural building
   m_EditorClassIdentifier: 
   dependencies: []
+  floorMat: {fileID: 2100000, guid: dcdf98dcd66cb844d89500897dbebf9f, type: 2}
+  drawDistance: 100
+  drawPosition: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   EarthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}

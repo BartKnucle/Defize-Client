@@ -23,7 +23,7 @@ namespace Game.Player
       Vector3 _lastPosition;
 
       private void Awake() {
-        GetComponent<CharacterController>().enabled = false;
+        //GetComponent<CharacterController>().enabled = false;
       }
 
       public void Create() {

@@ -5,6 +5,7 @@ using UnityEngine.ProBuilder.MeshOperations;
 namespace FunkySheep.Procedural.Buildings
 {
   [RequireComponent(typeof(ProBuilderMesh))]
+  [RequireComponent(typeof(MeshCollider))]
   public class Floor : MonoBehaviour
   {
     public Material material;
@@ -23,7 +24,7 @@ namespace FunkySheep.Procedural.Buildings
         newPositions[i].y = building.lowPoint;
       }
       
-      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint - building.lowPoint, false);
+      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint - building.lowPoint + 0.20f, false);
       mesh.SetMaterial(mesh.faces, material);
     }
   }  
