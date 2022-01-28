@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &409437358
 MonoBehaviour:
@@ -223,7 +223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &611546588
 Light:
   m_ObjectHideFlags: 0
@@ -298,7 +298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &669289504
 GameObject:
@@ -310,6 +310,16 @@ GameObject:
   m_Component:
   - component: {fileID: 669289505}
   - component: {fileID: 669289506}
+  - component: {fileID: 669289509}
+  - component: {fileID: 669289508}
+  - component: {fileID: 669289513}
+  - component: {fileID: 669289511}
+  - component: {fileID: 669289512}
+  - component: {fileID: 669289510}
+  - component: {fileID: 669289516}
+  - component: {fileID: 669289507}
+  - component: {fileID: 669289514}
+  - component: {fileID: 669289515}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -327,9 +337,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1547030227}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &669289506
 MonoBehaviour:
@@ -340,10 +351,211 @@ MonoBehaviour:
   m_GameObject: {fileID: 669289504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e68a32504a048bd4b878b60852e6d714, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fa5112f00068cc4587c9d29a76790c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worldSO: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
+  so: {fileID: 11400000, guid: 7a246d4d5fbabab4ba6be9c608e2b700, type: 2}
+  root: {fileID: 669289504}
+--- !u!114 &669289507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0ac5f19c974814ba89b23c03054394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
+  root: {fileID: 0}
+--- !u!114 &669289508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422dd2200c33130409947eb42dcca8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 426b156d491682246acabd68ad95b6dc, type: 2}
+  root: {fileID: 0}
+  addedTileEvent: {fileID: 11400000, guid: 334d9f6c57299624aa32a07c9d92bf27, type: 2}
+--- !u!114 &669289509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422dd2200c33130409947eb42dcca8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 2792fd4043eb3774396f18b279670b75, type: 2}
+  root: {fileID: 0}
+  addedTileEvent: {fileID: 11400000, guid: e89db87e60d227c4eafe928979037120, type: 2}
+--- !u!114 &669289510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8618daa6bc7969447bb42d7fe610adfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
+  root: {fileID: 0}
+--- !u!114 &669289511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc199f0b08fcc2c488ec49760cc00aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: e89db87e60d227c4eafe928979037120, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289510}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Earth.Manager, Game Assembly
+        m_MethodName: AddedMapTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &669289512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc199f0b08fcc2c488ec49760cc00aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 334d9f6c57299624aa32a07c9d92bf27, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289510}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Earth.Manager, Game Assembly
+        m_MethodName: AddedMapTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &669289513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422dd2200c33130409947eb42dcca8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 947e9bc6a63c7d4459405fb76eab3e8d, type: 2}
+  root: {fileID: 0}
+  addedTileEvent: {fileID: 0}
+--- !u!114 &669289514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d9ecbe6ab7cf342a316121762f0387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 06f0c1a9f2e52e44ca8e796d263b368a, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: Merge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &669289515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a353d812f3d1e4bb58cc5886520888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 051b02b2dd9875742bcfea1eb0525d39, type: 2}
+  root: {fileID: 1547030226}
+  initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
+--- !u!114 &669289516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa2147235f645244bbf980d61c51193, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0024c03abf8a09542b5f5b8b86192e6d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: AddedEarthTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &725708728
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +567,8 @@ GameObject:
   - component: {fileID: 725708729}
   - component: {fileID: 725708730}
   - component: {fileID: 725708733}
-  - component: {fileID: 725708731}
   - component: {fileID: 725708732}
+  - component: {fileID: 725708731}
   - component: {fileID: 725708734}
   m_Layer: 0
   m_Name: Player
@@ -373,7 +585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725708728}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974222800}
@@ -393,16 +605,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d743c49f469e142ab0a35225426cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkService: {fileID: 11400000, guid: b85a5b9502fc4cd4a9b511417a172508, type: 2}
   position: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   currentHeight: {fileID: 11400000, guid: 9a17160ecbdb3854aaa6a60225a58c45, type: 2}
   calculatedLatitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
   calculatedLongitude: {fileID: 11400000, guid: f3422011ac87ce840a3a13b3fccfa3e1, type: 2}
   calculatedMercatorPosition: {fileID: 11400000, guid: 06c9151f0721cd44090f810d574cd3b2, type: 2}
   status: {fileID: 11400000, guid: f2a004b376141a343bacdd6d46894e20, type: 2}
-  onPlayerStarted: {fileID: 11400000, guid: 5b579c7f872b95c41b6d015d9325b110, type: 2}
-  onPlayerMove: {fileID: 11400000, guid: 8e4e1daba2356284bb265cb8f5f77366, type: 2}
-  worldSO: {fileID: 11400000, guid: f6f274f74359be84c8f97f9106108806, type: 2}
+  onPlayerStarted: {fileID: 11400000, guid: 44eefb9f21578614696f259bcb91b558, type: 2}
+  onPlayerMove: {fileID: 11400000, guid: 9731114fae0e4c543a2adb54e575c559, type: 2}
 --- !u!114 &725708731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,16 +622,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 725708728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 5b579c7f872b95c41b6d015d9325b110, type: 2}
+  Event: {fileID: 11400000, guid: 9731114fae0e4c543a2adb54e575c559, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 669289506}
-        m_TargetAssemblyTypeName: FunkySheep.World.Manager, Game Assembly
-        m_MethodName: Create
+        m_TargetAssemblyTypeName: FunkySheep.Game.World.Manager, Game Assembly
+        m_MethodName: CalculatePositions
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -440,16 +650,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 725708728}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 8e4e1daba2356284bb265cb8f5f77366, type: 2}
+  Event: {fileID: 11400000, guid: 44eefb9f21578614696f259bcb91b558, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 669289506}
-        m_TargetAssemblyTypeName: FunkySheep.World.Manager, Game Assembly
-        m_MethodName: UpdatePlayerPosition
+        m_TargetAssemblyTypeName: FunkySheep.Game.World.Manager, Game Assembly
+        m_MethodName: Init
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -471,8 +681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c4ad84702d89e14ebae4b0004b488ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
-  rotateSpeed: 20
+  speed: 10
+  rotateSpeed: 1
 --- !u!143 &725708734
 CharacterController:
   m_ObjectHideFlags: 0
@@ -485,12 +695,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.26
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.86, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!1001 &1314514509
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,7 +763,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 320b1c2af77554f99a1658df4a6d3d5c, type: 3}
   m_PrefabInstance: {fileID: 1314514509}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1524250301
+--- !u!1 &1547030226
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -561,75 +771,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1524250302}
-  - component: {fileID: 1524250303}
-  - component: {fileID: 1524250304}
+  - component: {fileID: 1547030227}
   m_Layer: 0
-  m_Name: Network
+  m_Name: Buildings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1524250302
+--- !u!4 &1547030227
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524250301}
+  m_GameObject: {fileID: 1547030226}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -258.0461, y: 85.38291, z: -70.55499}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 669289505}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1524250303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524250301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7f9d08098facfd40a970b5a4a860476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Connection: {fileID: 11400000, guid: 894b1f94aa04b3a4a859c74fd7e2ece9, type: 2}
-  services: []
-  onStatusChanged: {fileID: 11400000, guid: 155627661dfcc0d478890facef0f220f, type: 2}
-  status: {fileID: 11400000, guid: de2af8c7f162c2f478c772254784deee, type: 2}
-  startedAt: 0
---- !u!114 &1524250304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524250301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e839e4c12473014b9b3d3faccc0f61d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 155627661dfcc0d478890facef0f220f, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1735890226}
-        m_TargetAssemblyTypeName: Game.UI.Status, Game Assembly
-        m_MethodName: Add
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: de2af8c7f162c2f478c772254784deee, type: 2}
-          m_ObjectArgumentAssemblyTypeName: FunkySheep.Types.String, FunkySheep
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1735890223
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,7 +811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1735890224
 Transform:
   m_ObjectHideFlags: 0
@@ -661,7 +824,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1735890225
 MonoBehaviour:
@@ -812,6 +975,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
