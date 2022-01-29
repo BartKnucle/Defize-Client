@@ -22,29 +22,22 @@ namespace FunkySheep.Procedural.Buildings
         List<Way> addedWays = new List<Way>();
         foreach (Way way in data.ways)
         {
+          Building building = new Building(way);
           bool addWay = true;
-          float? lowPoint = null;
-          float? hightPoint = null;
-          List<Vector3> nodePositions = new List<Vector3>();
+          //List<Vector3> nodePositions = new List<Vector3>();
           List<Vector2Int> nodeGridPositions = new List<Vector2Int>();
           List<Vector2> insideCellPositions = new List<Vector2>();
 
-          foreach (Node node in way.nodes)
+          for (int i = 0; i < building.points.Length; i++)
           {
-            Vector3 nodePosition = new Vector3(
-              (float)FunkySheep.GPS.Utils.lonToX(node.longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x,
-              0,
-              (float)FunkySheep.GPS.Utils.latToY(node.latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z
-            );
-
             Vector2Int nodeGridPosition = new Vector2Int(
-              Mathf.FloorToInt((nodePosition.x - initialDisplacement.Value.x) / tile.terrainData.size.x),
-              Mathf.FloorToInt((nodePosition.z - initialDisplacement.Value.y) / tile.terrainData.size.z)
+              Mathf.FloorToInt((building.points[i].x - initialDisplacement.Value.x) / tile.terrainData.size.x),
+              Mathf.FloorToInt((building.points[i].y - initialDisplacement.Value.y) / tile.terrainData.size.z)
             );
             nodeGridPositions.Add(nodeGridPosition);
             float distance = (Vector2.Distance(
               new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
-              new Vector2(nodePosition.x, nodePosition.z)));
+              new Vector2(building.points[i].x, building.points[i].y)));
 
             if (distance > (so as SO).drawDistance || nodeGridPosition != tile.gridPosition)
             {
@@ -52,33 +45,27 @@ namespace FunkySheep.Procedural.Buildings
               break;
             } else {
               Vector2 insideCellPosition = new Vector2(
-              (nodePosition.x - initialDisplacement.Value.x - (nodeGridPosition.x * tile.terrainData.size.x)) / tile.terrainData.size.x,
-              (nodePosition.z - initialDisplacement.Value.y - (nodeGridPosition.y * tile.terrainData.size.z)) / tile.terrainData.size.z
+              (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tile.terrainData.size.x)) / tile.terrainData.size.x,
+              (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tile.terrainData.size.z)) / tile.terrainData.size.z
               );
               insideCellPositions.Add(insideCellPosition);
 
-              nodePosition.y = tile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
-              nodePositions.Add(nodePosition);
+              building.heights[i] = tile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
 
-              if (nodePosition.y < lowPoint || lowPoint == null)
+              if (building.heights[i] < building.lowPoint || building.lowPoint == null)
               {
-                lowPoint = nodePosition.y;
+                building.lowPoint = building.heights[i];
               }
-              if (nodePosition.y > hightPoint || hightPoint == null)
+              if (building.heights[i] > building.hightPoint || building.hightPoint == null)
               {
-                hightPoint = nodePosition.y;
+                building.hightPoint = building.heights[i];
               }
             }
           }
 
           if (addWay == true)
           {
-            Buildings.Building building = new Building(way.id.ToString());
-            building.points = nodePositions;
-            building.lowPoint = lowPoint.Value;
-            building.hightPoint = hightPoint.Value;
-
-            (so as SO).AddBuilding(this, way, building);
+            (so as SO).AddBuilding(this, building);
             addedWays.Add(way);
           }
         }

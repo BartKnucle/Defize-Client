@@ -13,7 +13,7 @@ namespace FunkySheep.Procedural.Buildings
     public FunkySheep.Types.Vector3 drawPosition;
     public FunkySheep.Procedural.Earth.SO EarthSO;
 
-    public void AddBuilding(Manager manager, Way way, Building building)
+    public void AddBuilding(Manager manager, Building building)
     {
       GameObject goFloor = new GameObject();
       goFloor.name = building.id;

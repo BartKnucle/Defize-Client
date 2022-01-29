@@ -16,15 +16,16 @@ namespace FunkySheep.Procedural.Buildings
 
     public void Create(Building building)
     {
-      Vector3[] newPositions = new Vector3[building.points.Count];
-      building.points.CopyTo(newPositions, 0);
+      Vector3[] newPositions = new Vector3[building.points.Length];
 
       for (int i = 0; i < newPositions.Length; i++)
       {
-        newPositions[i].y = building.lowPoint;
+        newPositions[i].x = building.points[i].x;
+        newPositions[i].y = building.lowPoint.Value;
+        newPositions[i].z = building.points[i].y;
       }
       
-      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint - building.lowPoint + 0.20f, false);
+      mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 0.20f, false);
       mesh.SetMaterial(mesh.faces, material);
     }
   }  
