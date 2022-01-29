@@ -223,10 +223,11 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.library": {
-      "version": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-Library",
+      "version": "0.2.9",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.network": {
       "version": "0.1.5",
