@@ -36,17 +36,14 @@ namespace FunkySheep.OSM
 
       for (int i = 0; i < geometries.Count; i++)
       {
-        if (way.nodes.Find(node => node.id == nodes[i]) == null)
-        {
-          way.nodes.Add(new Node(nodes[i].AsLong, geometries[i]["lat"].AsDouble, geometries[i]["lon"].AsDouble));
-        }
+        way.nodes.Add(new Node(nodes[i].AsLong, geometries[i]["lat"].AsDouble, geometries[i]["lon"].AsDouble));
       }
 
       JSONObject tags = wayJSON["tags"].AsObject;
 
       foreach (KeyValuePair<string, JSONNode> tag in (JSONObject)tags)
       {
-          way.tags.Add(new Tag(tag.Key, tag.Value));
+        way.tags.Add(new Tag(tag.Key, tag.Value));
       }
       
       ways.Add(way);
