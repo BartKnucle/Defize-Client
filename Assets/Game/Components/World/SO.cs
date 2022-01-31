@@ -18,9 +18,12 @@ namespace FunkySheep.Game.World
     public FunkySheep.Types.Vector2 tileSize;
     
     public FunkySheep.Types.Vector2 initialOffset;
+    public Vector2 currentOffset;
     public FunkySheep.Types.Vector2 initialDisplacement;
+    public Vector2Int insideCellPosition;
+    public Vector2Int? lastInsideCellPosition = null;
     public Vector2Int currentMapPosition;
-    public Vector2Int? lastMapPosition;
+    public Vector2Int? lastMapPosition = null;
     public List<Vector2> tiles;
 
     private void OnEnable() {
@@ -44,16 +47,18 @@ namespace FunkySheep.Game.World
         (float)FunkySheep.Maps.Utils.TileSize(zoom.Value)
       );
 
-      initialOffset.Value = new Vector2(
-        -FunkySheep.Maps.Utils.LongitudeToInsideX(zoom.Value, longitude.Value),
-        -1 + FunkySheep.Maps.Utils.LatitudeToInsideZ(zoom.Value, latitude.Value)
-      );
-
+      CalculatePositions(manager);
+      initialOffset.Value = currentOffset;
       initialDisplacement.Value = new Vector2(
         initialOffset.Value.x * tileSize.Value.x,
         initialOffset.Value.y * tileSize.Value.y
       );
 
+      SetDefaultValues(manager);
+    }
+
+    public void SetDefaultValues(FunkySheep.Manager manager)
+    {
       earthSO.terrainSize = new Vector3(tileSize.Value.x, 9000, tileSize.Value.y);
       (earthSO.Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager).root.transform.localPosition = new Vector3(
         initialOffset.Value.x * tileSize.Value.x,
@@ -105,9 +110,6 @@ namespace FunkySheep.Game.World
           tileSize.Value.x / 256f,
           tileSize.Value.y / 256f,
       1f);
-
-      CalculatePositions(manager);
-      AddTile(manager);
     }
 
     public void CalculatePositions(FunkySheep.Manager manager)
@@ -117,21 +119,29 @@ namespace FunkySheep.Game.World
         FunkySheep.Maps.Utils.LatitudeToZ(zoom.Value, latitude.Value)
       );
 
-      if (!lastMapPosition.HasValue)
+      currentOffset = new Vector2(
+        -FunkySheep.Maps.Utils.LongitudeToInsideX(zoom.Value, longitude.Value),
+        -1 + FunkySheep.Maps.Utils.LatitudeToInsideZ(zoom.Value, latitude.Value)
+      );
+
+      if (-currentOffset.x >= 0.5f)
       {
-        lastMapPosition = currentMapPosition;
+        insideCellPosition.x = 1;
+      } else {
+        insideCellPosition.x = -1;
       }
 
-      if (lastMapPosition != currentMapPosition)
+      if (-currentOffset.y >= 0.5f)
       {
-        AddTile(manager);
-        lastMapPosition = currentMapPosition;
+        insideCellPosition.y = -1;
+      } else {
+        insideCellPosition.y = 1;
       }
     }
 
     public void AddTile(FunkySheep.Manager manager)
     {
-      if (!tiles.Contains(currentMapPosition))
+      if (lastMapPosition != currentMapPosition && !tiles.Contains(currentMapPosition))
       {
         earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, currentMapPosition);
         osmSO.AddTile(Get(manager, osmSO) as FunkySheep.Maps.Manager, currentMapPosition);
@@ -139,7 +149,15 @@ namespace FunkySheep.Game.World
         buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
         roadsSO.Download(Get(manager, roadsSO) as FunkySheep.OSM.Roads.Manager, boundaries);
         tiles.Add(currentMapPosition);
-        AddTile(manager, currentMapPosition + Vector2Int.up);
+        lastMapPosition = currentMapPosition;
+      }
+      
+      if (insideCellPosition != lastInsideCellPosition)
+      {
+        AddTile(manager, currentMapPosition + insideCellPosition * Vector2Int.up);
+        AddTile(manager, currentMapPosition + insideCellPosition * Vector2Int.right);
+        AddTile(manager, currentMapPosition + insideCellPosition);
+        lastInsideCellPosition = insideCellPosition;
       }
     }
 

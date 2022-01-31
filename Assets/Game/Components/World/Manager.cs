@@ -8,11 +8,13 @@ namespace FunkySheep.Game.World
     public void Init()
     {
       (so as SO).Init(this);
+      (so as SO).AddTile(this);
     }
 
     public void CalculatePositions()
     {
       (so as SO).CalculatePositions(this);
+      (so as SO).AddTile(this);
     }
   }
 }
