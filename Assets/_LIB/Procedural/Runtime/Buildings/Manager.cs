@@ -52,24 +52,21 @@ namespace FunkySheep.Procedural.Buildings
             new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
             new Vector2(building.points[i].x, building.points[i].y)));
 
-            if (distance < (so as SO).drawDistance)// || nodeGridPosition != tile.gridPosition)
+           Vector2 insideCellPosition = new Vector2(
+            (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
+            (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
+            );
+            insideCellPositions.Add(insideCellPosition);
+
+            building.heights[i] = earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
+
+            if (building.heights[i] < building.lowPoint || building.lowPoint == null)
             {
-              Vector2 insideCellPosition = new Vector2(
-              (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
-              (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
-              );
-              insideCellPositions.Add(insideCellPosition);
-
-              building.heights[i] = earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
-
-              if (building.heights[i] < building.lowPoint || building.lowPoint == null)
-              {
-                building.lowPoint = building.heights[i];
-              }
-              if (building.heights[i] > building.hightPoint || building.hightPoint == null)
-              {
-                building.hightPoint = building.heights[i];
-              }
+              building.lowPoint = building.heights[i];
+            }
+            if (building.heights[i] > building.hightPoint || building.hightPoint == null)
+            {
+              building.hightPoint = building.heights[i];
             }
           }
         }
