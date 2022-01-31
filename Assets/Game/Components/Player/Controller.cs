@@ -15,7 +15,7 @@ namespace Game.Player
       void Start()
       {
         _controller = GetComponent<CharacterController>();
-        _rb = GetComponent<Rigidbody>();
+        //_rb = GetComponent<Rigidbody>();
       }
 
       // Update is called once per frame
@@ -34,7 +34,7 @@ namespace Game.Player
       private void FixedUpdate() {
         if (Input.GetButtonDown("Jump"))
         {
-          _rb.AddForce(Vector3.up * 1000f);    
+          //_rb.AddForce(Vector3.up * 1000f);    
         }
       }
   }    

@@ -26,6 +26,7 @@ namespace FunkySheep.Procedural.Buildings
         points[i].x = (float)FunkySheep.GPS.Utils.lonToX(way.nodes[i].longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x;
         points[i].y = (float)FunkySheep.GPS.Utils.latToY(way.nodes[i].latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
       }
+      this.center = Center();
       
       //this.position = Position();
 

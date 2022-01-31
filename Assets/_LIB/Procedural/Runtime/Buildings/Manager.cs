@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using FunkySheep.OSM;
@@ -9,48 +10,57 @@ namespace FunkySheep.Procedural.Buildings
   {
     public List<Earth.Tile> earthTiles = new List<Earth.Tile>();
     public OSM.Data data = new Data();
-
+    public List<Building> buildings = new List<Building>();
+    public FunkySheep.Types.Vector2 tileSize;
     public FunkySheep.Types.Vector2 initialDisplacement;
     public void Merge(Data data)
     {
       this.data.Merge(data);
+      foreach (Way way in data.ways.ToList())
+      {
+        Building building = buildings.Find(building => building.id == way.id.ToString());
+        if (building == null)
+        {
+          building = new Building(way);
+          buildings.Add(building);
+          data.ways.Remove(way);
+        }
+      }
     }
 
-    private void Update() {
-      foreach (Earth.Tile tile in earthTiles)
+    public void Update() {
+      List<Building> closeBuildings = buildings.FindAll(building => Vector2.Distance(building.center, new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z)) <(so as SO).drawDistance);
+      foreach (Building building in closeBuildings.ToList())
       {
-        List<Way> addedWays = new List<Way>();
-        foreach (Way way in data.ways)
+        buildings.Remove(building);
+        //List<Vector3> nodePositions = new List<Vector3>();
+        List<Vector2Int> nodeGridPositions = new List<Vector2Int>();
+        List<Vector2> insideCellPositions = new List<Vector2>();
+
+        for (int i = 0; i < building.points.Length; i++)
         {
-          Building building = new Building(way);
-          bool addWay = true;
-          //List<Vector3> nodePositions = new List<Vector3>();
-          List<Vector2Int> nodeGridPositions = new List<Vector2Int>();
-          List<Vector2> insideCellPositions = new List<Vector2>();
+          Vector2Int nodeGridPosition = new Vector2Int(
+            Mathf.FloorToInt((building.points[i].x - initialDisplacement.Value.x) / tileSize.Value.x),
+            Mathf.FloorToInt((building.points[i].y - initialDisplacement.Value.y) / tileSize.Value.y)
+          );
+          nodeGridPositions.Add(nodeGridPosition);
 
-          for (int i = 0; i < building.points.Length; i++)
+          Earth.Tile earthTile = earthTiles.Find(tile => tile.gridPosition == nodeGridPosition);
+          if (earthTiles != null)
           {
-            Vector2Int nodeGridPosition = new Vector2Int(
-              Mathf.FloorToInt((building.points[i].x - initialDisplacement.Value.x) / tile.terrainData.size.x),
-              Mathf.FloorToInt((building.points[i].y - initialDisplacement.Value.y) / tile.terrainData.size.z)
-            );
-            nodeGridPositions.Add(nodeGridPosition);
             float distance = (Vector2.Distance(
-              new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
-              new Vector2(building.points[i].x, building.points[i].y)));
+            new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
+            new Vector2(building.points[i].x, building.points[i].y)));
 
-            if (distance > (so as SO).drawDistance || nodeGridPosition != tile.gridPosition)
+            if (distance < (so as SO).drawDistance)// || nodeGridPosition != tile.gridPosition)
             {
-              addWay = false;
-              break;
-            } else {
               Vector2 insideCellPosition = new Vector2(
-              (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tile.terrainData.size.x)) / tile.terrainData.size.x,
-              (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tile.terrainData.size.z)) / tile.terrainData.size.z
+              (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
+              (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
               );
               insideCellPositions.Add(insideCellPosition);
 
-              building.heights[i] = tile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
+              building.heights[i] = earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
 
               if (building.heights[i] < building.lowPoint || building.lowPoint == null)
               {
@@ -62,18 +72,9 @@ namespace FunkySheep.Procedural.Buildings
               }
             }
           }
-
-          if (addWay == true)
-          {
-            (so as SO).AddBuilding(this, building);
-            addedWays.Add(way);
-          }
         }
 
-        foreach (Way way in addedWays)
-        {
-          data.ways.Remove(way);
-        }
+        (so as SO).AddBuilding(this, building);
       }
     }
 

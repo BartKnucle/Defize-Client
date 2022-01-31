@@ -320,6 +320,9 @@ GameObject:
   - component: {fileID: 669289507}
   - component: {fileID: 669289514}
   - component: {fileID: 669289515}
+  - component: {fileID: 669289517}
+  - component: {fileID: 669289519}
+  - component: {fileID: 669289518}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -339,6 +342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1547030227}
+  - {fileID: 1901507646}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -527,6 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   so: {fileID: 11400000, guid: 051b02b2dd9875742bcfea1eb0525d39, type: 2}
   root: {fileID: 1547030226}
+  tileSize: {fileID: 11400000, guid: 1042c78dc9010de4ea7531d58c96ffb5, type: 2}
   initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
 --- !u!114 &669289516
 MonoBehaviour:
@@ -547,6 +552,75 @@ MonoBehaviour:
       - m_Target: {fileID: 669289515}
         m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
         m_MethodName: AddedEarthTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 669289518}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Roads.Manager, Game Assembly
+        m_MethodName: AddedEarthTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &669289517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63beded56ae6b34b9aacf5e9f51793d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: 682da760f628e6946b93ca785b3834a6, type: 2}
+  root: {fileID: 0}
+--- !u!114 &669289518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdeb34e5c0ec5c94c9e3a51a7b1de8b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  so: {fileID: 11400000, guid: d2a90729f0d8c2845aac2c3b9178c175, type: 2}
+  root: {fileID: 1901507645}
+  initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
+--- !u!114 &669289519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669289504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d9ecbe6ab7cf342a316121762f0387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d9db4025d4991c4b99366fb4b7e982f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 669289518}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Roads.Manager, Game Assembly
+        m_MethodName: Merge
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -642,6 +716,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: OnPlayerMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &725708732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -661,6 +747,18 @@ MonoBehaviour:
       - m_Target: {fileID: 669289506}
         m_TargetAssemblyTypeName: FunkySheep.Game.World.Manager, Game Assembly
         m_MethodName: Init
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 669289515}
+        m_TargetAssemblyTypeName: FunkySheep.Procedural.Buildings.Manager, Game Assembly
+        m_MethodName: OnPlayerMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -844,6 +942,36 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 18df3e8393d52fa4dae09a3ff803a276, type: 3}
   m_SortingOrder: 0
+--- !u!1 &1901507645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1901507646}
+  m_Layer: 0
+  m_Name: Roads
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1901507646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901507645}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 669289505}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1974222797
 GameObject:
   m_ObjectHideFlags: 0
