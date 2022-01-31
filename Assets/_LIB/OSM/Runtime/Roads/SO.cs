@@ -13,8 +13,7 @@ namespace FunkySheep.OSM.Roads
     public void Download(Manager manager, double[] boundaries)
     {
       manager.StartCoroutine(FunkySheep.Network.Downloader.Download(InterpolatedUrl(boundaries), (fileID, file) => {
-        FunkySheep.OSM.Data data = FunkySheep.OSM.Parser.Parse(file);
-        onOSMRoadsDownloaded.Raise(data);
+        manager.files.Enqueue(file);
       }));
     }
 
