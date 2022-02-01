@@ -2,6 +2,8 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using FunkySheep.OSM;
+using System.Threading;
+
 
 namespace FunkySheep.Procedural.Buildings
 {
@@ -13,22 +15,19 @@ namespace FunkySheep.Procedural.Buildings
     public List<Building> buildings = new List<Building>();
     public FunkySheep.Types.Vector2 tileSize;
     public FunkySheep.Types.Vector2 initialDisplacement;
+    
     public void Merge(Data data)
     {
       this.data.Merge(data);
       foreach (Way way in data.ways.ToList())
       {
-        Building building = buildings.Find(building => building.id == way.id.ToString());
-        if (building == null)
-        {
-          building = new Building(way);
-          buildings.Add(building);
-          data.ways.Remove(way);
-        }
+        Building building = new Building(way);
+        buildings.Add(building);
+        data.ways.Remove(way);
       }
     }
 
-    public void Update() {
+    public void OnPlayerMove() {
       List<Building> closeBuildings = buildings.FindAll(building => Vector2.Distance(building.center, new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z)) <(so as SO).drawDistance);
       foreach (Building building in closeBuildings.ToList())
       {

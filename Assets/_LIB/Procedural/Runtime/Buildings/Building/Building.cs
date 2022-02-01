@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using FunkySheep.OSM;
+using FunkySheep.JSON;
 
 namespace FunkySheep.Procedural.Buildings
 {
@@ -27,11 +28,20 @@ namespace FunkySheep.Procedural.Buildings
         points[i].y = (float)FunkySheep.GPS.Utils.latToY(way.nodes[i].latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
       }
       this.center = Center();
-      
-      //this.position = Position();
+    }
 
-      //SetFirstPoint();
-      // SetClockWise();
+    public Building(JSON.JSONNode way)
+    {
+      this.id = way["id"];
+      points = new Vector2[way["geometry"].AsArray.Count - 1];
+      heights = new float[way["geometry"].AsArray.Count - 1];
+
+      for (int i = 0; i < points.Length; i++)
+      {
+        points[i].x = (float)FunkySheep.GPS.Utils.lonToX(way["geometry"][i]["lon"]) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x;
+        points[i].y = (float)FunkySheep.GPS.Utils.latToY(way["geometry"][i]["lat"]) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
+      }
+      this.center = Center();
     }
 
     /// <summary>

@@ -15,3 +15,4 @@ MonoBehaviour:
   dependencies: []
   urlTemplate: {fileID: 11400000, guid: 311d01f398c280b4f92a7e06f4904a7f, type: 2}
   onOSMBuildingsDownloaded: {fileID: 11400000, guid: 06f0c1a9f2e52e44ca8e796d263b368a, type: 2}
+  onOSMBuildingsDownloadedJSON: {fileID: 11400000, guid: 910d8bb7ec017c948b039e54c4568bed, type: 2}
