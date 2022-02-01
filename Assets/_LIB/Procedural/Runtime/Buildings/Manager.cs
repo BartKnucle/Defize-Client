@@ -32,9 +32,6 @@ namespace FunkySheep.Procedural.Buildings
       foreach (Building building in closeBuildings.ToList())
       {
         buildings.Remove(building);
-        //List<Vector3> nodePositions = new List<Vector3>();
-        List<Vector2Int> nodeGridPositions = new List<Vector2Int>();
-        List<Vector2> insideCellPositions = new List<Vector2>();
 
         for (int i = 0; i < building.points.Length; i++)
         {
@@ -42,7 +39,6 @@ namespace FunkySheep.Procedural.Buildings
             Mathf.FloorToInt((building.points[i].x - initialDisplacement.Value.x) / tileSize.Value.x),
             Mathf.FloorToInt((building.points[i].y - initialDisplacement.Value.y) / tileSize.Value.y)
           );
-          nodeGridPositions.Add(nodeGridPosition);
 
           Earth.Tile earthTile = earthTiles.Find(tile => tile.gridPosition == nodeGridPosition);
           if (earthTiles != null)
@@ -55,7 +51,6 @@ namespace FunkySheep.Procedural.Buildings
             (building.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
             (building.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
             );
-            insideCellPositions.Add(insideCellPosition);
 
             building.heights[i] = earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
 
