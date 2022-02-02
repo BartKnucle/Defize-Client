@@ -601,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   so: {fileID: 11400000, guid: d2a90729f0d8c2845aac2c3b9178c175, type: 2}
   root: {fileID: 1901507645}
+  tileSize: {fileID: 11400000, guid: 1042c78dc9010de4ea7531d58c96ffb5, type: 2}
   initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
 --- !u!114 &669289519
 MonoBehaviour:

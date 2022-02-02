@@ -107,7 +107,9 @@ namespace FunkySheep.Procedural.Earth
           }
       }
       
-      terrainData.SetHeights(0, 0, heights);
+      //terrainData.SetHeights(0, 0, heights);
+      terrainData.SetHeightsDelayLOD(0, 0, heights);
+      terrainData.SyncHeightmap();
     }
 
     public float GetHeight(Manager manager, Vector2 position)

@@ -12,6 +12,7 @@ namespace FunkySheep.Procedural.Roads
     public OSM.Data data = new Data();
     public FunkySheep.Types.Vector2 tileSize;
     public FunkySheep.Types.Vector2 initialDisplacement;
+    public List<Node> nodes = new List<Node>();
     public void Merge(Data data)
     {
       this.data.Merge(data);
@@ -20,40 +21,51 @@ namespace FunkySheep.Procedural.Roads
     public void OnPlayerMove() {
       foreach (Way way in data.ways.ToList())
       {
-        GameObject roadGO = new GameObject();
-        roadGO.transform.parent = root.transform;
-        Road road = roadGO.AddComponent<Road>();
-        road.name = way.id.ToString();
-        road.points = new Vector3[way.nodes.Count - 1];
+        GameObject segmentGo = new GameObject();
+        segmentGo.transform.parent = this.root.transform;
+        segmentGo.name = way.id.ToString();
+        Segment segment = segmentGo.AddComponent<Segment>();
+        segment.way = way;
 
-        for (int i = 0; i < road.points.Length; i++)
+        Node previousNode = null;
+
+        for (int i = 0; i < segment.way.nodes.Count; i++)
         {
-          road.points[i].x = (float)FunkySheep.GPS.Utils.lonToX(way.nodes[i].longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x;
-          road.points[i].y = 0;
-          road.points[i].z = (float)FunkySheep.GPS.Utils.latToY(way.nodes[i].latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
-
-          Vector2Int nodeGridPosition = new Vector2Int(
-          Mathf.FloorToInt((road.points[i].x - initialDisplacement.Value.x) / tileSize.Value.x),
-          Mathf.FloorToInt((road.points[i].y - initialDisplacement.Value.y) / tileSize.Value.y)
+          GameObject nodeGO = GameObject.CreatePrimitive(PrimitiveType.Cube);
+          nodeGO.transform.parent = segment.transform;
+          Node node = nodeGO.AddComponent<Node>();
+          node.transform.position = new Vector3(
+            (float)FunkySheep.GPS.Utils.lonToX(segment.way.nodes[i].longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x,
+            0,
+            (float)FunkySheep.GPS.Utils.latToY(segment.way.nodes[i].latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z
           );
 
+          Vector2Int nodeGridPosition = new Vector2Int(
+          Mathf.FloorToInt((node.transform.position.x - initialDisplacement.Value.x) / tileSize.Value.x),
+          Mathf.FloorToInt((node.transform.position.z - initialDisplacement.Value.y) / tileSize.Value.y)
+          );
 
           Earth.Tile earthTile = earthTiles.Find(tile => tile.gridPosition == nodeGridPosition);
+
           if (earthTile != null && earthTile.terrainData != null)
           {
             Vector2 insideCellPosition = new Vector2(
-            (road.points[i].x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
-            (road.points[i].y - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
+            (node.transform.position.x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
+            (node.transform.position.z - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
             );
 
-            road.points[i].y = earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y);
-            if (i != 0)
+            node.transform.position += new Vector3(0, earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y), 0);
+            if (previousNode != null)
             {
-              Debug.DrawLine(road.points[i], road.points[i - 1], Color.red, 600);
+              node.nodes.Add(previousNode);
+              previousNode.nodes.Add(node);
+
+              Debug.DrawLine(node.transform.position, previousNode.transform.position, Color.red, 600);
+              //Debug.DrawLine(previousNode.transform.position, node.transform.position, Color.green, 600);
             }
+            previousNode = node;
           }
         }
-
         data.ways.Remove(way);
       }
     }
