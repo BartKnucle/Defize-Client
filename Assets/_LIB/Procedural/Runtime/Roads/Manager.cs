@@ -34,6 +34,7 @@ namespace FunkySheep.Procedural.Roads
           GameObject nodeGO = GameObject.CreatePrimitive(PrimitiveType.Cube);
           nodeGO.transform.parent = segment.transform;
           Node node = nodeGO.AddComponent<Node>();
+          node.material = (so as SO).roadMat;
           node.transform.position = new Vector3(
             (float)FunkySheep.GPS.Utils.lonToX(segment.way.nodes[i].longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x,
             0,
@@ -49,12 +50,13 @@ namespace FunkySheep.Procedural.Roads
 
           if (earthTile != null && earthTile.terrainData != null)
           {
-            Vector2 insideCellPosition = new Vector2(
+            node.terrainData = earthTile.terrainData;
+            node.insideCellPosition = new Vector2(
             (node.transform.position.x - initialDisplacement.Value.x - (nodeGridPosition.x * tileSize.Value.x)) / tileSize.Value.x,
             (node.transform.position.z - initialDisplacement.Value.y - (nodeGridPosition.y * tileSize.Value.y)) / tileSize.Value.y
             );
 
-            node.transform.position += new Vector3(0, earthTile.terrainData.GetInterpolatedHeight(insideCellPosition.x, insideCellPosition.y), 0);
+            node.transform.position += new Vector3(0, earthTile.terrainData.GetInterpolatedHeight(node.insideCellPosition.x, node.insideCellPosition.y), 0);
             if (previousNode != null)
             {
               node.nodes.Add(previousNode);
@@ -62,6 +64,11 @@ namespace FunkySheep.Procedural.Roads
 
               Debug.DrawLine(node.transform.position, previousNode.transform.position, Color.red, 600);
               //Debug.DrawLine(previousNode.transform.position, node.transform.position, Color.green, 600);
+              previousNode.Create();
+              if (i == segment.way.nodes.Count - 1)
+              {
+                node.Create();
+              }
             }
             previousNode = node;
           }
