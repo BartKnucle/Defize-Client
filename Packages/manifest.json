@@ -12,7 +12,7 @@
     "net.funkysheep.unity.buildings": "0.1.6",
     "net.funkysheep.unity.gps": "0.1.5",
     "net.funkysheep.unity.json": "0.1.0",
-    "net.funkysheep.unity.library": "file:C:/Users/Kaas/Documents/FunkySheep/Framework/Unity-Library",
+    "net.funkysheep.unity.library": "0.3.0",
     "net.funkysheep.unity.network": "0.1.5",
     "net.funkysheep.unity.openstreetmap": "0.2.3",
     "com.unity.modules.ai": "1.0.0",

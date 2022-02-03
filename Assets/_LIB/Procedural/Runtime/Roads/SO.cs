@@ -9,7 +9,9 @@ namespace FunkySheep.Procedural.Roads
   public class SO : FunkySheep.SO
   {
     public Material roadMat;
+    public FunkySheep.Types.Vector3 playerPosition;
     public FunkySheep.Procedural.Earth.SO EarthSO;
+    public float drawDistance = 100;
 
     /*public void AddRoad(Manager manager, Road road)
     {

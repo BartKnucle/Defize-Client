@@ -26,6 +26,11 @@ namespace FunkySheep.OSM
     {
       Way way = new Way(wayJSON["id"]);
 
+      way.bounds.minLatitude = wayJSON["bounds"]["minlat"];
+      way.bounds.minLongitude = wayJSON["bounds"]["minlon"];
+      way.bounds.maxLatitude = wayJSON["bounds"]["maxlat"];
+      way.bounds.maxLongitude = wayJSON["bounds"]["maxlon"];
+
       // Add the node id to the nodes list
       JSONArray nodes = wayJSON["nodes"].AsArray;
       JSONArray geometries = wayJSON["geometry"].AsArray;

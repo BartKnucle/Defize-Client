@@ -60,15 +60,5 @@ namespace FunkySheep.Procedural.Earth
         pendingTiles.Remove(pendingTile);
       }
     }
-
-    public float GetHeight(Vector2 position)
-    {
-      return (so as SO).GetHeight(this, position);
-    }
-
-    public float GetHeight(Vector3 position)
-    {
-      return (so as SO).GetHeight(this, position);
-    }
   }
 }

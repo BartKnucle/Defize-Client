@@ -5,9 +5,16 @@ using FunkySheep.OSM;
 
 namespace FunkySheep.Procedural.Roads
 {
-  public class Segment: MonoBehaviour
+  public class Segment
   {
-    public Way way;
-    public List<Node> nodes = new List<Node>();    
+    public long id;
+    public int index;
+    public List<Node> nodes = new List<Node>();
+
+    public Segment(long id, int index)
+    {
+      this.id = id;
+      this.index = index;
+    }
   }
 }

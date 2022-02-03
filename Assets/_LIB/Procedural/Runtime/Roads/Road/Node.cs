@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
+using FunkySheep.OSM;
 
 namespace FunkySheep.Procedural.Roads
 {
@@ -11,17 +12,118 @@ namespace FunkySheep.Procedural.Roads
   [RequireComponent(typeof(Rigidbody))]
   public class Node : MonoBehaviour
   {
-    public List<Node> nodes = new List<Node>();
-    public Material material;
-    public Vector2 insideCellPosition;
-    public TerrainData terrainData;
-
+    OSM.Node node;
+    public bool positionned = false;
     private void Awake() {
       GetComponent<Rigidbody>().useGravity = false;
       GetComponent<Rigidbody>().isKinematic = false;
       GetComponent<Rigidbody>().freezeRotation = true;
       GetComponent<BoxCollider>().isTrigger = true;
     }
+
+    public Segment segment;
+    public Intersection intersection = null;
+    public void Create(OSM.Node node)
+    {
+      this.node = node;
+      this.name = node.id.ToString();
+      SetPosition();
+    }
+
+    private void Update() {
+      if (!positionned)
+      {
+        positionned = SetPosition();
+      }
+    }
+
+    public bool SetPosition()
+    {
+      Vector2 position = new Vector2(
+        (float)FunkySheep.GPS.Utils.lonToX(node.longitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.x,
+        (float)FunkySheep.GPS.Utils.latToY(node.latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z
+      );
+
+      float? height = FunkySheep.Procedural.Earth.SO.GetHeight(position);
+      if (height == null)
+      {
+        height = 0;
+        return false;
+      }
+
+      this.transform.position = new Vector3(
+        position.x,
+        height.Value,
+        position.y
+      );
+
+      CreateSegments();
+
+      return true;
+    }
+
+    public void CreateSegments()
+    {
+      int indexInSegment = segment.nodes.IndexOf(this);
+      if (indexInSegment != 0 && segment.nodes[indexInSegment - 1].positionned && segment.nodes[indexInSegment - 1].intersection == null)
+      {
+        segment.nodes[indexInSegment - 1].CreateNextSegment(this);
+        CreatePreviousSegment(segment.nodes[indexInSegment - 1]);
+      }
+    }
+
+    public void CreatePreviousSegment(Node previsousNode)
+    {
+      Vector3 middle = (this.transform.position + previsousNode.transform.position) / 2;
+      middle.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middle);
+      Debug.DrawLine(this.transform.position, middle, Color.red, 600); 
+    }
+
+    public void CreateNextSegment(Node nextNode)
+    {
+      Vector3 middle = (this.transform.position + nextNode.transform.position) / 2;
+      middle.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middle);
+      Debug.DrawLine(this.transform.position, middle, Color.blue, 600); 
+    }
+
+    public void RemoveSegment()
+    {
+
+    }
+
+    public void CreateIntersection()
+    {
+      GameObject interGo = new GameObject();
+      interGo.transform.position = this.transform.position;
+      intersection = interGo.AddComponent<Intersection>();
+      intersection.AddNode(this);
+      interGo.transform.parent = this.transform;
+      interGo.name = "inter";
+    }
+
+    private void OnTriggerStay(Collider other) {
+      if (positionned && intersection == null)
+      {
+        Node otherNode = other.transform.GetComponent<Node>();
+        if (otherNode != null)
+        {
+          if (otherNode.intersection != null)
+          {
+            intersection = otherNode.intersection;
+            otherNode.intersection.AddNode(this);
+          } else {
+            CreateIntersection();
+          }
+          RemoveSegment();
+          GetComponent<MeshRenderer>().material.color = Color.green;
+        }
+      }
+    }
+  }
+    /*public List<Node> nodes = new List<Node>();
+    public Material material;
+    public Vector2 insideCellPosition;
+    public TerrainData terrainData;
 
     public void Create()
     {
@@ -102,5 +204,5 @@ namespace FunkySheep.Procedural.Roads
         GetComponent<MeshRenderer>().material.color = Color.green;
       }
     }
-  }
+  }*/
 }

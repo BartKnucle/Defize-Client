@@ -112,24 +112,35 @@ namespace FunkySheep.Procedural.Earth
       terrainData.SyncHeightmap();
     }
 
-    public float GetHeight(Manager manager, Vector2 position)
+    public static float? GetHeight(Vector2 position)
     {
-      Vector2Int gridPosition = new Vector2Int(
-        (int)Mathf.Floor(position.x / terrainSize.x),
-        (int)Mathf.Floor(position.y / terrainSize.y)
-      );
+      foreach (Terrain terrain in Terrain.activeTerrains)
+      {
+        UnityEngine.Bounds bounds = terrain.terrainData.bounds;
+        Vector2 terrainMin = new Vector2(
+          bounds.min.x + terrain.transform.position.x,
+          bounds.min.z + terrain.transform.position.z
+        );
 
-      Vector2 insideCellPosition = new Vector2(
-        position.x - gridPosition.x * terrainSize.x,
-        position.y - gridPosition.y * terrainSize.y
-      );
-
-      return manager.tiles.Find(tile => tile.gridPosition == gridPosition).terrainData.GetInterpolatedHeight(insideCellPosition.x / terrainSize.x, insideCellPosition.y / terrainSize.y);
+        Vector2 terrainMax = new Vector2(
+          bounds.max.x + terrain.transform.position.x,
+          bounds.max.z + terrain.transform.position.z
+        );
+        
+        if (position.x > terrainMin.x && position.y > terrainMin.y && position.x < terrainMax.x && position.y < terrainMax.y)
+        {
+          return terrain.terrainData.GetInterpolatedHeight(
+            (position.x - terrainMin.x) / (terrainMax.x - terrainMin.x),
+            (position.y - terrainMin.y) / (terrainMax.y - terrainMin.y)
+          );
+        }
+      }
+      return null;
     }
 
-    public float GetHeight(Manager manager, Vector3 position)
+    public static float? GetHeight(Vector3 position)
     {
-      return GetHeight(manager, new Vector2(position.x, position.z));
+      return GetHeight(new Vector2(position.x, position.z));
     }
   }  
 }
