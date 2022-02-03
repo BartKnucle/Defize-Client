@@ -7,13 +7,13 @@ namespace FunkySheep.Procedural.Roads
 {
   public class Segment
   {
-    public long id;
     public int index;
-    public List<Node> nodes = new List<Node>();
 
-    public Segment(long id, int index)
+    public Road road;
+    public List<Node> nodes = new List<Node>();
+    public Segment(Road road, int index)
     {
-      this.id = id;
+      this.road = road;
       this.index = index;
     }
   }

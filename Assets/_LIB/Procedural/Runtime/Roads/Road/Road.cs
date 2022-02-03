@@ -10,11 +10,12 @@ namespace FunkySheep.Procedural.Roads
         public Way way;
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();
+        public float size = 2;
 
         public void Create()
         {
             this.name = way.id.ToString();
-            Segment segment = new Segment(way.id, 0);
+            Segment segment = new Segment(this, 0);
             segments.Add(segment);
             foreach (OSM.Node osmNode in way.nodes)
             {

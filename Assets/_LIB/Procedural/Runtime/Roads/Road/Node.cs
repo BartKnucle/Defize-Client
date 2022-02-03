@@ -74,16 +74,31 @@ namespace FunkySheep.Procedural.Roads
 
     public void CreatePreviousSegment(Node previsousNode)
     {
-      Vector3 middle = (this.transform.position + previsousNode.transform.position) / 2;
-      middle.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middle);
-      Debug.DrawLine(this.transform.position, middle, Color.red, 600); 
+      CreateSegment(previsousNode, this);
     }
 
     public void CreateNextSegment(Node nextNode)
     {
-      Vector3 middle = (this.transform.position + nextNode.transform.position) / 2;
-      middle.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middle);
-      Debug.DrawLine(this.transform.position, middle, Color.blue, 600); 
+      CreateSegment(this, nextNode);
+    }
+
+    public void CreateSegment(Node from, Node to)
+    {
+      int indexToNode = segment.nodes.IndexOf(to);
+
+      Vector3 middlePosition = (from.transform.position + to.transform.position) / 2;
+      middlePosition.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middlePosition);
+
+      Vector3 normalDirection = new Vector3();
+      int indexToSegment = segment.nodes.IndexOf(to);
+      if (indexToSegment != segment.nodes.Count - 1 || segment.nodes.IndexOf(to) == 0)
+      {
+        normalDirection = Vector3.Cross(from.transform.position, to.transform.position).normalized * from.segment.road.size / 2;
+      } else {
+        normalDirection = Vector3.Cross(from.transform.position, middlePosition).normalized * from.segment.road.size / 2;
+      }
+      Debug.DrawLine(from.transform.position, from.transform.position + normalDirection * 5, Color.blue, 600); 
+      Debug.DrawLine(this.transform.position, middlePosition, Color.red, 600); 
     }
 
     public void RemoveSegment()
