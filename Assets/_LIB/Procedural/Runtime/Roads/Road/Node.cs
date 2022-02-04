@@ -58,63 +58,52 @@ namespace FunkySheep.Procedural.Roads
         position.y
       );
 
-      CreateSegments();
-
       return true;
     }
 
-    public void CreateSegments()
+    public List<Vector3> GetVertices()
     {
-      int indexInSegment = segment.nodes.IndexOf(this);
-      if (indexInSegment != 0 && segment.nodes[indexInSegment - 1].positionned)
+      List<Vector3> vertices = new List<Vector3>();
+
+      Vector3 nodePlusNormal = transform.position + Normal();
+      Vector3 nodeMinusNormal = transform.position - Normal();
+      float maxNodeHeight = GetMaxHeight(nodePlusNormal, nodeMinusNormal);
+      nodePlusNormal.y = maxNodeHeight;
+      nodeMinusNormal.y = maxNodeHeight;
+   
+      int index = segment.nodes.IndexOf(this);
+      if (index == 0)
       {
-        CreatePreviousSegment(segment.nodes[indexInSegment - 1]);
+        vertices.Add(nodePlusNormal);
+        vertices.Add(transform.position - Normal());
+      } else {
+        Vector3 lastMiddle = (segment.nodes[index - 1].transform.position + transform.position) / 2;
+        Vector3 lastMiddleNormal = Normal(segment.nodes[index - 1].transform.position, transform.position);
+        Vector3 lastMiddlePlusNormal = lastMiddle + lastMiddleNormal;
+        Vector3 lastMiddleMinusNormal = lastMiddle - lastMiddleNormal;
+        float maxlastMiddleHeight = GetMaxHeight(lastMiddlePlusNormal, lastMiddleMinusNormal);
+        lastMiddlePlusNormal.y = maxlastMiddleHeight;
+        lastMiddleMinusNormal.y = maxlastMiddleHeight;
+
+        vertices.Add(lastMiddlePlusNormal);
+        vertices.Add(nodePlusNormal);
+        vertices.Add(nodeMinusNormal);
+        vertices.Add(lastMiddleMinusNormal);
       }
+      return vertices;
     }
 
-    public void CreatePreviousSegment(Node previsousNode)
+    public float GetMaxHeight(Vector3 first, Vector3 second)
     {
-      CreateSegment(previsousNode, this);
-    }
+      float firstHeight = (float)FunkySheep.Procedural.Earth.SO.GetHeight(first);
+      float secondHeight = (float)FunkySheep.Procedural.Earth.SO.GetHeight(second);
 
-    public void CreateSegment(Node from, Node to)
-    {
-      int indexToNode = segment.nodes.IndexOf(to);
-
-      Vector3 middlePosition = (from.transform.position + to.transform.position) / 2;
-      middlePosition.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middlePosition);
-      Vector3 middleNormal = Normal(from.transform.position, to.transform.position);
-
-      
-      Debug.DrawLine(middlePosition, middlePosition + middleNormal, Color.yellow, 600); 
-      Debug.DrawLine(transform.position, transform.position + Normal(), Color.blue, 600); 
-      Debug.DrawLine(this.transform.position, middlePosition, Color.red, 600); 
-
-      Vector3[] vertices = new Vector3[6];
-      vertices[0] = from.transform.position + from.Normal();
-      vertices[1] = from.transform.position - from.Normal();
-      vertices[2] = middlePosition - middleNormal;
-      vertices[3] = to.transform.position - to.Normal();
-      vertices[4] = to.transform.position + to.Normal();
-      vertices[5] = middlePosition + middleNormal;
-
-      GameObject segmentGo = new GameObject();
-      segmentGo.transform.parent = this.transform;
-      ProBuilderMesh segmentMesh = segmentGo.AddComponent<ProBuilderMesh>();
-      segmentGo.GetComponent<MeshRenderer>().material = material;
-      segmentMesh.CreateShapeFromPolygon(vertices.ToList(), 0.5f, false);
-
-      /*List<ProBuilderMesh> final = new List<ProBuilderMesh>();
-      final.Add(segmentMesh);
-      CombineMeshes.Combine(final, mesh);
-      MeshUtility.CollapseSharedVertices(GetComponent<MeshFilter>().sharedMesh);
-      mesh.Refresh();
-      Destroy(segmentMesh);*/
-    }
-
-    public void RemoveSegment()
-    {
-
+      if (firstHeight > secondHeight)
+      {
+        return firstHeight;
+      } else {
+        return secondHeight;
+      }
     }
 
     public void CreateIntersection()
@@ -140,7 +129,6 @@ namespace FunkySheep.Procedural.Roads
           } else {
             CreateIntersection();
           }
-          RemoveSegment();
         }
       }
     }
@@ -151,16 +139,16 @@ namespace FunkySheep.Procedural.Roads
       int indexToSegment = segment.nodes.IndexOf(this);
       if (indexToSegment == 0)
       {
-        normal = Vector3.Cross(this.transform.position, segment.nodes[indexToSegment + 1].transform.position).normalized;
+        normal = Vector3.Cross(this.transform.position, segment.nodes[indexToSegment + 1].transform.position);
 
       } else if (indexToSegment == segment.nodes.Count - 1)
       {
-        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, this.transform.position).normalized;
+        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, this.transform.position);
       } else {
-        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, segment.nodes[indexToSegment + 1].transform.position).normalized;
+        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, segment.nodes[indexToSegment + 1].transform.position);
       }
-      normal *= segment.road.size / 2;
       normal.y = 0;
+      normal = normal.normalized * segment.road.size / 2;
 
       return normal;
     }
@@ -168,96 +156,11 @@ namespace FunkySheep.Procedural.Roads
     public Vector3 Normal(Vector3 from, Vector3 to)
     {
       Vector3 normal = new Vector3();
-      normal = Vector3.Cross(from, to).normalized;
-      normal *= segment.road.size / 2;
+      normal = Vector3.Cross(from, to);
       normal.y = 0;
+      normal = normal.normalized * segment.road.size / 2;
 
       return normal;
     }
   }
-    /*public List<Node> nodes = new List<Node>();
-    public Material material;
-    public Vector2 insideCellPosition;
-    public TerrainData terrainData;
-
-    public void Create()
-    {
-      List<Vector3> centerVertices = new List<Vector3>();
-      List<ProBuilderMesh> final = new List<ProBuilderMesh>();
-      
-      for (int i = 0; i < nodes.Count; i++)
-      {
-        float roadSize = 2;
-        List<Vector3> vertices = new List<Vector3>();
-
-        Vector3 node = this.transform.position;
-        Vector3 nextNode = nodes[i].transform.position;
-        Vector3 junctionNode = Vector3.Lerp(node, nextNode, 0.25f );
-        Vector3 middleNode = (node + nextNode) / 2;
-        Vector3 normalNode = Vector3.Cross(nodes[i].transform.position, this.transform.position).normalized * roadSize;
-        normalNode.y = 0;
-
-        Vector3 junctionNodeLeftVertice = junctionNode + normalNode;
-        vertices.Add(junctionNodeLeftVertice);
-
-        float junctionHeight = nodes[i].terrainData.GetInterpolatedHeight(
-          Mathf.Lerp(insideCellPosition.x, nodes[i].insideCellPosition.x, 0.25f),
-          Mathf.Lerp(insideCellPosition.y, nodes[i].insideCellPosition.y, 0.25f)
-        );
-        junctionNode.y = junctionHeight;
-
-        float middleHeight = nodes[i].terrainData.GetInterpolatedHeight(
-          (nodes[i].insideCellPosition.x + insideCellPosition.x) / 2,
-          (nodes[i].insideCellPosition.y + insideCellPosition.y) /2
-        );
-        middleNode.y = middleHeight;
-                
-        Vector3 middleNodeLeftVertice = middleNode + normalNode;
-        middleNodeLeftVertice.y = middleHeight;
-        vertices.Add(middleNodeLeftVertice);
-        Vector3 middleNodeRightVertice = middleNode - normalNode;
-        middleNodeRightVertice.y = middleHeight;
-        vertices.Add(middleNodeRightVertice);
-
-        Vector3 junctionNodeRightVertice = junctionNode - normalNode;
-        vertices.Add(junctionNodeRightVertice);
-
-        GameObject nodeGo = new GameObject();
-        ProBuilderMesh mesh = nodeGo.AddComponent<ProBuilderMesh>();
-        mesh.CreateShapeFromPolygon(vertices, 0.20f, false);
-        mesh.SetMaterial(mesh.faces, material);
-        nodeGo.transform.parent = this.transform;
-
-        centerVertices.Add(junctionNodeLeftVertice);
-        centerVertices.Add(junctionNodeRightVertice);
-        if (nodes.Count == 1)
-        {
-          centerVertices.Add(node - normalNode);
-          centerVertices.Add(node + normalNode);          
-        }
-        final.Add(mesh);
-      }
-
-      GameObject nodeCenterGo = new GameObject();
-      nodeCenterGo.name = "center";
-      ProBuilderMesh meshCenter = nodeCenterGo.AddComponent<ProBuilderMesh>();
-      meshCenter.CreateShapeFromPolygon(centerVertices, 0.20f, false);
-      meshCenter.SetMaterial(meshCenter.faces, material);
-      nodeCenterGo.transform.parent = this.transform;
-     
-      final.Add(meshCenter);
-
-      CombineMeshes.Combine(final, meshCenter);
-      MeshUtility.CollapseSharedVertices(meshCenter.GetComponent<MeshFilter>().sharedMesh);
-      meshCenter.Refresh();
-    }
-
-    private void OnTriggerEnter(Collider other) {
-      Node otherNode = other.transform.GetComponent<Node>();
-      if (otherNode != null)
-      {
-        GetComponent<MeshRenderer>().material.color = Color.green;
-      }
-    }
-  }*/
 }
