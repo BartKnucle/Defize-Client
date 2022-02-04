@@ -10,6 +10,8 @@ namespace FunkySheep.Procedural.Roads
         public Way way;
         public List<Segment> segments = new List<Segment>();
         public List<Intersection> intersections = new List<Intersection>();
+
+        public Material material;
         public float size = 2;
 
         public void Create()
@@ -22,6 +24,7 @@ namespace FunkySheep.Procedural.Roads
                 GameObject nodeGO = new GameObject();
                 nodeGO.transform.parent = this.transform;
                 Node node = nodeGO.AddComponent<Node>();
+                node.material = material;
                 node.segment = segment;
                 segment.nodes.Add(node);
 

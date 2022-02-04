@@ -43,6 +43,7 @@ namespace FunkySheep.Procedural.Roads
             GameObject roadGO = new GameObject();
             roadGO.transform.parent = this.root.transform;
             Road road = roadGO.AddComponent<Road>();
+            road.material = (so as SO).roadMat;
             road.way = way;
             road.Create();
           }

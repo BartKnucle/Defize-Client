@@ -13,6 +13,7 @@ namespace FunkySheep.Procedural.Roads
     ProBuilderMesh mesh;
     OSM.Node node;
     public bool positionned = false;
+    public Material material;
     private void Awake() {
       GetComponent<Rigidbody>().useGravity = false;
       GetComponent<Rigidbody>().isKinematic = false;
@@ -100,6 +101,7 @@ namespace FunkySheep.Procedural.Roads
       GameObject segmentGo = new GameObject();
       segmentGo.transform.parent = this.transform;
       ProBuilderMesh segmentMesh = segmentGo.AddComponent<ProBuilderMesh>();
+      segmentGo.GetComponent<MeshRenderer>().material = material;
       segmentMesh.CreateShapeFromPolygon(vertices.ToList(), 0.5f, false);
 
       /*List<ProBuilderMesh> final = new List<ProBuilderMesh>();
