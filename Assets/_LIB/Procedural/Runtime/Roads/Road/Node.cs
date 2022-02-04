@@ -1,10 +1,8 @@
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
-using FunkySheep.OSM;
 
 namespace FunkySheep.Procedural.Roads
 {
@@ -12,6 +10,7 @@ namespace FunkySheep.Procedural.Roads
   [RequireComponent(typeof(Rigidbody))]
   public class Node : MonoBehaviour
   {
+    ProBuilderMesh mesh;
     OSM.Node node;
     public bool positionned = false;
     private void Awake() {
@@ -19,6 +18,7 @@ namespace FunkySheep.Procedural.Roads
       GetComponent<Rigidbody>().isKinematic = false;
       GetComponent<Rigidbody>().freezeRotation = true;
       GetComponent<BoxCollider>().isTrigger = true;
+      mesh = GetComponent<ProBuilderMesh>();
     }
 
     public Segment segment;
@@ -65,9 +65,8 @@ namespace FunkySheep.Procedural.Roads
     public void CreateSegments()
     {
       int indexInSegment = segment.nodes.IndexOf(this);
-      if (indexInSegment != 0 && segment.nodes[indexInSegment - 1].positionned && segment.nodes[indexInSegment - 1].intersection == null)
+      if (indexInSegment != 0 && segment.nodes[indexInSegment - 1].positionned)
       {
-        segment.nodes[indexInSegment - 1].CreateNextSegment(this);
         CreatePreviousSegment(segment.nodes[indexInSegment - 1]);
       }
     }
@@ -77,28 +76,38 @@ namespace FunkySheep.Procedural.Roads
       CreateSegment(previsousNode, this);
     }
 
-    public void CreateNextSegment(Node nextNode)
-    {
-      CreateSegment(this, nextNode);
-    }
-
     public void CreateSegment(Node from, Node to)
     {
       int indexToNode = segment.nodes.IndexOf(to);
 
       Vector3 middlePosition = (from.transform.position + to.transform.position) / 2;
       middlePosition.y = (float)FunkySheep.Procedural.Earth.SO.GetHeight(middlePosition);
+      Vector3 middleNormal = Normal(from.transform.position, to.transform.position);
 
-      Vector3 normalDirection = new Vector3();
-      int indexToSegment = segment.nodes.IndexOf(to);
-      if (indexToSegment != segment.nodes.Count - 1 || segment.nodes.IndexOf(to) == 0)
-      {
-        normalDirection = Vector3.Cross(from.transform.position, to.transform.position).normalized * from.segment.road.size / 2;
-      } else {
-        normalDirection = Vector3.Cross(from.transform.position, middlePosition).normalized * from.segment.road.size / 2;
-      }
-      Debug.DrawLine(from.transform.position, from.transform.position + normalDirection * 5, Color.blue, 600); 
+      
+      Debug.DrawLine(middlePosition, middlePosition + middleNormal, Color.yellow, 600); 
+      Debug.DrawLine(transform.position, transform.position + Normal(), Color.blue, 600); 
       Debug.DrawLine(this.transform.position, middlePosition, Color.red, 600); 
+
+      Vector3[] vertices = new Vector3[6];
+      vertices[0] = from.transform.position + from.Normal();
+      vertices[1] = from.transform.position - from.Normal();
+      vertices[2] = middlePosition - middleNormal;
+      vertices[3] = to.transform.position - to.Normal();
+      vertices[4] = to.transform.position + to.Normal();
+      vertices[5] = middlePosition + middleNormal;
+
+      GameObject segmentGo = new GameObject();
+      segmentGo.transform.parent = this.transform;
+      ProBuilderMesh segmentMesh = segmentGo.AddComponent<ProBuilderMesh>();
+      segmentMesh.CreateShapeFromPolygon(vertices.ToList(), 0.5f, false);
+
+      /*List<ProBuilderMesh> final = new List<ProBuilderMesh>();
+      final.Add(segmentMesh);
+      CombineMeshes.Combine(final, mesh);
+      MeshUtility.CollapseSharedVertices(GetComponent<MeshFilter>().sharedMesh);
+      mesh.Refresh();
+      Destroy(segmentMesh);*/
     }
 
     public void RemoveSegment()
@@ -130,9 +139,38 @@ namespace FunkySheep.Procedural.Roads
             CreateIntersection();
           }
           RemoveSegment();
-          GetComponent<MeshRenderer>().material.color = Color.green;
         }
       }
+    }
+
+    public Vector3 Normal()
+    {
+      Vector3 normal = new Vector3();
+      int indexToSegment = segment.nodes.IndexOf(this);
+      if (indexToSegment == 0)
+      {
+        normal = Vector3.Cross(this.transform.position, segment.nodes[indexToSegment + 1].transform.position).normalized;
+
+      } else if (indexToSegment == segment.nodes.Count - 1)
+      {
+        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, this.transform.position).normalized;
+      } else {
+        normal = Vector3.Cross(segment.nodes[indexToSegment - 1].transform.position, segment.nodes[indexToSegment + 1].transform.position).normalized;
+      }
+      normal *= segment.road.size / 2;
+      normal.y = 0;
+
+      return normal;
+    }
+
+    public Vector3 Normal(Vector3 from, Vector3 to)
+    {
+      Vector3 normal = new Vector3();
+      normal = Vector3.Cross(from, to).normalized;
+      normal *= segment.road.size / 2;
+      normal.y = 0;
+
+      return normal;
     }
   }
     /*public List<Node> nodes = new List<Node>();

@@ -19,7 +19,7 @@ namespace FunkySheep.Procedural.Roads
             segments.Add(segment);
             foreach (OSM.Node osmNode in way.nodes)
             {
-                GameObject nodeGO = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                GameObject nodeGO = new GameObject();
                 nodeGO.transform.parent = this.transform;
                 Node node = nodeGO.AddComponent<Node>();
                 node.segment = segment;
