@@ -22,14 +22,15 @@ namespace Game.Player
     void Update()
     {
       float curSpeed = 0;
+
       #if UNITY_ANDROID
-        Vector3 dir = Vector2.zero;
+        Vector2 dir = Vector2.zero;
         dir.x = Input.acceleration.y;
         dir.y = Input.acceleration.x;
         if (dir.sqrMagnitude > 1)
           dir.Normalize();
         transform.Rotate(0, dir.y * rotateSpeed, 0);
-        curSpeed = speed * dir.x;
+        curSpeed += speed * dir.x;
         foreach(Touch touch in Input.touches)
         {
             if (touch.phase == TouchPhase.Began)
@@ -37,17 +38,19 @@ namespace Game.Player
               Jump();
             }
         }
-      #else
-        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-        curSpeed = speed * Input.GetAxis("Vertical");
       #endif
+
+       #if UNITY_EDITOR
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+        curSpeed += speed * Input.GetAxis("Vertical");
+        if (Input.GetKey("space"))
+        {
+          Jump();
+        }
+      #endif
+
       _controller.SimpleMove(transform.forward * curSpeed);
       animator.SetFloat("Speed", curSpeed);
-      
-      if (Input.GetKey("space"))
-      {
-        Jump();
-      }
     }
 
     private void FixedUpdate() {
