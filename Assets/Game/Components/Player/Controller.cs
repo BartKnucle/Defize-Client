@@ -10,77 +10,57 @@ namespace Game.Player
     private CharacterController _controller;
     public float speed = 20;
     public float rotateSpeed = 1;
+    private Gyroscope gyro;
     // Start is called before the first frame update
     void Start()
     {
       _controller = GetComponent<CharacterController>();
       _controller.minMoveDistance = 0f;
-      //_rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-      transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
-      float curSpeed = speed * Input.GetAxis("Vertical");
+      float curSpeed = 0;
+      #if UNITY_ANDROID
+        Vector3 dir = Vector2.zero;
+        dir.x = Input.acceleration.y;
+        dir.y = Input.acceleration.x;
+        if (dir.sqrMagnitude > 1)
+          dir.Normalize();
+        transform.Rotate(0, dir.y * rotateSpeed, 0);
+        curSpeed = speed * dir.x;
+        foreach(Touch touch in Input.touches)
+        {
+            if (touch.phase == TouchPhase.Began)
+            {
+              Jump();
+            }
+        }
+      #else
+        transform.Rotate(0, Input.GetAxis("Horizontal") * rotateSpeed, 0);
+        curSpeed = speed * Input.GetAxis("Vertical");
+      #endif
       _controller.SimpleMove(transform.forward * curSpeed);
       animator.SetFloat("Speed", curSpeed);
       
       if (Input.GetKey("space"))
       {
-        animator.SetBool("isGrounded", false);
-        _controller.Move(Vector3.up + transform.forward * 0.3f);
+        Jump();
       }
     }
 
     private void FixedUpdate() {
       if (_controller.isGrounded)
       {
-         animator.SetBool("isGrounded", true);
+        animator.SetBool("isGrounded", true);
       }
-
-      
-      
-      /*if (_controller.isGrounded)
-      {
-        float curSpeed = speed * Input.GetAxis("Vertical");
-        _controller.SimpleMove(transform.forward * curSpeed);
-      }*/
-      /*// Rotate around y - axis
-      
-
-      // Move forward / backward
-      float curSpeed = speed * Input.GetAxis("Vertical");
-      if (_controller.isGrounded == true && _controller.velocity.y < 0)
-      {
-        animator.SetFloat("Speed", curSpeed);
-      } else {
-        animator.SetFloat("Speed", 0f);
-      }
-      _controller.SimpleMove(transform.forward * curSpeed);
-
-      if (Input.GetKey("space"))
-      {
-        _controller.Move(Vector3.up / 2 + transform.forward * 0.3f);  
-      }
-      HandleAnimations();*/
     }
 
-    private void HandleAnimations()
+    public void Jump()
     {
-        if (!_controller.isGrounded)
-        {
-            animator.SetBool("isGrounded", false);
-
-            //Set the animator velocity equal to 1 * the vertical direction in which the player is moving 
-            animator.SetFloat("velocityY", 1 * Mathf.Sign(_controller.velocity.y));
-        }
-
-        if (_controller.isGrounded)
-        {
-            animator.SetBool("isGrounded", true);
-            animator.SetFloat("velocityY", 0);
-        }
+      animator.SetBool("isGrounded", false);
+      _controller.Move(Vector3.up + transform.forward * 0.3f);
     }
   }
 }

@@ -25,7 +25,7 @@ namespace FunkySheep.Procedural.Buildings
         buildings.Add(building);
         data.ways.Remove(way);
       }
-       OnPlayerMove();
+      OnPlayerMove();
     }
 
     public void OnPlayerMove() {
@@ -42,7 +42,7 @@ namespace FunkySheep.Procedural.Buildings
           );
 
           Earth.Tile earthTile = earthTiles.Find(tile => tile.gridPosition == nodeGridPosition);
-          if (earthTiles != null)
+          if (earthTile != null)
           {
             float distance = (Vector2.Distance(
             new Vector2((so as SO).drawPosition.Value.x, (so as SO).drawPosition.Value.z),
