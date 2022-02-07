@@ -8,13 +8,14 @@ namespace FunkySheep.Procedural.Buildings
   [RequireComponent(typeof(MeshCollider))]
   public class Floor : MonoBehaviour
   {
+    public Building building;
     public Material material;
     ProBuilderMesh mesh;
     private void Awake() {
       mesh = this.GetComponent<ProBuilderMesh>();
     }
 
-    public void Create(Building building)
+    public void Create()
     {
       Vector3[] newPositions = new Vector3[building.points.Length];
 
@@ -26,7 +27,7 @@ namespace FunkySheep.Procedural.Buildings
       }
       
       mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 0.20f, false);
-      mesh.SetMaterial(mesh.faces, material);
+      GetComponent<MeshRenderer>().material = material;
     }
   }  
 }

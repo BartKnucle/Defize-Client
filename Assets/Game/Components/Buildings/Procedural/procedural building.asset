@@ -17,3 +17,4 @@ MonoBehaviour:
   drawDistance: 200
   drawPosition: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
   EarthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
+  prefab: {fileID: 6040755391757108870, guid: e440ead9791a6a94c8f81bbe42a9db75, type: 3}
