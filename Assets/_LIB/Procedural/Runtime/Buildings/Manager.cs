@@ -25,6 +25,7 @@ namespace FunkySheep.Procedural.Buildings
         buildings.Add(building);
         data.ways.Remove(way);
       }
+       OnPlayerMove();
     }
 
     public void OnPlayerMove() {
