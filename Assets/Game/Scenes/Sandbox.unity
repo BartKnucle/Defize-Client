@@ -942,6 +942,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 145868083}
+  start: {x: -10, y: 0, z: 0}
+  end: {x: 10, y: 0, z: 0}
   material: {fileID: 2100000, guid: 98994838eb381954ea6b93ddbcef8897, type: 2}
   width: 1
   height: 2
