@@ -62,12 +62,12 @@ namespace Game.Building
 
                 points[1] = nextPoint;
                 
-                points[2] = nextPoint - new Vector3(
+                points[2] = nextPoint + new Vector3(
                 (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * wallThickness).x,
                 0,
                 (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * wallThickness).z) * nextPointAngle;
 
-                points[3] = point - new Vector3(
+                points[3] = point + new Vector3(
                 (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * wallThickness).x,
                 0,
                 (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * wallThickness).z) * pointAngle;

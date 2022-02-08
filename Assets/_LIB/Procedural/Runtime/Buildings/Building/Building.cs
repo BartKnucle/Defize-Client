@@ -28,6 +28,8 @@ namespace FunkySheep.Procedural.Buildings
         points[i].y = (float)FunkySheep.GPS.Utils.latToY(way.nodes[i].latitude) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
       }
       this.center = Center();
+      SetFirstPoint();
+      SetClockWise();
     }
 
     public Building(JSON.JSONNode way)
@@ -42,6 +44,8 @@ namespace FunkySheep.Procedural.Buildings
         points[i].y = (float)FunkySheep.GPS.Utils.latToY(way["geometry"][i]["lat"]) - FunkySheep.GPS.Manager.Instance.initialMercatorPosition.Value.z;
       }
       this.center = Center();
+      SetFirstPoint();
+      SetClockWise();
     }
 
     /// <summary>
