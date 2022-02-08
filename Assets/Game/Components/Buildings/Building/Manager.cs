@@ -19,6 +19,7 @@ namespace Game.Building
         // Start is called before the first frame update
         void Start()
         {
+            gameObject.layer = 20;
             this.floor = GetComponent<Floor>();
             this.floor.material = material;
             this.building = floor.building;

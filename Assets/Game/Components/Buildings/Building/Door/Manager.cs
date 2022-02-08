@@ -33,9 +33,7 @@ namespace Game.Building.Door
 
         public void Create(int seed = 0)
         {
-            Evaluate();
             GetHeightPosition();
-            GetFrontPosition();
             SetSeed(seed);
             height = Random.Range(2.5f, 3.5f);
             width = height * Random.Range(0.5f, 1);
@@ -43,11 +41,12 @@ namespace Game.Building.Door
 
             CreateStairs();
             CreateFrame();
+            Evaluate();
         }
 
         public bool Evaluate()
         {
-            if (heightPosition < 2 && frontPosition > 2)
+            if (heightPosition < 3 && ChechNeightbours())
             {
                 material.SetColor("Color_0c948efe52be4ddeb4993b6f87bd244e", Color.green);
                 return true;
@@ -73,22 +72,28 @@ namespace Game.Building.Door
             }
         }
 
-        void GetFrontPosition()
+        bool ChechNeightbours()
         {
+            bool valid = true;
             // Bit shift the index of the layer (8) to get a bit mask
-            int layerMask = 1 << 10;
+            int layerMask = 1 << 20;
 
             // This would cast rays only against colliders in layer 8.
             // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-            layerMask = ~layerMask;
+            //layerMask = ~layerMask;
 
             RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position - transform.up * 0.1f, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layerMask))
+            Debug.DrawRay(transform.position + transform.up, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)) * 20, Color.magenta, 600);
+            if (Physics.Raycast(transform.position + transform.up, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)), out hit, Mathf.Infinity, layerMask))
             {
-                Debug.DrawRay(transform.position - transform.up * 0.1f, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                frontPosition = hit.distance;
+                if (hit.distance < 5)
+                {
+                    return false;
+                }
             }
+
+            return valid;       
         }
 
         public void CreateFrame()
@@ -99,14 +104,12 @@ namespace Game.Building.Door
 
         public void CreateStairs()
         {
-            float depth = 1;
-            //float stairsHeight = 1;
-            Vector3 size = new Vector3(width, heightPosition, depth);
+            Vector3 size = new Vector3(width, heightPosition, heightPosition);
             ProBuilderMesh stairs = ShapeGenerator.GenerateStair(PivotLocation.Center, size, Mathf.CeilToInt(heightPosition / 0.2f), true);
             stairs.gameObject.transform.parent = transform;
             stairs.gameObject.transform.localRotation = Quaternion.identity;
             stairs.gameObject.transform.Rotate(Vector3.up * 180);
-            stairs.gameObject.transform.localPosition =  new Vector3(0, -heightPosition * 0.5f, depth / 2);
+            stairs.gameObject.transform.localPosition =  new Vector3(0, -heightPosition * 0.5f, heightPosition / 2);
             stairs.GetComponent<MeshRenderer>().material = material;
         }
 

@@ -21,7 +21,7 @@ namespace Game.Building.Walls.Wall
 
         public void RemoveDoor()
         {
-            //Destroy(this._door);
+            Destroy(this._door);
         }
     }    
 }

@@ -31,7 +31,7 @@ namespace Game.Player
 
                     if (_lastWall != null)
                     {
-                        _currentWall.GetComponent<Game.Building.Walls.Wall.Manager>().RemoveDoor();
+                        _lastWall.GetComponent<Game.Building.Walls.Wall.Manager>().RemoveDoor();
                         _lastWall.GetComponent<MeshRenderer>().enabled = true;
                     }
 
