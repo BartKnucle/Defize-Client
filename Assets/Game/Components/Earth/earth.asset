@@ -21,3 +21,4 @@ MonoBehaviour:
   resolution: 64
   material: {fileID: 2100000, guid: 9897d50658091914bb48dbdce50e2583, type: 2}
   addedTileEvent: {fileID: 11400000, guid: 0024c03abf8a09542b5f5b8b86192e6d, type: 2}
+  layer: 10
