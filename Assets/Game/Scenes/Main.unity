@@ -646,6 +646,9 @@ GameObject:
   - component: {fileID: 725708731}
   - component: {fileID: 725708734}
   - component: {fileID: 725708733}
+  - component: {fileID: 725708736}
+  - component: {fileID: 725708735}
+  - component: {fileID: 725708737}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -826,6 +829,75 @@ MonoBehaviour:
   animator: {fileID: 1334823817}
   speed: 10
   rotateSpeed: 1
+--- !u!114 &725708735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725708728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 708981f22169ba74db10ab0a88abe0e5, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 725708730}
+        m_TargetAssemblyTypeName: Game.Player.Manager, Game Assembly
+        m_MethodName: onBuildExit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &725708736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725708728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f3ecea74296974aa75a3993bd288f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 2036fb451d8049b4f932da6949402e84, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 725708730}
+        m_TargetAssemblyTypeName: Game.Player.Manager, Game Assembly
+        m_MethodName: onBuildEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &725708737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725708728}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7553fc2344ead1f468fd2a5b146f6ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorPrefab: {fileID: 1823956036386322611, guid: f5069e2997851f74b934fa818516cdc5, type: 3}
 --- !u!95 &1334823817
 Animator:
   serializedVersion: 3

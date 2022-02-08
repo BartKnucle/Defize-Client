@@ -26,10 +26,12 @@ namespace FunkySheep.Procedural.Earth
     public int resolution = 64;
     public Material material;
     public AddedTileEvent addedTileEvent;
+    public int layer = 0;
 
     public override void Create(FunkySheep.Manager manager)
     {
       base.Create(manager);
+      manager.root.layer = layer;
       //Hide the tilemaps
       (Get(manager, heightSO) as FunkySheep.Maps.Manager).root.GetComponent<TilemapRenderer>().enabled = false;
       (Get(manager, normalSO) as FunkySheep.Maps.Manager).root.GetComponent<TilemapRenderer>().enabled = false;
@@ -44,6 +46,7 @@ namespace FunkySheep.Procedural.Earth
     public Tile BuildTile(Manager manager, TerrainTile tile)
     {
       GameObject go = new GameObject();
+      go.layer = layer;
       go.name = tile.tilemapPosition.ToString();
       go.transform.parent = manager.root.transform;
       go.transform.localPosition = new Vector3(

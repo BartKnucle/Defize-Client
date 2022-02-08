@@ -52,9 +52,14 @@ namespace Game.Building.Walls
 
                 GameObject go = new GameObject();
                 go.name = i.ToString();
+                go.layer = 21;
                 go.transform.parent = this.transform;
                 go.transform.localPosition = Vector3.zero;
                 ProBuilderMesh mesh = go.AddComponent<ProBuilderMesh>();
+                Walls.Wall.Manager wall = go.AddComponent<Walls.Wall.Manager>();
+                wall.start = point;
+                wall.end = nextPoint;
+                go.AddComponent<MeshCollider>();
                 mesh.CreateShapeFromPolygon(points, 5, false);
                 go.GetComponent<MeshRenderer>().material = this.material;
             }

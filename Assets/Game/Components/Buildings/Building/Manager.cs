@@ -14,6 +14,8 @@ namespace Game.Building
         Floor floor;
         GameObject wallsGo;
         public Material material;
+        public FunkySheep.Events.GameEventGO onBuildEnter;
+        public FunkySheep.Events.GameEventGO onBuildExit;
         // Start is called before the first frame update
         void Start()
         {
@@ -26,10 +28,12 @@ namespace Game.Building
         private void OnCollisionEnter(Collision other) {
             GetComponent<MeshRenderer>().material.color = Color.green;
             CreateWalls();
+            onBuildEnter.Raise(this.gameObject);
         }
 
         private void OnCollisionExit(Collision other) {
             GetComponent<MeshRenderer>().material.color = Color.white;
+            onBuildExit.Raise(this.gameObject);
             DestroyWalls();
         }
 

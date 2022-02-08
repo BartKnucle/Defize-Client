@@ -61,6 +61,16 @@ namespace Game.Player
           calculatedLongitude.Value = calculatedGPS.longitude;
           calculatedMercatorPosition.Value = FunkySheep.GPS.Utils.toCartesianVector(calculatedLatitude.Value, calculatedLongitude.Value);
       }
+
+      public void onBuildEnter(GameObject buildingGo)
+      {
+        GetComponent<Builder>().enabled = true;
+      }
+
+      public void onBuildExit(GameObject buildingGo)
+      {
+        GetComponent<Builder>().enabled = false;
+      }
   }
     
 }
