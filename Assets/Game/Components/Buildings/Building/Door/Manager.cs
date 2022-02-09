@@ -22,7 +22,6 @@ namespace Game.Building.Door
         {
             heightPosition = Mathf.Infinity;
             frontPosition = Mathf.Infinity;
-            material.SetColor("Color_0c948efe52be4ddeb4993b6f87bd244e", Color.green);
         }
         
         public void SetSeed(int seed)
@@ -31,27 +30,34 @@ namespace Game.Building.Door
             Random.InitState(seed);
         }
 
-        public void Create(int seed = 0)
+        public bool Create(int seed = 0, float maxWidth = 5)
         {
-            GetHeightPosition();
-            SetSeed(seed);
-            height = Random.Range(3.5f, 5f);
-            width = height * Random.Range(0.5f, 1);
-            thickness = Random.Range(0.3f, 0.5f);
+            if (Evaluate())
+            {
+                if (maxWidth > 5)
+                {
+                    maxWidth = 5;
+                }
+                SetSeed(seed);
+                height = Random.Range(3.5f, 5f);
+                width = Random.Range(1f, maxWidth - 0.5f);
+                thickness = thickness = width * 0.1f;
 
-            CreateStairs();
-            CreateFrame();
-            Evaluate();
+                CreateStairs();
+                CreateFrame();
+                return true;
+            } else {
+                return false;
+            }
         }
 
         public bool Evaluate()
         {
+            GetHeightPosition();
             if (heightPosition < 3 && ChechNeightbours())
             {
-                material.SetColor("Color_0c948efe52be4ddeb4993b6f87bd244e", Color.green);
                 return true;
             } else {
-                material.SetColor("Color_0c948efe52be4ddeb4993b6f87bd244e", Color.red);
                 return false;
             }
         }
@@ -84,13 +90,10 @@ namespace Game.Building.Door
 
             RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
-            Debug.DrawRay(transform.position + transform.up, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)) * 20, Color.magenta, 600);
-            if (Physics.Raycast(transform.position + transform.up, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)), out hit, Mathf.Infinity, layerMask))
+            Debug.DrawRay(transform.position + transform.up * 3, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)) * 20, Color.magenta, 600);
+            if (Physics.Raycast(transform.position + transform.up * 3, (transform.TransformDirection(Vector3.forward - Vector3.up * 2)), out hit, Mathf.Infinity, layerMask))
             {
-                if (hit.distance < 5)
-                {
-                    return false;
-                }
+                return false;
             }
 
             return valid;       

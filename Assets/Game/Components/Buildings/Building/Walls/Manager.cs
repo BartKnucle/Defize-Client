@@ -8,13 +8,21 @@ namespace Game.Building.Walls
 {
     public class Manager : MonoBehaviour
     {
+        float wallThickness = 0.5f;
         public Material material;
+        FunkySheep.Procedural.Buildings.Building building;
         public void Create(FunkySheep.Procedural.Buildings.Building building)
         {
-            float wallThickness = 1f;
+            this.building = building;
             for (int i = 0, c = building.points.Length; i < c; i++)
             {
-                int prevIndex = i - 1;
+                AddWall(i);
+            }
+        }
+
+        public void AddWall(int i)
+        {
+            int prevIndex = i - 1;
                 if (i == 0)
                 {
                 prevIndex = building.points.Length - 1;
@@ -62,7 +70,8 @@ namespace Game.Building.Walls
                 go.AddComponent<MeshCollider>();
                 mesh.CreateShapeFromPolygon(points, 5, false);
                 go.GetComponent<MeshRenderer>().material = this.material;
-            }
+
+
         }
     }    
 }

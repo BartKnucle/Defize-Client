@@ -26,8 +26,10 @@ namespace Game.Player
                 _currentWall = hit.collider.gameObject;
                 if (_currentWall != _lastWall)
                 {
-                    _currentWall.GetComponent<MeshRenderer>().enabled = false;
-                    _currentWall.GetComponent<Game.Building.Walls.Wall.Manager>().AddDoor(doorPrefab);
+                    if (_currentWall.GetComponent<Game.Building.Walls.Wall.Manager>().AddDoor(doorPrefab))
+                    {
+                        _currentWall.GetComponent<MeshRenderer>().enabled = false;
+                    };
 
                     if (_lastWall != null)
                     {
