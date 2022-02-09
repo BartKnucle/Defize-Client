@@ -11,6 +11,7 @@ namespace Game.Building
     public class Manager : MonoBehaviour
     {
         FunkySheep.Procedural.Buildings.Building building ;
+        public bool created = false;
         Floor floor;
         GameObject wallsGo;
         public Material material;
@@ -27,15 +28,19 @@ namespace Game.Building
         }
 
         private void OnCollisionEnter(Collision other) {
-            GetComponent<MeshRenderer>().material.color = Color.green;
-            CreateWalls();
-            onBuildEnter.Raise(this.gameObject);
+            if (!created)
+            {
+              CreateWalls();
+              onBuildEnter.Raise(this.gameObject);
+            }
         }
 
         private void OnCollisionExit(Collision other) {
-            GetComponent<MeshRenderer>().material.color = Color.white;
-            onBuildExit.Raise(this.gameObject);
+          onBuildExit.Raise(this.gameObject);
+          if (!created)
+          {
             DestroyWalls();
+          }
         }
 
         public void CreateWalls()
@@ -46,7 +51,6 @@ namespace Game.Building
             walls.material = this.material;
             walls.Create(building);
         }
-
         public void DestroyWalls()
         {
             Destroy(wallsGo);

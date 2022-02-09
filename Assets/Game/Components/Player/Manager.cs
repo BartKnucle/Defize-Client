@@ -64,12 +64,14 @@ namespace Game.Player
 
       public void onBuildEnter(GameObject buildingGo)
       {
+        GetComponent<Builder>().buildingGo = buildingGo;
         GetComponent<Builder>().enabled = true;
       }
 
       public void onBuildExit(GameObject buildingGo)
       {
         GetComponent<Builder>().enabled = false;
+        GetComponent<Builder>().buildingGo = null;
       }
   }
     

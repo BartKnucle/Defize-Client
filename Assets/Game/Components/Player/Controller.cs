@@ -63,7 +63,7 @@ namespace Game.Player
     public void Jump()
     {
       animator.SetBool("isGrounded", false);
-      _controller.Move(Vector3.up + transform.forward * 0.3f);
+      _controller.Move(Vector3.up * 0.1f + transform.forward * 0.1f);
     }
   }
 }
