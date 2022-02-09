@@ -35,9 +35,9 @@ namespace Game.Building.Door
         {
             GetHeightPosition();
             SetSeed(seed);
-            height = Random.Range(2.5f, 3.5f);
+            height = Random.Range(3.5f, 5f);
             width = height * Random.Range(0.5f, 1);
-            thickness = Random.Range(0.1f, 0.5f);
+            thickness = Random.Range(0.3f, 0.5f);
 
             CreateStairs();
             CreateFrame();
@@ -115,32 +115,32 @@ namespace Game.Building.Door
 
         public void CreateFrameHead()
         {
-            ProBuilderMesh frameHead = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(width, width * 0.5f, thickness));
+            ProBuilderMesh frameHead = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(width, thickness, thickness));
             frameHead.transform.parent = transform;
-            frameHead.transform.localPosition = new Vector3(0, height - width * 0.25f , -thickness / 2);
+            frameHead.transform.localPosition = new Vector3(0, height , -thickness / 2);
             frameHead.gameObject.transform.localRotation = Quaternion.identity;
             frameHead.gameObject.GetComponent<MeshRenderer>().material = material;
 
-            int count = (int)Random.Range(3, 10);
+            /*int count = (int)Random.Range(3, 10);
             float archThickness = thickness * 1.2f;
             ProBuilderMesh frameHeadArch = ShapeGenerator.GenerateArch(PivotLocation.Center, 180, width * 0.5f, width * 0.5f, archThickness, count, true, true, true, true, true);
             frameHeadArch.transform.parent = transform;
             frameHeadArch.transform.localPosition = new Vector3(0, height - width * 0.25f , -thickness / 2 + (archThickness - thickness));
             frameHeadArch.gameObject.transform.localRotation = Quaternion.identity;
-            frameHeadArch.gameObject.GetComponent<MeshRenderer>().material = material;
+            frameHeadArch.gameObject.GetComponent<MeshRenderer>().material = material;*/
         }
 
         public void CreateFrameJambs()
         {
             ProBuilderMesh frameJambLeft = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, height, thickness));
             frameJambLeft.transform.parent = transform;
-            frameJambLeft.transform.localPosition = Vector3.zero + new Vector3(-width * 0.5f, height * 0.5f, -thickness / 2);
+            frameJambLeft.transform.localPosition = Vector3.zero + new Vector3(-width * 0.5f + thickness / 2, height * 0.5f, -thickness / 2);
             frameJambLeft.gameObject.transform.localRotation = Quaternion.identity;
             frameJambLeft.gameObject.GetComponent<MeshRenderer>().material = material;
 
             ProBuilderMesh frameRightJambe = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, height, thickness));
             frameRightJambe.transform.parent = transform;
-            frameRightJambe.transform.localPosition = Vector3.zero + new Vector3(width * 0.5f, height * 0.5f, -thickness / 2);
+            frameRightJambe.transform.localPosition = Vector3.zero + new Vector3(width * 0.5f - thickness / 2, height * 0.5f, -thickness / 2);
             frameRightJambe.gameObject.transform.localRotation = Quaternion.identity;
             frameRightJambe.gameObject.GetComponent<MeshRenderer>().material = material;
         }
