@@ -12,10 +12,19 @@ namespace Game.Player
     public float rotateSpeed = 1;
     private Gyroscope gyro;
     // Start is called before the first frame update
+
+    public GameObject mobileController;
     void Start()
     {
       _controller = GetComponent<CharacterController>();
       _controller.minMoveDistance = 0f;
+
+      #if UNITY_ANDROID
+        mobileController = GameObject.Instantiate(mobileController);
+        mobileController.GetComponentInChildren<Game.Player.Joystick>().controller = _controller;
+        mobileController.GetComponentInChildren<Game.Player.Joystick>().animator = animator;
+      #endif
+
     }
 
     // Update is called once per frame
@@ -24,7 +33,7 @@ namespace Game.Player
       float curSpeed = 0;
 
       #if UNITY_ANDROID
-        Vector2 dir = Vector2.zero;
+        /*Vector2 dir = Vector2.zero;
         dir.x = Input.acceleration.y;
         dir.y = Input.acceleration.x;
         if (dir.sqrMagnitude > 1)
@@ -37,7 +46,7 @@ namespace Game.Player
             {
               Jump();
             }
-        }
+        }*/
       #endif
 
        #if UNITY_EDITOR

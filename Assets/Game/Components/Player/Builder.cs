@@ -47,7 +47,7 @@ namespace Game.Player
               }
           }
 
-          if (Input.GetKeyDown(KeyCode.LeftControl) && DoorAdded)
+          if ((Input.GetKeyDown(KeyCode.LeftControl) || Input.touchCount == 2)  && DoorAdded)
           {
             Destroy(_currentWall.GetComponent<ProBuilderMesh>());
             Destroy(_currentWall.GetComponent<MeshRenderer>());
