@@ -21,13 +21,14 @@ namespace FunkySheep.Procedural.Buildings
 
       for (int i = 0; i < newPositions.Length; i++)
       {
-        newPositions[i].x = building.points[i].x;
-        newPositions[i].y = building.lowPoint.Value;
-        newPositions[i].z = building.points[i].y;
+        newPositions[i].x = building.points[i].x - building.center.x;
+        newPositions[i].y = 0;
+        newPositions[i].z = building.points[i].y - building.center.y;
       }
       
       mesh.CreateShapeFromPolygon(newPositions, building.hightPoint.Value - building.lowPoint.Value + 0.20f, false);
       GetComponent<MeshRenderer>().material = material;
+      transform.position = new Vector3(building.center.x, building.lowPoint.Value, building.center.y);
     }
   }  
 }

@@ -45,11 +45,12 @@ namespace Game.Building
 
         public void CreateWalls()
         {
-            wallsGo = new GameObject();
-            wallsGo.transform.parent = transform;
-            Walls.Manager walls = wallsGo.AddComponent<Walls.Manager>();
-            walls.material = this.material;
-            walls.Create(building);
+          wallsGo = new GameObject();
+          wallsGo.transform.parent = transform;
+          wallsGo.transform.position = transform.position;
+          Walls.Manager walls = wallsGo.AddComponent<Walls.Manager>();
+          walls.material = this.material;
+          walls.Create(building);
         }
         public void DestroyWalls()
         {

@@ -17,6 +17,7 @@ namespace Game.Building.Door
         public float heightPosition;
         public float frontPosition;
         public float thickness = 0.2f;
+        Game.Building.Walls.Wall.Manager wall;
 
         private void Awake()
         {
@@ -30,21 +31,19 @@ namespace Game.Building.Door
             Random.InitState(seed);
         }
 
-        public bool Create(int seed = 0, float maxWidth = 5)
+        public bool Create(Game.Building.Walls.Wall.Manager wall, int seed = 0)
         {
             if (Evaluate())
             {
-                if (maxWidth > 5)
-                {
-                    maxWidth = 5;
-                }
+                this.wall = wall;
                 SetSeed(seed);
-                height = Random.Range(3.5f, 5f);
-                width = Random.Range(1f, maxWidth - 0.5f);
+                height = wall.height - 0.5f;
+                width = Random.Range(1f, Vector3.Distance(wall.start, wall.end) - 0.5f);
                 thickness = thickness = width * 0.1f;
 
                 CreateStairs();
                 CreateFrame();
+                CreateBorders();
                 return true;
             } else {
                 return false;
@@ -114,38 +113,73 @@ namespace Game.Building.Door
             stairs.gameObject.transform.Rotate(Vector3.up * 180);
             stairs.gameObject.transform.localPosition =  new Vector3(0, -heightPosition * 0.5f, heightPosition / 2);
             stairs.GetComponent<MeshRenderer>().material = material;
+            stairs.gameObject.AddComponent<MeshCollider>();
         }
 
         public void CreateFrameHead()
         {
             ProBuilderMesh frameHead = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(width, thickness, thickness));
+            frameHead.gameObject.AddComponent<MeshCollider>();
             frameHead.transform.parent = transform;
-            frameHead.transform.localPosition = new Vector3(0, height , -thickness / 2);
+            frameHead.transform.localPosition = new Vector3(0, wall.height -thickness / 2 , -thickness / 2);
             frameHead.gameObject.transform.localRotation = Quaternion.identity;
             frameHead.gameObject.GetComponent<MeshRenderer>().material = material;
-
-            /*int count = (int)Random.Range(3, 10);
-            float archThickness = thickness * 1.2f;
-            ProBuilderMesh frameHeadArch = ShapeGenerator.GenerateArch(PivotLocation.Center, 180, width * 0.5f, width * 0.5f, archThickness, count, true, true, true, true, true);
-            frameHeadArch.transform.parent = transform;
-            frameHeadArch.transform.localPosition = new Vector3(0, height - width * 0.25f , -thickness / 2 + (archThickness - thickness));
-            frameHeadArch.gameObject.transform.localRotation = Quaternion.identity;
-            frameHeadArch.gameObject.GetComponent<MeshRenderer>().material = material;*/
+            frameHead.gameObject.AddComponent<MeshCollider>();
         }
 
         public void CreateFrameJambs()
         {
-            ProBuilderMesh frameJambLeft = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, height, thickness));
+            ProBuilderMesh frameJambLeft = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, wall.height, thickness));
             frameJambLeft.transform.parent = transform;
-            frameJambLeft.transform.localPosition = Vector3.zero + new Vector3(-width * 0.5f + thickness / 2, height * 0.5f, -thickness / 2);
+            frameJambLeft.transform.localPosition = Vector3.zero + new Vector3(-width * 0.5f + thickness / 2, wall.height * 0.5f, -thickness / 2);
             frameJambLeft.gameObject.transform.localRotation = Quaternion.identity;
             frameJambLeft.gameObject.GetComponent<MeshRenderer>().material = material;
+            frameJambLeft.gameObject.AddComponent<MeshCollider>();
 
-            ProBuilderMesh frameRightJambe = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, height, thickness));
+            ProBuilderMesh frameRightJambe = ShapeGenerator.GenerateCube(PivotLocation.Center, new Vector3(thickness, wall.height, thickness));
             frameRightJambe.transform.parent = transform;
-            frameRightJambe.transform.localPosition = Vector3.zero + new Vector3(width * 0.5f - thickness / 2, height * 0.5f, -thickness / 2);
+            frameRightJambe.transform.localPosition = Vector3.zero + new Vector3(width * 0.5f - thickness / 2, wall.height * 0.5f, -thickness / 2);
             frameRightJambe.gameObject.transform.localRotation = Quaternion.identity;
             frameRightJambe.gameObject.GetComponent<MeshRenderer>().material = material;
+            frameRightJambe.gameObject.AddComponent<MeshCollider>();
+        }
+
+        public void CreateBorders()
+        {
+            Vector3 center = (wall.end - wall.start) / 2;
+            Vector3 start = wall.start - center;
+            Vector3 startInside = start + (wall.startInside - wall.start);
+            Vector3 end = wall.end - center;
+            Vector3 endInside = end + (wall.endInside - wall.end);
+
+            IList<Vector3> leftVect = new List<Vector3> {
+                Vector3.zero - transform.right * width / 2,
+                start,
+                startInside,
+                -transform.forward * thickness - transform.right * width / 2
+            };
+
+            ProBuilderMesh borderLeft = ProBuilderMesh.Create();
+            borderLeft.CreateShapeFromPolygon(leftVect, wall.height, false);
+            borderLeft.transform.parent = transform;
+            borderLeft.transform.localPosition = Vector3.zero;
+            borderLeft.gameObject.GetComponent<MeshRenderer>().material = material;
+            borderLeft.gameObject.AddComponent<MeshCollider>();
+
+            IList<Vector3> rightVect = new List<Vector3> {
+                Vector3.zero + transform.right * width / 2,
+                end,
+                endInside,
+                -transform.forward * thickness + transform.right * width / 2
+            };
+
+            ProBuilderMesh borderRight = ProBuilderMesh.Create();
+            borderRight.CreateShapeFromPolygon(rightVect, wall.height, false);
+            borderRight.transform.parent = transform;
+            borderRight.transform.localPosition = Vector3.zero;
+            borderRight.gameObject.GetComponent<MeshRenderer>().material = material;
+            borderRight.gameObject.AddComponent<MeshCollider>();
+
         }
     }    
 }

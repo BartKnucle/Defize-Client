@@ -8,7 +8,8 @@ namespace Game.Building.Walls
 {
     public class Manager : MonoBehaviour
     {
-        float wallThickness = 0.5f;
+        float thickness = 0.5f;
+        float height = 5f;
         public Material material;
         FunkySheep.Procedural.Buildings.Building building;
         public void Create(FunkySheep.Procedural.Buildings.Building building)
@@ -32,10 +33,10 @@ namespace Game.Building.Walls
 
           Vector3[] points = new Vector3[4];
 
-          Vector3 prevPoint = new Vector3(building.points[prevIndex].x, building.hightPoint.Value + 0.20f, building.points[prevIndex].y);
-          Vector3 point = new Vector3(building.points[i].x, building.hightPoint.Value + 0.20f, building.points[i].y);
-          Vector3 nextPoint = new Vector3(building.points[nextIndex].x, building.hightPoint.Value + 0.20f, building.points[nextIndex].y);
-          Vector3 lastPoint = new Vector3(building.points[lastIndex].x, building.hightPoint.Value + 0.20f, building.points[lastIndex].y);
+          Vector3 prevPoint = new Vector3(building.points[prevIndex].x - building.center.x, (building.hightPoint.Value- building.lowPoint.Value) + 0.20f, building.points[prevIndex].y - building.center.y);
+          Vector3 point = new Vector3(building.points[i].x - building.center.x, (building.hightPoint.Value- building.lowPoint.Value) + 0.20f, building.points[i].y - building.center.y);
+          Vector3 nextPoint = new Vector3(building.points[nextIndex].x - building.center.x, (building.hightPoint.Value- building.lowPoint.Value) + 0.20f, building.points[nextIndex].y - building.center.y);
+          Vector3 lastPoint = new Vector3(building.points[lastIndex].x - building.center.x, (building.hightPoint.Value- building.lowPoint.Value) + 0.20f, building.points[lastIndex].y - building.center.y);
 
           float pointAngle = Mathf.Sign(Vector3.SignedAngle(nextPoint - point, prevPoint - point, point));
           if (pointAngle == 0)
@@ -44,35 +45,36 @@ namespace Game.Building.Walls
           if (nextPointAngle == 0)
           nextPointAngle = -1;
 
-          points[0] = point;
+          points[0] = Vector3.zero;
 
-          points[1] = nextPoint;
+          points[1] = nextPoint - point;
           
-          points[2] = nextPoint + new Vector3(
-          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * wallThickness).x,
+          points[2] = nextPoint  - point + new Vector3(
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * thickness).x,
           0,
-          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * wallThickness).z) * nextPointAngle;
+          (((point - nextPoint).normalized + (lastPoint - nextPoint).normalized).normalized * thickness).z) * nextPointAngle;
 
-          points[3] = point + new Vector3(
-          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * wallThickness).x,
+          points[3] = Vector3.zero + new Vector3(
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * thickness).x,
           0,
-          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * wallThickness).z) * pointAngle;
+          (((prevPoint - point).normalized + (nextPoint - point).normalized).normalized * thickness).z) * pointAngle;
 
           GameObject go = new GameObject();
           go.name = i.ToString();
           go.layer = 21;
           go.transform.parent = this.transform;
-          go.transform.localPosition = Vector3.zero;
+          go.transform.localPosition = point;
           ProBuilderMesh mesh = go.AddComponent<ProBuilderMesh>();
           Walls.Wall.Manager wall = go.AddComponent<Walls.Wall.Manager>();
           wall.walls = this;
           wall.id = i;
-          wall.start = point;
+          wall.start = points[0];
           wall.startInside = points[3];
-          wall.end = nextPoint;
+          wall.end = points[1];
           wall.endInside = points[2];
+          wall.height = height;
           go.AddComponent<MeshCollider>();
-          mesh.CreateShapeFromPolygon(points, 5, false);
+          mesh.CreateShapeFromPolygon(points, height, false);
           go.GetComponent<MeshRenderer>().material = this.material;
         }
     }    

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 
 namespace Game.Player
 {
@@ -48,7 +49,9 @@ namespace Game.Player
 
           if (Input.GetKeyDown(KeyCode.LeftControl) && DoorAdded)
           {
-            _currentWall.GetComponent<MeshRenderer>().enabled = true;
+            Destroy(_currentWall.GetComponent<ProBuilderMesh>());
+            Destroy(_currentWall.GetComponent<MeshRenderer>());
+            Destroy(_currentWall.GetComponent<MeshCollider>());
             buildingGo.GetComponent<Game.Building.Manager>().created = true;
             _currentWall = null;
             _lastWall = null;
