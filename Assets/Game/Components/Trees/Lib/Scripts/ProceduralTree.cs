@@ -49,9 +49,9 @@ namespace ProceduralModeling {
 					var segment = branch.Segments[i];
 					var N = segment.Frame.Normal;
 					var B = segment.Frame.Binormal;
-					for(int j = 0; j <= data.radialSegments; j++) {
+					for(int j = 0; j <= data.RadialSegments(); j++) {
 						// 0.0 ~ 2π
-						var u = 1f * j / data.radialSegments;
+						var u = 1f * j / data.RadialSegments();
 						float rad = u * PI2;
 
 						float cos = Mathf.Cos(rad), sin = Mathf.Sin(rad);
@@ -66,12 +66,12 @@ namespace ProceduralModeling {
 					}
 				}
 
-				for (int j = 1; j <= data.heightSegments; j++) {
-					for (int i = 1; i <= data.radialSegments; i++) {
-						int a = (data.radialSegments + 1) * (j - 1) + (i - 1);
-						int b = (data.radialSegments + 1) * j + (i - 1);
-						int c = (data.radialSegments + 1) * j + i;
-						int d = (data.radialSegments + 1) * (j - 1) + i;
+				for (int j = 1; j <= data.heightSegments(); j++) {
+					for (int i = 1; i <= data.RadialSegments(); i++) {
+						int a = (data.RadialSegments() + 1) * (j - 1) + (i - 1);
+						int b = (data.RadialSegments() + 1) * j + (i - 1);
+						int c = (data.RadialSegments() + 1) * j + i;
+						int d = (data.RadialSegments() + 1) * (j - 1) + i;
 
 						a += offset;
 						b += offset;
@@ -125,7 +125,7 @@ namespace ProceduralModeling {
         [Range(-45f, 0f)] public float growthAngleMin = -15f;
         [Range(0f, 45f)] public float growthAngleMax = 15f;
         [Range(1f, 10f)] public float growthAngleScale = 4f;
-		[Range(4, 20)] public int heightSegments = 10, radialSegments = 8;
+		//[Range(4, 20)] public int heightSegments = 10; //, radialSegments = 8;
 		[Range(0.0f, 0.35f)] public float bendDegree = 0.1f;
 
 		Rand rnd;
@@ -133,6 +133,17 @@ namespace ProceduralModeling {
 		public void Setup() {
 			rnd = new Rand(randomSeed);
 		}
+
+    public int RadialSegments()
+    {
+      return 8;
+    }
+
+    public int heightSegments()
+    {
+      return 10;
+    }
+
 
 		public int Range(int a, int b) {
 			return rnd.Range(a, b);
@@ -263,7 +274,7 @@ namespace ProceduralModeling {
 
 			var curve = new CatmullRomCurve(points);
 
-			var frames = curve.ComputeFrenetFrames(data.heightSegments, normal, binormal, false);
+			var frames = curve.ComputeFrenetFrames(data.heightSegments(), normal, binormal, false);
 			for(int i = 0, n = frames.Count; i < n; i++) {
 				var u = 1f * i / (n - 1);
                 var radius = Mathf.Lerp(fromRadius, toRadius, u);

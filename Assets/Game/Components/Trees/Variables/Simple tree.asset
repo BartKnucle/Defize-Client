@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Simple tree
   m_EditorClassIdentifier: 
   dependencies: []
+  seed: 0
+  generations: 5
   material: {fileID: 2100000, guid: e1034568a883f0c4687d332de291a658, type: 2}
-  generations: 0
