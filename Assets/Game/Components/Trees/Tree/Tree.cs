@@ -6,17 +6,19 @@ namespace Game.Trees
 {
   public class Tree : MonoBehaviour
   {
+    public int generations = 3;
     private void Start() {
-      CreateMultipleTrunks();
+      CreateTrunk();
     }
 
     public void CreateTrunk()
     {
-      GameObject rootGo = new GameObject();
+      GameObject rootGo = GameObject.CreatePrimitive(PrimitiveType.Cube);
       rootGo.name = "root";
-      rootGo.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+      rootGo.transform.localScale = Vector3.one * 0.1f;
       rootGo.transform.parent = this.transform;
-      rootGo.AddComponent<Branch>();
+      Branch trunk = rootGo.AddComponent<Branch>();
+      trunk.tree = this;
     }
 
     public void CreateMultipleTrunks()

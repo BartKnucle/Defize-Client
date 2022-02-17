@@ -11,7 +11,8 @@ namespace Game.Trees
       public Material material;
       public void Create(Manager manager)
       {
-        GameObject treeGo = new GameObject();
+        GameObject treeGo = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        treeGo.transform.localScale = Vector3.one * 0.1f;
         treeGo.name = "tree";
         treeGo.transform.parent = manager.root.transform;
         treeGo.AddComponent<Tree>();
