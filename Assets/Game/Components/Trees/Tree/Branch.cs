@@ -16,6 +16,9 @@ namespace Game.Trees
     //bool alive = true;
     bool positionned = false;
     bool created = false;
+    int childCount = 0;
+
+    List<Vector3> nodes = new List<Vector3>();
 
     private void Awake() {
       GetComponent<Collider>().isTrigger = true;
@@ -50,9 +53,9 @@ namespace Game.Trees
 
     public void CreateChilds()
     {
-      int childcount = Random.Range(2, 4);
+      childCount = Random.Range(2, 4);
 
-      for (int i = 0; i < childcount; i++)
+      for (int i = 0; i < childCount; i++)
       {
         CreateChild();
       }
@@ -111,44 +114,39 @@ namespace Game.Trees
       {
         GetComponent<MeshRenderer>().material.color = Color.green;
         Debug.DrawLine(transform.parent.position, transform.position, Color.green, 600);
-
-        if (IsParentReady())
-        {
-          Branch parent = transform.parent.GetComponent<Branch>();
-          if (parent != null)
-          {
-            parent.CreateMesh();
-          }
-        }
-
       } else {
         GetComponent<MeshRenderer>().material.color = Color.red;
         Debug.DrawLine(transform.parent.position, transform.position, Color.red, 600);
         CreateChilds();
       }
+
+      CreateMesh();
     }
 
-    public bool IsParentReady()
+    public bool IsReady()
     {
-      bool ready = true;
-      
-      Branch[] parentChildBrances = transform.parent.GetComponentsInChildren<Branch>();
-
-      for (int i = 0; i < parentChildBrances.Length; i++)
+      bool ready = true;    
+      for (int i = 0; i < transform.childCount; i++)
       {
-        ready &= parentChildBrances[i].positionned;
+        ready &= transform.GetChild(i).GetComponent<Branch>().positionned;
       }
       return ready;
     }
 
     public void CreateMesh()
     {
-      GetComponent<MeshRenderer>().material.color = Color.blue;
+      float radius = tree.radius  * (tree.generations - generation) / tree.generations;
+      int nodeCount = tree.resolution * childCount;
 
-      Branch parent = transform.parent.GetComponent<Branch>();
-      if (parent != null)
+      for (int i = 0; i < nodeCount; i++)
       {
-        parent.CreateMesh();
+        float angle = i * Mathf.PI * 2f / nodeCount;
+        Vector3 newPos = new Vector3(Mathf.Cos(angle)*radius, 0, Mathf.Sin(angle)*radius);
+        GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        go.transform.position = start + newPos;
+        go.name = i.ToString();
+        go.transform.localScale = Vector3.one * 0.05f;
+        go.transform.parent = this.transform;
       }
     }
   }

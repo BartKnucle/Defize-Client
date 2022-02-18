@@ -6,6 +6,8 @@ namespace Game.Trees
 {
   public class Tree : MonoBehaviour
   {
+    public float radius = 0.5f;
+    public int resolution = 2;
     public int generations = 3;
     private void Start() {
       CreateTrunk();
