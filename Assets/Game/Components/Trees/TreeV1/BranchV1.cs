@@ -108,16 +108,57 @@ namespace Game.Trees
 
     public void AddBranch()
     {
-      for (int i = 0; i < tree.resolution; i++)
+      Vector3? nextNode = transform.position;
+      if (generation != 0)
       {
-        Vector3 position = transform.position;
-        if (generation != 0)
-        {
-          position = (generation - 1) * Vector3.up;
-        }
+        nextNode = GetNextHeight().Value;
+      }
 
-        vertices.Add(position);
+      if (nextNode != null)
+      {
+        for (int i = 0; i < tree.resolution; i++)
+        {
+          vertices.Add(nextNode.Value);
+        }
       }
     }
+
+    public Vector3? GetNextHeight()
+    {
+      for (int x = 0; x < 10; x++)
+      {
+        Vector3 nextHeight = RandomNext((generation - 1) * Vector3.up);
+        Color color = Random.ColorHSV();
+        bool valid = true;
+        for (int i = 0; i < tree.resolution; i++)
+        {
+          float radius = tree.radius * (1 - ((float)generation / (float)tree.generations));
+          float angle = i * Mathf.PI * 2f / tree.resolution;
+          Vector3 nextPos = new Vector3(Mathf.Cos(angle) * radius, generation, Mathf.Sin(angle) * radius);
+          nextPos += nextHeight;
+          
+          int lastVerticeIndex = ((generation - 1) * tree.resolution) + i;
+          // Detect horizontal collisions
+          Debug.DrawLine(vertices[lastVerticeIndex], nextPos, color, 600);
+          valid &= !DectectCollision(vertices[lastVerticeIndex], nextPos);
+        }
+
+        if (valid)
+        {
+          return nextHeight;
+        }
+      }
+
+      return null;
+    }
+
+    public Vector3 RandomNext(Vector3 start)
+    {
+      return Utils.RandVector3(
+        start + Vector3.left + Vector3.forward,
+        start + Vector3.right + Vector3.back
+      );
+    }
+
   }
 }
