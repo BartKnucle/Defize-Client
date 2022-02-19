@@ -12,6 +12,7 @@ namespace Game.Trees
     public int generation = 0;
 
     public List<Vector3> vertices = new List<Vector3>();
+    Vector3? nextNode;
 
     private void Start() {
       this.Create();
@@ -52,6 +53,7 @@ namespace Game.Trees
         float radius = tree.radius * (1 - ((float)generation / (float)tree.generations));
         float angle = i * Mathf.PI * 2f / tree.resolution;
         Vector3 endPos = new Vector3(Mathf.Cos(angle) * radius, generation, Mathf.Sin(angle) * radius);
+        endPos += nextNode.Value;
         
         int verticeIndex = (generation * tree.resolution) + i;
         int nextVerticeIndex = (generation * tree.resolution) + (i + 1) % tree.resolution;
@@ -97,7 +99,6 @@ namespace Game.Trees
     {
       if (Physics.Linecast(start, end))
       {
-        Debug.DrawLine(start, end, Color.red);
         return true;
       }
       else
@@ -106,28 +107,11 @@ namespace Game.Trees
       }
     }
 
-    public void AddBranch()
-    {
-      Vector3? nextNode = transform.position;
-      if (generation != 0)
-      {
-        nextNode = GetNextHeight().Value;
-      }
-
-      if (nextNode != null)
-      {
-        for (int i = 0; i < tree.resolution; i++)
-        {
-          vertices.Add(nextNode.Value);
-        }
-      }
-    }
-
     public Vector3? GetNextHeight()
     {
       for (int x = 0; x < 10; x++)
       {
-        Vector3 nextHeight = RandomNext((generation - 1) * Vector3.up);
+        Vector3 nextHeight = RandomNext(Vector3.zero);
         Color color = Random.ColorHSV();
         bool valid = true;
         for (int i = 0; i < tree.resolution; i++)
@@ -139,7 +123,7 @@ namespace Game.Trees
           
           int lastVerticeIndex = ((generation - 1) * tree.resolution) + i;
           // Detect horizontal collisions
-          Debug.DrawLine(vertices[lastVerticeIndex], nextPos, color, 600);
+          //Debug.DrawLine(vertices[lastVerticeIndex], nextPos, color, 600);
           valid &= !DectectCollision(vertices[lastVerticeIndex], nextPos);
         }
 
@@ -160,5 +144,36 @@ namespace Game.Trees
       );
     }
 
+    public void AddBranch()
+    {
+      nextNode = transform.position;
+      if (generation != 0)
+      {
+        nextNode = GetNextHeight().Value;
+      }
+
+      if (nextNode != null)
+      {
+        for (int i = 0; i < tree.resolution; i++)
+        {
+          if (generation != 0)
+          {
+            int prevIndex = ((generation - 1) * tree.resolution) + i;
+            vertices.Add(vertices[prevIndex]);
+          } else {
+            vertices.Add(Vector3.zero);
+          }     
+        }
+      }
+    }
+
+    public void AddChild(Vector3 position)
+    {
+      GameObject go = new GameObject();
+      go.transform.position = position;
+      BranchV1 branch = go.AddComponent<BranchV1>();
+      branch.tree = tree;
+      go.transform.parent = transform;
+    }
   }
 }
