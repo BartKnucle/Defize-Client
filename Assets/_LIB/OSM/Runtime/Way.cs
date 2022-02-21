@@ -9,7 +9,6 @@ namespace FunkySheep.OSM
         public Bounds bounds = new Bounds();
         public List<Node> nodes = new List<Node>();
         public List<Tag> tags = new List<Tag>();
-        public Tile tile;
         public Way(int id)
         {
           this.id = id;

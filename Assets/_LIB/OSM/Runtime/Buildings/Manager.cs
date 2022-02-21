@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep.JSON;
+using FunkySheep.SimpleJSON;
 
 namespace FunkySheep.OSM.Buildings
 {

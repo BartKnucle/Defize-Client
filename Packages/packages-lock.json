@@ -189,16 +189,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "net.funkysheep.unity.buildings": {
-      "version": "0.1.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "net.funkysheep.unity.library": "0.2.4",
-        "net.funkysheep.unity.habrador": "0.1.0"
-      },
-      "url": "https://registry.npmjs.org"
-    },
     "net.funkysheep.unity.gps": {
       "version": "0.1.6",
       "depth": 0,
@@ -206,20 +196,6 @@
       "dependencies": {
         "net.funkysheep.unity.library": "0.2.4"
       },
-      "url": "https://registry.npmjs.org"
-    },
-    "net.funkysheep.unity.habrador": {
-      "version": "0.1.0",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
-    },
-    "net.funkysheep.unity.json": {
-      "version": "0.1.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.library": {
@@ -230,22 +206,11 @@
       "url": "https://registry.npmjs.org"
     },
     "net.funkysheep.unity.network": {
-      "version": "0.1.5",
+      "version": "0.1.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "net.funkysheep.unity.library": "0.2.4"
-      },
-      "url": "https://registry.npmjs.org"
-    },
-    "net.funkysheep.unity.openstreetmap": {
-      "version": "0.2.3",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "net.funkysheep.unity.library": "0.2.4",
-        "net.funkysheep.unity.gps": "0.1.4",
-        "net.funkysheep.unity.buildings": "0.1.6"
+        "net.funkysheep.unity.library": "0.3.3"
       },
       "url": "https://registry.npmjs.org"
     },

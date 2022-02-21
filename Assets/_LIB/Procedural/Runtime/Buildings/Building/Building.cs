@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using FunkySheep.OSM;
-using FunkySheep.JSON;
+using FunkySheep.SimpleJSON;
 
 namespace FunkySheep.Procedural.Buildings
 {
@@ -32,7 +32,7 @@ namespace FunkySheep.Procedural.Buildings
       SetClockWise();
     }
 
-    public Building(JSON.JSONNode way)
+    public Building(JSONNode way)
     {
       this.id = way["id"];
       points = new Vector2[way["geometry"].AsArray.Count - 1];
@@ -105,7 +105,7 @@ namespace FunkySheep.Procedural.Buildings
     public void SetClockWise()
     {
         // Skip the last point since it is the same as the first
-        int result = FunkySheep.Vectors.IsClockWise(points[1], points[points.Length - 1] , points[0]);
+        int result = FunkySheep.Vectors.Utils.IsClockWise(points[1], points[points.Length - 1] , points[0]);
         if (result < 0) {
             Array.Reverse(points);
         }

@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FunkySheep;
+using FunkySheep.SimpleJSON;
 using FunkySheep.Network;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -179,7 +178,7 @@ public class PointClouds : MonoBehaviour
 
     // Fill the point cloud with database
     public void fill() {
-        SimpleJSON.JSONArray points = pointsCloudService.lastRawMsg["data"]["data"].AsArray;
+        JSONArray points = pointsCloudService.lastRawMsg["data"]["data"].AsArray;
         for (int i = 0; i < points.Count; i++)
         {
             GameObject cloud;

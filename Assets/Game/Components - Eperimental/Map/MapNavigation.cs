@@ -6,7 +6,9 @@ using UnityEngine;
 public class MapNavigation : MonoBehaviour
 {
     Camera cam;
-    public FunkySheep.OSM.Map2D _map;
+    int zoom = 14;
+    float tileSize;
+    //public FunkySheep.OSM.Map2D _map;
     
     private void Start() {
         this.cam = GetComponent<Camera>();
@@ -45,17 +47,17 @@ public class MapNavigation : MonoBehaviour
 
                 if (tZero.phase == TouchPhase.Moved || tOne.phase == TouchPhase.Moved)
                 {
-                    if (_map.zoom == 19 && cam.orthographicSize < _map.tileSize.Value) {
-                        cam.orthographicSize = _map.tileSize.Value;
+                    if (zoom == 19 && cam.orthographicSize < tileSize) {
+                        cam.orthographicSize = tileSize;
                     } else {
                         cam.orthographicSize += deltaDistance;
                     
-                        if (cam.orthographicSize > _map.tileSize.Value * 1.5f ) {
-                            _map.PreviousZoom();
+                        if (cam.orthographicSize > tileSize * 1.5f ) {
+                            //zoom.PreviousZoom();
                             UpdateCamera();
-                        } else if (cam.orthographicSize < _map.tileSize.Value / 1.5f)
+                        } else if (cam.orthographicSize < tileSize / 1.5f)
                         {
-                            _map.NextZoom();
+                            //_map.NextZoom();
                             UpdateCamera();
                         }
                     }
@@ -76,8 +78,8 @@ public class MapNavigation : MonoBehaviour
         /// Update the othographic camera parameters depending on zoom values
         /// </summary>
         public void UpdateCamera() {
-            this.cam.orthographicSize = _map.tileSize.Value;
-            this.cam.nearClipPlane = -_map.tileSize.Value * 2f;
-            this.cam.farClipPlane = _map.tileSize.Value * 2f;
+            this.cam.orthographicSize = tileSize;
+            this.cam.nearClipPlane = -tileSize * 2f;
+            this.cam.farClipPlane = tileSize * 2f;
         }
 }

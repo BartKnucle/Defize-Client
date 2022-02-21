@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using FunkySheep.JSON;
+using FunkySheep.SimpleJSON;
 using UnityEngine;
 
 namespace FunkySheep.OSM

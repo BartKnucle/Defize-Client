@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using FunkySheep.JSON;
+using FunkySheep.SimpleJSON;
 
 namespace FunkySheep.OSM
 {
