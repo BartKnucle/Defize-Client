@@ -19,7 +19,8 @@ MonoBehaviour:
   zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
   earthSO: {fileID: 11400000, guid: b9c5a42e6b6de3a4993ddf9d3afc3812, type: 2}
   osmSO: {fileID: 11400000, guid: 947e9bc6a63c7d4459405fb76eab3e8d, type: 2}
-  satelliteSO: {fileID: 11400000, guid: c211e7742737aef449133f8425c35516, type: 2}
+  treesTileMapSO: {fileID: 11400000, guid: c211e7742737aef449133f8425c35516, type: 2}
+  treesTileMapMaterial: {fileID: 2100000, guid: ed199ba6c4414da46b4d558dccd1a9cf, type: 2}
   buildingsSO: {fileID: 11400000, guid: 0795aee3405769940b524a00174188bc, type: 2}
   roadsSO: {fileID: 11400000, guid: 682da760f628e6946b93ca785b3834a6, type: 2}
   latitude: {fileID: 11400000, guid: 81a330c5c8452d24bb15b178b1cfc62f, type: 2}
@@ -30,8 +31,4 @@ MonoBehaviour:
   initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
   insideCellPosition: {x: 1, y: -1}
   currentMapPosition: {x: 16783, y: 11836}
-  tiles:
-  - {x: 16783, y: 11836}
-  - {x: 16783, y: 11835}
-  - {x: 16784, y: 11836}
-  - {x: 16784, y: 11835}
+  tiles: []

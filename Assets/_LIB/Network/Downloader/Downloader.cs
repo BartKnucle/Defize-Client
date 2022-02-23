@@ -23,7 +23,8 @@ namespace FunkySheep.Network
         yield return request.SendWebRequest();
         if(request.result != UnityWebRequest.Result.Success) 
         {
-            Debug.Log(request.error);
+          Debug.Log(request.error);
+          Debug.Log(url);
         }                
         else
         {

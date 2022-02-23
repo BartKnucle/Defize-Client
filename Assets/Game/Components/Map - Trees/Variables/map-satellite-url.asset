@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cffab15f4b1b0747909ad54cb6d896d, type: 3}
-  m_Name: map-satellite
+  m_Script: {fileID: 11500000, guid: 01c097419f3afdb4ab073703e6598123, type: 3}
+  m_Name: map-satellite-url
   m_EditorClassIdentifier: 
-  dependencies: []
-  urlTemplate: {fileID: 11400000, guid: c5893ff1b49100343976c3a13f02fa63, type: 2}
-  zoom: {fileID: 11400000, guid: c3baeedba1e421b4f9a6045a0421d76f, type: 2}
+  DeveloperDescription: 
+  reset: 0
+  _value: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{zoom}/{position.y}/{position.x} '

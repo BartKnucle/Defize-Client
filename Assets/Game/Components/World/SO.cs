@@ -11,7 +11,8 @@ namespace FunkySheep.Game.World
 
     public FunkySheep.Procedural.Earth.SO earthSO;
     public FunkySheep.Maps.SO osmSO;
-    public FunkySheep.Maps.SO satelliteSO;
+    public FunkySheep.Maps.SO treesTileMapSO;
+    public Material treesTileMapMaterial;
     public FunkySheep.OSM.Buildings.SO buildingsSO;
     public FunkySheep.OSM.Roads.SO roadsSO;
     public FunkySheep.Types.Double latitude;
@@ -112,20 +113,22 @@ namespace FunkySheep.Game.World
           tileSize.Value.y / 256f,
       1f);
 
-      FunkySheep.Maps.Manager satellite = (satelliteSO.Get(manager, satelliteSO) as FunkySheep.Maps.Manager);
-      satellite.root.transform.Rotate(new Vector3(90, 0, 0));
-      satellite.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
-      Tilemap satelliteTilemap = satellite.root.GetComponent<Tilemap>();
-      satelliteTilemap.tileAnchor = new Vector3(
+      FunkySheep.Maps.Manager treesTileMap = (treesTileMapSO.Get(manager, treesTileMapSO) as FunkySheep.Maps.Manager);
+      treesTileMap.root.transform.Rotate(new Vector3(90, 0, 0));
+      treesTileMap.root.GetComponent<Grid>().cellSize = new Vector3(256f, 256f, 0f);
+      Tilemap treesTileMapTilemap = treesTileMap.root.GetComponent<Tilemap>();
+      treesTileMapTilemap.tileAnchor = new Vector3(
           initialOffset.Value.x,
           initialOffset.Value.y,
           0
       );
 
-      satelliteTilemap.transform.localScale = new Vector3(
+      treesTileMapTilemap.transform.localScale = new Vector3(
           tileSize.Value.x / 256f,
           tileSize.Value.y / 256f,
       1f);
+
+      treesTileMap.root.GetComponent<TilemapRenderer>().material = treesTileMapMaterial;
 
 
     }
@@ -163,7 +166,7 @@ namespace FunkySheep.Game.World
       {
         earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, currentMapPosition);
         osmSO.AddTile(Get(manager, osmSO) as FunkySheep.Maps.Manager, currentMapPosition);
-        satelliteSO.AddTile(Get(manager, satelliteSO) as FunkySheep.Maps.Manager, currentMapPosition);
+        treesTileMapSO.AddTile(Get(manager, treesTileMapSO) as FunkySheep.Maps.Manager, currentMapPosition);
         double[] boundaries = FunkySheep.Maps.Utils.CaclulateGpsBoundaries(zoom.Value, currentMapPosition);
         buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
         roadsSO.Download(Get(manager, roadsSO) as FunkySheep.OSM.Roads.Manager, boundaries);
@@ -186,7 +189,7 @@ namespace FunkySheep.Game.World
       {
         earthSO.AddTile(Get(manager, earthSO) as FunkySheep.Procedural.Earth.Manager, position);
         osmSO.AddTile(Get(manager, osmSO) as FunkySheep.Maps.Manager, position);
-        satelliteSO.AddTile(Get(manager, satelliteSO) as FunkySheep.Maps.Manager, position);
+        treesTileMapSO.AddTile(Get(manager, treesTileMapSO) as FunkySheep.Maps.Manager, position);
         double[] boundaries = FunkySheep.Maps.Utils.CaclulateGpsBoundaries(zoom.Value, position);
         buildingsSO.Download(Get(manager, buildingsSO) as FunkySheep.OSM.Buildings.Manager, boundaries);
         roadsSO.Download(Get(manager, roadsSO) as FunkySheep.OSM.Roads.Manager, boundaries);
