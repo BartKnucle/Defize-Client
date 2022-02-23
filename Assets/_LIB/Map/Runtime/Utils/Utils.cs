@@ -130,13 +130,15 @@ namespace FunkySheep.Maps
 
     /// <summary>
     /// Convert from color channel values in 0.0-1.0 range to elevation in meters:
-    /// https://mapzen.com/documentation/terrain-tiles/formats/#terrarium
+    /// 21768
+    /// 
     /// </summary>
     /// <param name="color"></param>
     /// <returns></returns>
     public static float ColorToElevation(Color color)
     {
-      return (color.r * 256.0f * 256.0f + color.g * 256.0f + color.b) - 32768.0f;
+      float height = (Mathf.Floor(color.r * 256.0f) * 256.0f + Mathf.Floor(color.g * 256.0f)  + color.b) - 32768.0f;
+      return height;
     }
   } 
 }
