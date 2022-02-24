@@ -677,6 +677,7 @@ MonoBehaviour:
   initialDisplacement: {fileID: 11400000, guid: 4b0077a9a4476c34ab6dec3ad42a6fc7, type: 2}
   drawDistance: 100
   drawPosition: {fileID: 11400000, guid: f634435ee8b10f34b82b776883a70841, type: 2}
+  tree: {fileID: 3726134474519596915, guid: 036450fc6b1350947a8f928c63d6862e, type: 3}
 --- !u!114 &669289522
 MonoBehaviour:
   m_ObjectHideFlags: 0

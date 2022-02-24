@@ -16,6 +16,7 @@ namespace Game.World.Trees
         //public FunkySheep.Types.Vector2 tileSize;
         public int drawDistance = 100;
         public FunkySheep.Types.Vector3 drawPosition;
+        public GameObject tree;
 
         private void Start() {
         }
@@ -71,10 +72,9 @@ namespace Game.World.Trees
 
         public void AddTree(Vector3 position)
         {
-            GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            GameObject go = GameObject.Instantiate(tree);
             go.transform.position = position;
-            go.transform.localScale = new Vector3(10, 10, 10);
-            go.GetComponent<MeshRenderer>().sharedMaterial.color = Color.red;
+            go.transform.localScale = new Vector3(5, 5, 5);
         }
 
         public void OnPlayerMovement()
@@ -82,7 +82,7 @@ namespace Game.World.Trees
             List<Vector3> closeTrees = positions.FindAll(position => Vector3.Distance(
                 position,
                 drawPosition.Value
-                ) < 800);
+                ) < 500);
             foreach (Vector3 treePosition in closeTrees.ToList())
             {
                 float? height = FunkySheep.Procedural.Earth.SO.GetHeight(treePosition);
