@@ -74,7 +74,18 @@ namespace Game.World.Trees
         {
             GameObject go = GameObject.Instantiate(tree);
             go.transform.position = position;
-            go.transform.localScale = new Vector3(5, 5, 5);
+            go.transform.localScale = new Vector3(
+                UnityEngine.Random.Range(5, 10),
+                UnityEngine.Random.Range(5, 10),
+                UnityEngine.Random.Range(5, 10)
+            );
+            go.transform.Rotate(
+                new Vector3(
+                UnityEngine.Random.Range(0, 10),
+                UnityEngine.Random.Range(0, 360),
+                UnityEngine.Random.Range(0, 10)
+                )
+            );
         }
 
         public void OnPlayerMovement()
